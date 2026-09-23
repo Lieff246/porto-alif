@@ -1,4 +1,9 @@
+# Alif Apriansyah — Engineering Portfolio & Personal Website
+
+> 📋 **Product Requirements Document (PRD):** Baca [PRD.md](./PRD.md) untuk spesifikasi lengkap desain, arsitektur, filosofi Anti-AI-Slop, dan panduan untuk AI Agent.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
 
 ## Getting Started
 
