@@ -72,12 +72,8 @@ export default function Hero() {
             </div>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl">
-              Software engineer focused on scalable web architecture, spatial data processing, and clean backend design. Experienced in crafting robust services with{" "}
-              <span className="text-zinc-950 font-semibold underline decoration-zinc-300 underline-offset-4">
-                Laravel &amp; Go
-              </span>
-              , while mentoring the next wave of builders at{" "}
-              <span className="text-zinc-950 font-semibold">Tadulako</span>.
+              Informatics student at{" "}
+              <span className="text-zinc-950 font-semibold">Universitas Tadulako</span> who loves building things for the screen. Passionate about software craftsmanship and mentoring fellow students in Palu.
             </p>
 
             {/* Quick Interactive Actions */}
