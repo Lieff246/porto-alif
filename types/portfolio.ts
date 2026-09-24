@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   tagline: string;
-  category: "Fullstack / WebGIS" | "AI & Systems" | "Backend" | "IoT & Vision" | "Mobile" | "Frontend / Web";
+  category: "Fullstack / WebGIS" | "Fullstack / Web" | "AI & Systems" | "Backend" | "IoT & Vision" | "Mobile" | "Frontend / Web";
   role: string;
   period: string;
   image?: string;

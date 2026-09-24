@@ -1,21 +1,54 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { personalInfo, projects } from "@/data/portfolio";
-import { ArrowDown, ExternalLink, Copy, Check, Terminal } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
+import { ArrowDown, ExternalLink, Terminal, Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/Icons";
+
+const roles = [
+  "Web Developer",
+  "WebGIS Specialist",
+  "Flutter Mobile Dev",
+  "IoT & AI Researcher",
+];
 
 export default function Hero() {
-  const [copied, setCopied] = useState<boolean>(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
-  };
+  // Dynamic Typewriter Effect (like Hafidz Humaidi)
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayedRole, setDisplayedRole] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      if (displayedRole.length < currentRole.length) {
+        timer = setTimeout(() => {
+          setDisplayedRole(currentRole.slice(0, displayedRole.length + 1));
+        }, 65);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (displayedRole.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayedRole(currentRole.slice(0, displayedRole.length - 1));
+        }, 35);
+      } else {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedRole, isDeleting, roleIndex]);
 
   // Ultra-Smooth 60/120fps Hardware-Accelerated Pendulum Mouse Physics
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,8 +88,8 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Main Hero Narrative */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="space-y-2.5">
+          <div className="lg:col-span-7 space-y-4">
+            <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
                 <Terminal className="w-3.5 h-3.5 text-zinc-700" />
                 <span>INFORMATICS STUDENT &amp; BUILDER</span>
@@ -66,23 +99,28 @@ export default function Hero() {
                 Alif Apriansyah<span className="text-emerald-500">.</span>
               </h1>
 
-              <p className="text-lg sm:text-xl font-bold tracking-tight text-zinc-800 leading-snug">
-                Crafting resilient systems &amp; spatial tools. Explore my selected work below.
-              </p>
+              {/* Dynamic Typewriter Role - Unified Clean Typography */}
+              <div className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2.5 pt-1">
+                <span className="text-zinc-400 font-normal">Seorang</span>
+                <span className="text-zinc-950 font-black border-b-2 border-emerald-500 pb-0.5 inline-flex items-center">
+                  {displayedRole}
+                  <span className="w-0.5 h-5 bg-emerald-500 ml-1 inline-block animate-pulse" />
+                </span>
+              </div>
             </div>
 
-            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl">
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl pt-1">
               Informatics student at{" "}
               <span className="text-zinc-950 font-semibold">Universitas Tadulako</span> who loves building things for the screen. Passionate about software craftsmanship and mentoring fellow students in Palu.
             </p>
 
-            {/* Quick Interactive Actions */}
+            {/* Quick Interactive Actions & Social Row */}
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href="#projects"
                 className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all shadow-sm hover:shadow"
               >
-                <span>Lihat Project [{String(projects.length).padStart(2, "0")}]</span>
+                <span>Lihat Project</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               </a>
 
@@ -97,24 +135,26 @@ export default function Hero() {
                 <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
               </a>
 
-              {/* 1-Click Interactive Copy Email Button */}
-              <button
-                onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-zinc-200 text-sm font-semibold transition-all shadow-2xs cursor-pointer active:scale-95"
-                title="Salin alamat email ke clipboard"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-600 animate-in zoom-in-75 duration-150" />
-                    <span className="text-emerald-700 font-mono text-xs font-bold">Email Tersalin! ✓</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs">Salin Email</span>
-                  </>
-                )}
-              </button>
+              {/* Social Quick Connect */}
+              <div className="flex items-center gap-1.5 pl-1 border-l border-zinc-200">
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
+                  title="LinkedIn Alif Apriansyah"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
+                  title="Kirim Email"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -226,7 +266,7 @@ export default function Hero() {
 
                   {/* Clean Monospaced Spec Strip (No emojis) */}
                   <div className="mt-2.5 pt-2 border-t border-zinc-100 flex items-center justify-between text-[10px] font-mono text-zinc-500">
-                    <span className="text-zinc-600 font-semibold">[LARAVEL · GO]</span>
+                    <span className="text-zinc-600 font-semibold">[LARAVEL · GO · NEXT.JS]</span>
                     <span className="text-zinc-400">PALU, ID</span>
                   </div>
                 </div>
@@ -235,27 +275,62 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 4 Stat Counters */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 sm:mt-12 pt-8 border-t border-zinc-200">
-          <div className="p-5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-400 transition-all shadow-2xs group">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1 group-hover:text-zinc-600 transition-colors">01 // STATUS</span>
-            <span className="text-2xl font-black text-zinc-950">Semester 5</span>
-            <span className="text-xs text-zinc-500 block mt-0.5">Teknik Informatika Untad</span>
-          </div>
-          <div className="p-5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-400 transition-all shadow-2xs group">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1 group-hover:text-zinc-600 transition-colors">02 // PROJECTS</span>
-            <span className="text-2xl font-black text-zinc-950">{projects.length}+ Karya</span>
-            <span className="text-xs text-zinc-500 block mt-0.5">WebGIS, AI, IoT, Flutter, Go</span>
-          </div>
-          <div className="p-5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-400 transition-all shadow-2xs group">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1 group-hover:text-zinc-600 transition-colors">03 // ORGANISASI</span>
-            <span className="text-2xl font-black text-zinc-950">HMTI Untad</span>
-            <span className="text-xs text-zinc-500 block mt-0.5">Divisi Penalaran Keilmuan</span>
-          </div>
-          <div className="p-5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-400 transition-all shadow-2xs group">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1 group-hover:text-zinc-600 transition-colors">04 // RISET LOMBA</span>
-            <span className="text-2xl font-black text-zinc-950">LIDM 2025</span>
-            <span className="text-xs text-zinc-500 block mt-0.5">Ketua Tim SIFOKUS IoT</span>
+        {/* 4 Stat Metrics: Unified Minimalist Grid (Anti-AI-Slop) */}
+        <div className="mt-10 sm:mt-12 pt-8 border-t border-zinc-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-2xs divide-y sm:divide-y-0 sm:divide-x divide-zinc-200">
+            
+            {/* 01: Status */}
+            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
+              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                01 // STATUS
+              </span>
+              <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+                Semester 5
+              </p>
+              <p className="text-xs text-zinc-500 font-mono mt-0.5">
+                Teknik Informatika Untad
+              </p>
+            </div>
+
+            {/* 02: Projects */}
+            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
+              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                02 // PROJECTS
+              </span>
+              <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+                {projects.length}+ Karya
+              </p>
+              <p className="text-xs text-zinc-500 font-mono mt-0.5">
+                WebGIS · Backend · Mobile
+              </p>
+            </div>
+
+            {/* 03: Organisasi & Komunitas */}
+            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
+              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                03 // KOMUNITAS
+              </span>
+              <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
+                Prog. Tadulako
+              </p>
+              <p className="text-xs text-zinc-500 font-mono mt-0.5">
+                Web Mentor &amp; HMTI Untad
+              </p>
+            </div>
+
+            {/* 04: Riset Lomba */}
+            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
+              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                04 // RISET LOMBA
+              </span>
+              <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
+                LIDM &amp; Gemastik
+              </p>
+              <p className="text-xs text-zinc-500 font-mono mt-0.5">
+                Ketua Tim SIFOKUS IoT &apos;26
+              </p>
+            </div>
+
           </div>
         </div>
       </div>

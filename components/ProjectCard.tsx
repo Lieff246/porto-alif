@@ -32,7 +32,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
               alt={project.title}
               fill
               sizes={featured ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 600px"}
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
             />
             {/* Subtle Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/20 opacity-80 group-hover:opacity-60 transition-opacity" />

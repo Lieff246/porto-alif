@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Project } from "@/types/portfolio";
 import { X, ExternalLink, CheckCircle2 } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -12,6 +13,12 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -26,15 +33,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     };
   }, [project, onClose]);
 
-  if (!project) return null;
+  if (!project || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-zinc-950/60 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-zinc-950/70 backdrop-blur-sm animate-in fade-in duration-200"
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -66,19 +73,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Screenshot Image Preview inside Modal */}
         {project.image && (
-          <div
-            className={`mt-5 relative w-full rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 ${
-              project.category === "Mobile"
-                ? "h-80 sm:h-96 flex items-center justify-center p-2 bg-zinc-900/5"
-                : "aspect-video"
-            }`}
-          >
+          <div className="mt-5 relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200 bg-zinc-900/5">
             <Image
               src={project.image}
               alt={project.title}
               fill
               sizes="(max-width: 768px) 100vw, 700px"
-              className={project.category === "Mobile" ? "object-contain" : "object-cover object-top"}
+              className="object-cover object-center"
             />
           </div>
         )}
@@ -199,6 +200,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
