@@ -1,89 +1,127 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function CursorSpotlight() {
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
-  const [trailPos, setTrailPos] = useState({ x: -1000, y: -1000 });
-  const [isPointer, setIsPointer] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let animationFrameId: number;
+    // Only run on non-touch desktop screens
+    if (typeof window === "undefined" || window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setIsVisible(true);
-      setMousePos({ x: e.clientX, y: e.clientY });
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let isHovered = false;
+    let isVisible = false;
+    let rafId: number;
 
-      // Check if hovering over clickable elements
-      const target = e.target as HTMLElement | null;
-      if (target) {
-        const isClickable = Boolean(
-          target.closest("a, button, [role='button'], input, textarea, select")
-        );
-        setIsPointer(isClickable);
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!isVisible) {
+        isVisible = true;
+        if (dotRef.current) dotRef.current.style.opacity = "1";
+        if (ringRef.current) ringRef.current.style.opacity = "1";
+        if (spotlightRef.current) spotlightRef.current.style.opacity = "1";
       }
+
+      // Check clickable targets efficiently without triggering re-renders
+      const target = e.target as HTMLElement | null;
+      isHovered = Boolean(
+        target?.closest("a, button, [role='button'], input, textarea, select, .cursor-pointer")
+      );
     };
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
+    const onMouseLeave = () => {
+      isVisible = false;
+      if (dotRef.current) dotRef.current.style.opacity = "0";
+      if (ringRef.current) ringRef.current.style.opacity = "0";
+      if (spotlightRef.current) spotlightRef.current.style.opacity = "0";
     };
 
-    // Smooth lerp trailing cursor follower (like bc.sultengprov.go.id)
-    let currentX = -1000;
-    let currentY = -1000;
-
-    const render = () => {
-      currentX += (mousePos.x - currentX) * 0.15;
-      currentY += (mousePos.y - currentY) * 0.15;
-      setTrailPos({ x: currentX, y: currentY });
-      animationFrameId = requestAnimationFrame(render);
+    const onMouseEnter = () => {
+      isVisible = true;
+      if (dotRef.current) dotRef.current.style.opacity = "1";
+      if (ringRef.current) ringRef.current.style.opacity = "1";
+      if (spotlightRef.current) spotlightRef.current.style.opacity = "1";
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    animationFrameId = requestAnimationFrame(render);
+    // 144Hz Hardware-accelerated fluid Lerp Loop (Zero React overhead)
+    const loop = () => {
+      // 0.11 Lerp coefficient = luxurious fluid trailing delay with silky settling
+      ringX += (mouseX - ringX) * 0.11;
+      ringY += (mouseY - ringY) * 0.11;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }
+
+      if (ringRef.current) {
+        const scale = isHovered ? "scale(1.45)" : "scale(1)";
+        const borderColor = isHovered ? "rgba(16, 185, 129, 0.7)" : "rgba(24, 24, 27, 0.45)";
+        const bg = isHovered ? "rgba(16, 185, 129, 0.08)" : "transparent";
+
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${scale}`;
+        ringRef.current.style.borderColor = borderColor;
+        ringRef.current.style.backgroundColor = bg;
+      }
+
+      if (spotlightRef.current) {
+        spotlightRef.current.style.background = `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(16, 185, 129, 0.04), transparent 70%)`;
+      }
+
+      rafId = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("mouseenter", onMouseEnter);
+    rafId = requestAnimationFrame(loop);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mouseenter", onMouseEnter);
+      cancelAnimationFrame(rafId);
     };
-  }, [mousePos.x, mousePos.y]);
-
-  if (!isVisible) return null;
+  }, []); // Run once on mount
 
   return (
     <>
-      {/* 1. Large Ambient Background Spotlight that follows mouse */}
+      {/* 1. Large Ambient Background Spotlight */}
       <div
-        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"
+        ref={spotlightRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500 hidden md:block"
+        style={{ willChange: "background" }}
+      />
+
+      {/* 2. Trailing Smooth Ring Follower */}
+      <div
+        ref={ringRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed top-0 left-0 z-50 w-8 h-8 rounded-full border border-zinc-900/40 opacity-0 hidden md:block"
         style={{
-          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(14, 116, 144, 0.07), rgba(16, 185, 129, 0.04) 35%, transparent 75%)`,
+          willChange: "transform, border-color, background-color",
+          transition: "opacity 300ms ease, border-color 200ms ease, background-color 200ms ease",
         }}
       />
 
-      {/* 2. Trailing Smooth Cursor Circle (like bc.sultengprov.go.id) */}
+      {/* 3. Center Micro Dot (Locked 1:1 to hardware cursor) */}
       <div
-        className={`pointer-events-none fixed z-50 rounded-full border border-zinc-800/60 hidden md:block transition-transform duration-75 ${
-          isPointer
-            ? "w-12 h-12 bg-emerald-500/10 border-emerald-600 scale-125"
-            : "w-8 h-8 scale-100"
-        }`}
+        ref={dotRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed top-0 left-0 z-50 w-2 h-2 rounded-full bg-zinc-900 opacity-0 hidden md:block"
         style={{
-          left: `${trailPos.x}px`,
-          top: `${trailPos.y}px`,
-          transform: "translate(-50%, -50%)",
-        }}
-      />
-
-      {/* 3. Sharp Center Micro Dot */}
-      <div
-        className="pointer-events-none fixed z-50 w-2 h-2 rounded-full bg-zinc-900 hidden md:block"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          transform: "translate(-50%, -50%)",
+          willChange: "transform",
+          transition: "opacity 300ms ease",
         }}
       />
     </>

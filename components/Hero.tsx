@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { personalInfo, projects } from "@/data/portfolio";
 import { ArrowDown, ExternalLink, Copy, Check, Terminal } from "lucide-react";
@@ -8,11 +8,40 @@ import { GithubIcon } from "@/components/Icons";
 
 export default function Hero() {
   const [copied, setCopied] = useState<boolean>(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
+  };
+
+  // Ultra-Smooth 60/120fps Hardware-Accelerated Pendulum Mouse Physics
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(() => {
+      if (cardRef.current) {
+        // Damped, subtle physical sway anchored at the lanyard top
+        const rotY = x * 8;
+        const rotX = -y * 6;
+        const rotZ = x * 2.5; // gentle natural pendulum sway
+        cardRef.current.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translateY(-4px)`;
+      }
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    if (cardRef.current) {
+      // Silky smooth return to resting tilt
+      cardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)`;
+    }
   };
 
   return (
@@ -38,7 +67,7 @@ export default function Hero() {
               </h1>
 
               <p className="text-lg sm:text-xl font-bold tracking-tight text-zinc-800 leading-snug">
-                Building resilient backends, WebGIS, and spatial systems from Palu.
+                Crafting resilient systems &amp; spatial tools. Explore my selected work below.
               </p>
             </div>
 
@@ -95,7 +124,19 @@ export default function Hero() {
 
           {/* ID Card with subtle organic tilt and aligned lanyard */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-[280px] sm:max-w-[290px] select-none transition-all duration-500 ease-out transform rotate-[2.5deg] hover:rotate-0 hover:scale-[1.02] cursor-pointer flex flex-col items-center">
+            <div
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)",
+                transformOrigin: "top center",
+                transition: "transform 450ms cubic-bezier(0.16, 1, 0.3, 1)",
+                willChange: "transform",
+                backfaceVisibility: "hidden",
+              }}
+              className="w-full max-w-[280px] sm:max-w-[290px] select-none cursor-pointer flex flex-col items-center"
+            >
               
               {/* Lanyard Fabric Ribbon (Tali) */}
               <div className="w-6 h-10 sm:h-12 bg-gradient-to-b from-zinc-800/0 via-zinc-900 to-zinc-950 border-x border-zinc-700/60 relative overflow-hidden shadow-xs shrink-0 flex items-center justify-center">
@@ -124,7 +165,7 @@ export default function Hero() {
               </div>
 
               {/* ID Card Body - slightly overlapping hook */}
-              <div className="w-full -mt-1.5 group relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8">
+              <div className="w-full -mt-1.5 group relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8 hover:shadow-2xl hover:shadow-zinc-900/12 transition-shadow duration-500">
                 {/* ID Badge Top Header with Mathematically Centered Slot Hole */}
                 <div className="pt-3 pb-2.5 px-4 bg-zinc-50/90 border-b border-zinc-100 relative">
                   {/* Absolute Left Status */}
@@ -154,7 +195,7 @@ export default function Hero() {
                     alt={personalInfo.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
-                    className="object-cover object-center filter grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700 ease-out"
+                    className="object-cover object-center filter grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
                     priority
                   />
                   {/* Subtle Inset Vignette */}
