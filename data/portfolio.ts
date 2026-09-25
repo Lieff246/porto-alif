@@ -272,6 +272,8 @@ export const experiences: Experience[] = [
       "Menyusun modul serta bank materi pembelajaran untuk mendukung kelancaran studi mahasiswa"
     ],
     tags: ["Academic Mentoring", "Community Leadership", "Event Organizing", "Informatics Community"],
+    image: "/images/pk.jpeg",
+    imageCaption: "Dokumentasi Penalaran Mingguan",
   },
   {
     id: "mentor-pt",
@@ -287,6 +289,8 @@ export const experiences: Experience[] = [
       "Mengarahkan peserta hingga berhasil menyelesaikan dan men-deploy project akhir submission web masing-masing"
     ],
     tags: ["Teaching", "HTML5/CSS3", "JavaScript", "Git & GitHub Workflow", "Peer Review"],
+    image: "/images/pt.jpg",
+    imageCaption: "Submission Project Web Programming Tadulako Batch Orion",
   },
   {
     id: "asisten-lab",
@@ -302,6 +306,8 @@ export const experiences: Experience[] = [
       "Melakukan evaluasi berkala dan penilaian laporan praktikum mingguan mahasiswa"
     ],
     tags: ["Lab Assistant", "Code Review", "Problem Solving", "Curriculum Delivery"],
+    image: "/images/pengenalan.jpeg",
+    imageCaption: "Dokumentasi Pengenalan Praktikum 2026",
   },
   {
     id: "lead-lidm",
@@ -317,6 +323,8 @@ export const experiences: Experience[] = [
       "Memimpin presentasi teknis dan demonstrasi purwarupa perangkat pada Lomba Capstone Design Dies Natalis FATEK Untad"
     ],
     tags: ["Team Leadership", "IoT & Vision", "Research Paper", "Puspresnas / Balmawa"],
+    image: "/images/sifokus.jpg",
+    imageCaption: "Tim Pelaksana SIFOKUS — Capstone Dies Natalis FATEK Untad",
   },
 ];
 

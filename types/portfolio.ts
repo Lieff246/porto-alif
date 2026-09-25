@@ -32,6 +32,8 @@ export interface Experience {
   description: string;
   achievements: string[];
   tags: string[];
+  image?: string;
+  imageCaption?: string;
 }
 
 export interface SkillCategory {
