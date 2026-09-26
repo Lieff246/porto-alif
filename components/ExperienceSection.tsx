@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { experiences } from "@/data/portfolio";
-import { Users, BookOpen, Award, GraduationCap, CheckCircle, Camera, Maximize2, X } from "lucide-react";
+import { Users, BookOpen, Award, GraduationCap, CheckCircle, Camera, Maximize2, X, Briefcase } from "lucide-react";
 
 interface LightboxData {
   src: string;
@@ -42,6 +42,7 @@ export default function ExperienceSection() {
     Mentoring: <BookOpen className="w-4 h-4 text-blue-700" />,
     Academic: <GraduationCap className="w-4 h-4 text-amber-700" />,
     Competition: <Award className="w-4 h-4 text-purple-700" />,
+    Internship: <Briefcase className="w-4 h-4 text-indigo-700" />,
   };
 
   return (

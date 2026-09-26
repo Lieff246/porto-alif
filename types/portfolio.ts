@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   tagline: string;
-  category: "Fullstack / WebGIS" | "Fullstack / Web" | "AI & Systems" | "Backend" | "IoT & Vision" | "Mobile" | "Frontend / Web";
+  category: "Fullstack / WebGIS" | "Fullstack / Web" | "AI & Systems" | "Backend" | "IoT & Vision" | "Mobile" | "Frontend / Web" | "Game & Simulation";
   role: string;
   period: string;
   image?: string;
@@ -28,7 +28,7 @@ export interface Experience {
   organization: string;
   period: string;
   badge: string;
-  category: "Leadership" | "Mentoring" | "Academic" | "Competition";
+  category: "Leadership" | "Mentoring" | "Academic" | "Competition" | "Internship";
   description: string;
   achievements: string[];
   tags: string[];
@@ -40,6 +40,32 @@ export interface SkillCategory {
   title: string;
   description: string;
   items: string[];
+}
+
+export interface TechTool {
+  name: string;
+  category: "Languages" | "Frameworks & Web" | "Geospatial" | "AI & Hardware" | "Tools & DevOps";
+  role: string;
+  icon?: string; // Path file logo lokal di /public/icons/ (contoh: "/icons/react.svg")
+}
+
+export interface FocusCapability {
+  label: string;
+  detail: string;
+}
+
+export interface FocusArea {
+  code: string;
+  title: string;
+  tagline: string;
+  description: string;
+  capabilities: FocusCapability[];
+  provenProject: {
+    title: string;
+    description: string;
+  };
+  tags: string[];
+  icon: string;
 }
 
 export interface PersonalInfo {

@@ -1,4 +1,4 @@
-import { PersonalInfo, Project, Experience, SkillCategory } from "@/types/portfolio";
+import { PersonalInfo, Project, Experience, SkillCategory, FocusArea, TechTool } from "@/types/portfolio";
 
 export const personalInfo: PersonalInfo = {
   name: "Alif Apriansyah",
@@ -15,29 +15,109 @@ export const personalInfo: PersonalInfo = {
   linkedin: "https://www.linkedin.com/in/alif-apriansyah",
 };
 
-export const focusAreas = [
+export const focusAreas: FocusArea[] = [
   {
+    code: "WEBGIS_SPATIAL",
     title: "Fullstack Web & WebGIS",
-    description: "Membangun aplikasi web decoupled dengan Laravel 11, React, TypeScript, dan visualisasi pemetaan spasial berbasis Leaflet/GeoJSON.",
-    tags: ["React", "TypeScript", "Laravel 11", "WebGIS", "Leaflet", "Tailwind CSS"],
+    tagline: "Sistem informasi spasial interaktif dengan arsitektur decoupled untuk visualisasi data skala provinsi.",
+    description: "Membangun sistem pemetaan geografis dan antarmuka web modern dengan integrasi RESTful API terpisah.",
+    capabilities: [
+      {
+        label: "Visualisasi Data Spasial",
+        detail: "Clustering ribuan koordinat sekolah, kalkulasi buffer, dan polygon 6 batas cabang dinas menggunakan Leaflet & GeoJSON.",
+      },
+      {
+        label: "Decoupled Frontend UI",
+        detail: "Komponen antarmuka modular dan reaktif menggunakan React 19, TypeScript, dan Tailwind CSS.",
+      },
+      {
+        label: "Headless RESTful API",
+        detail: "Layanan data terpusat dan proteksi akses multi-role berbasis Laravel 11 Sanctum & Fortify.",
+      },
+    ],
+    provenProject: {
+      title: "Portal Pemetaan Sekolah Dinas Pendidikan Sulteng",
+      description: "WebGIS terintegrasi untuk visualisasi ribuan data sekolah se-Provinsi Sulawesi Tengah.",
+    },
+    tags: ["React 19", "TypeScript", "Laravel 11", "Leaflet", "GeoJSON", "Tailwind CSS"],
     icon: "Globe",
   },
   {
+    code: "CLEAN_BACKEND",
     title: "Backend Engineering",
-    description: "Merancang API berperforma tinggi dengan Clean Architecture di Go (Golang) dan RESTful backend berbasis PHP/Laravel yang aman.",
-    tags: ["Go (Golang)", "Chi Router", "MySQL", "JWT Auth", "Clean Architecture"],
+    tagline: "Perancangan RESTful API terstruktur dengan prinsip Clean Architecture dan efisiensi konkurensi.",
+    description: "Membangun fondasi server yang mudah dirawat, berkinerja tinggi, dan memiliki pemisahan tanggung jawab yang ketat.",
+    capabilities: [
+      {
+        label: "High-Throughput Routing",
+        detail: "Pemanfaatan concurrency goroutine dan router berbobot ringan di Go (Golang) menggunakan Chi Router.",
+      },
+      {
+        label: "Clean Architecture Pattern",
+        detail: "Pemisahan lapisan sistem yang ketat antara Handler (Transport), UseCase (Domain Logic), dan Repository (Storage).",
+      },
+      {
+        label: "Autentikasi & Database",
+        detail: "Implementasi stateless JWT authentication dan perancangan skema relasional terindeks di MySQL.",
+      },
+    ],
+    provenProject: {
+      title: "High-Performance Notes API & Backend Service",
+      description: "Implementasi Clean Architecture di Go 1.21 dengan koneksi database MySQL dan proteksi JWT.",
+    },
+    tags: ["Go (Golang)", "Chi Router", "MySQL", "JWT Auth", "Clean Architecture", "PHP 8+"],
     icon: "Server",
   },
   {
+    code: "VISION_AI_SYSTEMS",
     title: "AI & Computer Vision",
-    description: "Menerapkan Computer Vision (MediaPipe, OpenCV, EAR metrics) serta arsitektur Multi-Agent cerdas dengan Gemini API.",
-    tags: ["Python", "OpenCV", "MediaPipe", "Google Gemini API", "Multi-Agent"],
+    tagline: "Penerapan visi komputer untuk analisis metrik biometrik dan integrasi agen kecerdasan buatan.",
+    description: "Mengembangkan algoritma deteksi visual dan integrasi model Large Language Model untuk solusi terapan.",
+    capabilities: [
+      {
+        label: "Deteksi Metrik Biometrik (EAR)",
+        detail: "Tracking 468 titik FaceMesh untuk kalkulasi Eye Aspect Ratio (EAR) 6-titik euclidean dalam mendeteksi kelelahan.",
+      },
+      {
+        label: "Multi-Agent AI Systems",
+        detail: "Integrasi model penalaran Google Gemini API dengan pembagian peran terstruktur (Validator, Synthesizer, Analyst).",
+      },
+      {
+        label: "Pipeline Pemrosesan Citra",
+        detail: "Manipulasi frame video real-time, masking kontur, dan inferensi visual berbasis OpenCV & Python.",
+      },
+    ],
+    provenProject: {
+      title: "SIFOKUS & SmartStudy AI",
+      description: "Riset deteksi kantuk LIDM Puspresnas 2025 serta sistem pembelajaran cerdas berbasis Gemini API.",
+    },
+    tags: ["Python", "OpenCV", "MediaPipe FaceMesh", "Google Gemini API", "Multi-Agent"],
     icon: "Brain",
   },
   {
+    code: "EMBEDDED_HARDWARE",
     title: "IoT & Hardware Prototyping",
-    description: "Eksplorasi modul mikrokontroler ESP32-CAM, integrasi sensor visual, dan perancangan fisik enclosure/casing 3D print.",
-    tags: ["ESP32-CAM", "3D CAD / STL", "Embedded Systems", "Arduino"],
+    tagline: "Integrasi modul mikrokontroler visual mandiri dengan perancangan enclosure mekanik 3D print.",
+    description: "Menghubungkan komputasi perangkat keras dengan sensor visual dan perancangan fisik perangkat yang fungsional.",
+    capabilities: [
+      {
+        label: "Visual Microcontroller",
+        detail: "Pemrograman modul ESP32-CAM dengan sensor OV2640 untuk transmisi frame citra melalui protokol jaringan lokal.",
+      },
+      {
+        label: "Perancangan Enclosure 3D CAD",
+        detail: "Pemodelan wadah fisik perangkat (casing Swanky Turing) dengan toleransi presisi menggunakan format STL/CAD.",
+      },
+      {
+        label: "Logika Sistem Tertanam (Embedded)",
+        detail: "Kontrol sinyal GPIO, indikator alert LED, dan manajemen daya 3.3V menggunakan C/C++ pada Arduino IDE.",
+      },
+    ],
+    provenProject: {
+      title: "Perangkat Hardware Sensor SIFOKUS",
+      description: "Prototipe perangkat monitoring siswa dengan casing 3D print custom untuk Capstone Design FATEK.",
+    },
+    tags: ["ESP32-CAM", "3D CAD / STL", "Embedded C++", "Arduino", "Hardware Prototyping"],
     icon: "Cpu",
   },
 ];
@@ -130,7 +210,7 @@ export const projects: Project[] = [
     category: "Backend",
     role: "Backend Developer",
     period: "2025",
-    featured: true,
+    featured: false,
     image: "/images/notesapp.png",
     description: "Backend API catatan dan tagging berkecepatan tinggi dengan menerapkan pola Clean Architecture standar industri pada bahasa pemrograman Go.",
     fullDescription: "Menerapkan standar Clean Architecture pada Go dengan pemisahan lapisan cmd, internal/handlers, internal/middleware, internal/models, internal/database, dan internal/utils. Dilengkapi dengan otentikasi stateless menggunakan JSON Web Token (JWT), password hashing dengan Bcrypt, serta endpoint CRUD untuk folders, notes, dan tags dengan efisiensi memori tinggi.",
@@ -184,7 +264,7 @@ export const projects: Project[] = [
     category: "Mobile",
     role: "Mobile Developer (UAS Praktikum)",
     period: "2026",
-    featured: true,
+    featured: false,
     image: "/images/distroku.png",
     description: "Aplikasi mobile e-commerce clothing distro dengan arsitektur autentikasi ganda (Supabase Cloud + SQLite Local), slider promo interaktif, dan switchable grid/list view.",
     fullDescription: "Dikembangkan sebagai proyek akhir komprehensif pada mata kuliah Praktikum Pemrograman Mobile Semester 4 di Universitas Tadulako. DistroKu mengintegrasikan Supabase Auth untuk manajemen akun cloud serta SQLite (via sqflite) untuk persistensi lokal dan kapabilitas offline. Dilengkapi antarmuka modular dengan navigasi multi-fragment (Home, Katalog, Akun), banner slider promosi, konsumsi REST API produk dengan FutureBuilder, serta fitur toggle tampilan grid/list interaktif.",
@@ -254,26 +334,89 @@ export const projects: Project[] = [
       database: "MySQL Relational Database Schema",
     },
   },
+  {
+    id: "safe-game-lidm",
+    title: "S.A.F.E — Game Edukasi Mitigasi Gempa Bumi (Roblox)",
+    tagline: "Inovasi Media Pembelajaran Berbasis Game 3D & Microlearning untuk Edukasi Mitigasi Gempa Bumi",
+    category: "Game & Simulation",
+    role: "Game Developer (Tim Pemuda Vimral)",
+    period: "2026",
+    featured: false,
+    image: "/images/safe.png",
+    description: "Game edukasi kebencanaan 3D berbasis platform Roblox untuk melatih kesiapsiagaan gempa bumi siswa SD-SMP melalui simulasi 14 logistik tas siaga, guncangan Drop-Cover-Hold On (DCH), dan evakuasi rute aman multiplayer.",
+    fullDescription: "Diajukan pada Lomba Inovasi Digital Mahasiswa (LIDM) 2026 Divisi Inovasi Pembelajaran Digital Pendidikan (IPDP) oleh Tim Pemuda Vimral Universitas Tadulako (Ketua: Ahmad Mujahid; Anggota: Alif Apriansyah, Achmad Aulia Irsyad, Amalia Az Zahrah; Dosen Pembimbing: Fizar Syafa'at, S.Kom., M.Kom.). S.A.F.E mengadopsi model ADDIE dan MDA Framework (Mechanic, Dynamic, Aesthetic) yang terbagi dalam 3 stage terstruktur: Stage 1 (Misi pengumpulan 14 barang esensial Tas Siaga Bencana sebelum batas waktu habis), Stage 2 (Simulasi guncangan visual-audio realistik dan respons aksi Drop, Cover, Hold On dalam hitungan detik < 10 detik), serta Stage 3 (Simulasi evakuasi mandiri dan gotong royong multiplayer menuju Assembly Area sembari menghindari rintangan reruntuhan). Dilengkapi karakter instruktur virtual NPC 'Pak John' berbahasa Indonesia berstandar resmi BPBD dan Teacher Dashboard berbasis Roblox DataStore API untuk pemantauan learning analytics secara real-time.",
+    tags: ["Roblox Studio", "Luau Scripting", "3D Simulation", "Game-Based Learning", "DataStore API", "Multiplayer", "Disaster Mitigation"],
+    githubUrl: null,
+    liveUrl: "https://youtu.be/0_yj7xjP1mI",
+    metrics: "LIDM 2026 Divisi IPDP (Tim Pemuda Vimral) · 3 Stage Simulasi & NPC BPBD",
+    highlights: [
+      "Simulasi 3D imersif dan ringan berbasis Roblox Studio & scripting Luau yang multiplatform (PC, Android, iOS)",
+      "Penerapan Game-Based Learning (GBL) dengan 3 stage sekuensial: Tas Siaga Bencana, aksi Drop-Cover-Hold On (DCH), dan evakuasi aman",
+      "Fitur multiplayer kolaboratif untuk melatih refleks navigasi spasial menuju titik kumpul (Assembly Area)",
+      "Karakter instruktur virtual NPC 'Pak John' (BPBD) dengan materi edukasi sesuai standar kebencanaan nasional",
+      "Integrasi Teacher Dashboard berbasis Roblox DataStore API untuk learning analytics dan evaluasi respon siswa"
+    ],
+    techDetails: {
+      frontend: "Roblox 3D Client Engine, Custom Player GUI, In-Game HUD, Audio & Camera Shake Simulation",
+      backend: "Luau Scripting Language, Roblox Server Architecture, Multiplayer Networking",
+      database: "Roblox DataStore API (Cloud Session & Learning Analytics Persistence)",
+    },
+  },
 ];
 
 
 export const experiences: Experience[] = [
   {
+    id: "magang-dispen",
+    role: "Fullstack Web & WebGIS Developer (Intern)",
+    organization: "Dinas Pendidikan Provinsi Sulawesi Tengah",
+    period: "2026",
+    badge: "Government Internship",
+    category: "Internship",
+    description: "Melaksanakan magang kedinasan di Dinas Pendidikan Provinsi Sulawesi Tengah untuk merancang dan membangun sistem informasi geospasial (WebGIS) pemetaan profiling sekolah terintegrasi se-Provinsi Sulawesi Tengah.",
+    achievements: [
+      "Mengembangkan arsitektur Decoupled murni memisahkan Laravel dan frontend interaktif React + TypeScript + Vite",
+      "Mengintegrasikan visualisasi peta Leaflet dengan cluster marker sekolah dan data spasial poligon 6 cabang dinas pendidikan",
+      "Menerapkan sistem autentikasi multi-role aman berbasis Laravel Sanctum, Fortify, dan Spatie Role/Permission",
+      "Membangun fitur profiling sekolah se-Sulawesi Tengah dengan data lengkap dan terintegrasi"
+    ],
+    tags: ["Laravel", "React", "TypeScript", "WebGIS & Leaflet", "GeoJSON", "MySQL", "Government System"],
+    image: "/images/dispen.png",
+    imageCaption: "Dokumentasi saat magang di Dinas Pendidikan Provinsi Sulawesi Tengah",
+  },
+  {
     id: "hmti-penalaran",
-    role: "Staff Divisi Penalaran Keilmuan (Intelektual)",
+    role: "PJ Divisi Penalaran Keilmuan (Intelektual)",
     organization: "Himpunan Mahasiswa Teknik Informatika (HMTI) Untad",
     period: "2025 — Sekarang",
     badge: "Leadership & Academic",
     category: "Leadership",
     description: "Mengemban amanah di divisi intelektual HMTI Untad untuk mengorganisir program pengembangan kapabilitas akademik mahasiswa Informatika dan fasilitasi kompetisi.",
     achievements: [
-      "Menginisiasi kelas belajar dan diskusi mingguan untuk mata kuliah inti (OOP, Struktur Data, Pemrograman Web, Basis Data)",
+      "Menginisiasi kelas belajar dan diskusi mingguan untuk mata kuliah inti (OOP, UI/UX, Pemrograman Web, Basis Data, Rekayasa API, dsb)",
       "Mendampingi dan menyiapkan delegasi mahasiswa Informatika untuk kompetisi teknologi tingkat regional dan nasional (LIDM, Gemastik, dsb)",
       "Menyusun modul serta bank materi pembelajaran untuk mendukung kelancaran studi mahasiswa"
     ],
     tags: ["Academic Mentoring", "Community Leadership", "Event Organizing", "Informatics Community"],
     image: "/images/pk.jpeg",
     imageCaption: "Dokumentasi Penalaran Mingguan",
+  },
+  {
+    id: "lidm-2026-safe",
+    role: "Game Developer & System Integrator (Anggota Tim)",
+    organization: "LIDM 2026 — Tim Pemuda Vimral",
+    period: "2026",
+    badge: "National Competition",
+    category: "Competition",
+    description: "Mengembangkan karya inovasi media pembelajaran digital berbasis game 3D Roblox 'S.A.F.E' (Stay Alert, Find Escape) pada Lomba Inovasi Digital Mahasiswa (LIDM) 2026 Divisi IPDP.",
+    achievements: [
+      "Mengembangkan 3 stage skenario kebencanaan (Misi Tas Siaga, simulasi guncangan Drop-Cover-Hold On, dan evakuasi rute aman)",
+      "Merancang integrasi NPC instruktur virtual 'Pak John' (BPBD) serta Teacher Dashboard berbasis Roblox DataStore API",
+      "Menyusun proposal ilmiah dan materi pengujian edukasi mitigasi gempa bumi bersama Tim Pemuda Vimral dibimbing Fizar Syafa'at, S.Kom., M.Kom."
+    ],
+    tags: ["LIDM 2026", "Roblox Studio", "Luau", "Game-Based Learning", "Disaster Mitigation"],
+    image: "/images/safe.png",
+    imageCaption: "In-Game NPC 'Pak John' BPBD & Skenario Simulasi Game S.A.F.E (Roblox)",
   },
   {
     id: "mentor-pt",
@@ -354,4 +497,52 @@ export const skillCategories: SkillCategory[] = [
     description: "Lingkungan kerja pengembangan perangkat lunak, cloud BaaS, dan basis data.",
     items: ["Git", "GitHub", "MySQL", "Supabase", "Firebase", "SQLite (sqflite)", "Postman", "Laragon", "VS Code", "Android Studio"],
   },
+];
+
+export const techTools: TechTool[] = [
+  // Web & Frameworks
+  { name: "React", category: "Frameworks & Web", role: "FRONTEND LIB", icon: "icons/react.svg" },
+  { name: "Tailwind CSS", category: "Frameworks & Web", role: "CSS FRAMEWORK", icon: "icons/tailwindcss.svg" },
+  { name: "Next.js", category: "Frameworks & Web", role: "WEB FRAMEWORK", icon: "icons/nextdotjs.svg" },
+  { name: "Laravel", category: "Frameworks & Web", role: "BACKEND API", icon: "icons/laravel.svg" },
+  { name: "Flutter", category: "Frameworks & Web", role: "MOBILE SDK", icon: "icons/flutter.svg" },
+  { name: "Vite", category: "Frameworks & Web", role: "BUILD TOOL", icon: "icons/vite.svg"},
+  { name: "Node.js", category: "Frameworks & Web", role: "JS RUNTIME", icon: "icons/nodedotjs.svg" },
+
+  // Languages
+  { name: "TypeScript", category: "Languages", role: "TYPED SCRIPT", icon: "icons/typescript.svg" },
+  { name: "JavaScript", category: "Languages", role: "CLIENT SCRIPT", icon: "icons/javascript.svg" },
+  { name: "Go (Golang)", category: "Languages", role: "SYSTEMS LANG", icon: "icons/go.svg" },
+  { name: "PHP 8+", category: "Languages", role: "SERVER SCRIPT", icon: "icons/php.svg" },
+  { name: "Python 3", category: "Languages", role: "AI & DATA LANG", icon: "icons/python.svg" },
+  { name: "Dart", category: "Languages", role: "CROSS-PLATFORM", icon: "icons/dart.svg" },
+  { name: "Kotlin", category: "Languages", role: "ANDROID LANG", icon: "icons/kotlin.svg" },
+  { name: "C++", category: "Languages", role: "EMBEDDED LANG", icon: "icons/cplusplus.svg" },
+  { name: "SQL", category: "Languages", role: "QUERY LANG", icon: "icons/mysql.svg"},
+
+  // Geospatial & Spatial Data
+  { name: "Leaflet.js", category: "Geospatial", role: "WEB MAPPING", icon: "icons/leaflet.svg" },
+  { name: "QGIS", category: "Geospatial", role: "DESKTOP GIS", icon: "icons/qgis.svg"  },
+  { name: "ArcGIS", category: "Geospatial", role: "ESRI SPATIAL", icon: "icons/arcgis.svg" },
+
+  // AI, Vision & Embedded
+  { name: "Google Gemini", category: "AI & Hardware", role: "LLM MULTI-AGENT", icon: "icons/googlegemini.svg" },
+  { name: "Claude", category: "AI & Hardware", role: "LLM MULTI-AGENT", icon: "icons/claude.svg" },
+  { name: "MediaPipe", category: "AI & Hardware", role: "FACEMESH VISION", icon: "icons/mediapipe.svg" },
+  { name: "OpenCV", category: "AI & Hardware", role: "IMAGE PROCESSING", icon: "icons/opencv.svg" },
+  { name: "Arduino", category: "AI & Hardware", role: "EMBEDDED PLATFORM", icon: "icons/arduino.svg" },
+
+  // Tools & DevOps
+  { name: "VS Code", category: "Tools & DevOps", role: "CODE EDITOR", icon: "icons/visualstudiocode.svg" },
+  { name: "Antigravity", category: "Tools & DevOps", role: "CODE EDITOR", icon: "icons/antigravity.svg" },
+  { name: "Git", category: "Tools & DevOps", role: "VERSION CONTROL", icon: "icons/git.svg" },
+  { name: "GitHub", category: "Tools & DevOps", role: "CODE REPO", icon: "icons/github.svg" },
+  { name: "MySQL", category: "Tools & DevOps", role: "RELATIONAL DB", icon: "icons/mysql.svg" },
+  { name: "PhpMyAdmin", category: "Tools & DevOps", role: "RELATIONAL DB", icon: "icons/phpmyadmin.svg" },
+  { name: "Supabase", category: "Tools & DevOps", role: "POSTGRES BAAS", icon: "icons/supabase.svg" },
+  { name: "Firebase", category: "Tools & DevOps", role: "BACKEND SERVICE", icon: "icons/firebase.svg" },
+  { name: "SQLite", category: "Tools & DevOps", role: "LOCAL DATABASE", icon: "icons/sqlite.svg" },
+  { name: "Postman", category: "Tools & DevOps", role: "API TESTING", icon: "icons/postman.svg" },
+  { name: "Laragon", category: "Tools & DevOps", role: "LOCAL SERVER", icon: "icons/laragon.svg" },
+  { name: "Android Studio", category: "Tools & DevOps", role: "MOBILE IDE", icon: "icons/android.svg" },
 ];
