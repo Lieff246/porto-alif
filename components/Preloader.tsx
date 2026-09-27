@@ -100,8 +100,7 @@ export default function Preloader() {
       </div>
 
       {/* Bottom Hint */}
-      <div className="flex items-center justify-between w-full max-w-5xl mx-auto text-[11px] font-mono text-zinc-600">
-        <span>PALU, SULAWESI TENGAH</span>
+      <div className="flex items-center justify-end w-full max-w-5xl mx-auto text-[11px] font-mono text-zinc-600">
         <span className="hover:text-zinc-400 transition-colors">
           KLIK DI MANA SAJA UNTUK LEWATI ↵
         </span>

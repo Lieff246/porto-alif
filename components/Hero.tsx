@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { personalInfo, projects } from "@/data/portfolio";
 import { ArrowDown, ExternalLink, Terminal, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/Icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
 
 const roles = [
   "Web Developer",
@@ -13,9 +13,49 @@ const roles = [
   "IoT & AI Researcher",
 ];
 
+const cardRoles = [
+  {
+    title: "Staff Penalaran Keilmuan",
+    org: "HMTI Untad",
+    badge: "Staff",
+    spec: "[LARAVEL · GO · NEXT.JS]",
+  },
+  {
+    title: "Web Programming Mentor",
+    org: "Programming Tadulako",
+    badge: "Web Mentor",
+    spec: "[HTML · CSS · JS · GO]",
+  },
+];
+
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
+
+  // ID Card dynamic role switcher
+  const [cardRoleIndex, setCardRoleIndex] = useState(0);
+  const [isRoleFading, setIsRoleFading] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsRoleFading(true);
+      setTimeout(() => {
+        setCardRoleIndex((prev) => (prev + 1) % cardRoles.length);
+        setIsRoleFading(false);
+      }, 180);
+    }, 3600);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleCardClick = () => {
+    setIsRoleFading(true);
+    setTimeout(() => {
+      setCardRoleIndex((prev) => (prev + 1) % cardRoles.length);
+      setIsRoleFading(false);
+    }, 120);
+  };
+
+  const currentCardRole = cardRoles[cardRoleIndex];
 
   // Dynamic Typewriter Effect (like Hafidz Humaidi)
   const [roleIndex, setRoleIndex] = useState(0);
@@ -92,7 +132,7 @@ export default function Hero() {
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
                 <Terminal className="w-3.5 h-3.5 text-zinc-700" />
-                <span>INFORMATICS STUDENT &amp; BUILDER</span>
+                <span>Software Builder &amp; Informatics Student</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
@@ -101,7 +141,7 @@ export default function Hero() {
 
               {/* Dynamic Typewriter Role - Unified Clean Typography */}
               <div className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2.5 pt-1">
-                <span className="text-zinc-400 font-normal">Seorang</span>
+                <span className="text-zinc-400 font-normal">I'm a</span>
                 <span className="text-zinc-950 font-black border-b-2 border-emerald-500 pb-0.5 inline-flex items-center">
                   {displayedRole}
                   <span className="w-0.5 h-5 bg-emerald-500 ml-1 inline-block animate-pulse" />
@@ -111,7 +151,7 @@ export default function Hero() {
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl pt-1">
               Informatics student at{" "}
-              <span className="text-zinc-950 font-semibold">Universitas Tadulako</span> who loves building things for the screen. Passionate about software craftsmanship and mentoring fellow students in Palu.
+              <span className="text-zinc-950 font-semibold">Universitas Tadulako</span> who loves building things for the screen. Passionate about software craftsmanship and mentoring fellow students in Palu, Indonesia.
             </p>
 
             {/* Quick Interactive Actions & Social Row */}
@@ -137,15 +177,29 @@ export default function Hero() {
 
               {/* Social Quick Connect */}
               <div className="flex items-center gap-1.5 pl-1 border-l border-zinc-200">
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
-                  title="LinkedIn Alif Apriansyah"
-                >
-                  <LinkedinIcon className="w-4 h-4" />
-                </a>
+                {personalInfo.linkedin && (
+                  <a
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
+                    title="LinkedIn Alif Apriansyah"
+                  >
+                    <LinkedinIcon className="w-4 h-4" />
+                  </a>
+                )}
+
+                {personalInfo.instagram && (
+                  <a
+                    href={personalInfo.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
+                    title="Instagram @alifapriansyah02"
+                  >
+                    <InstagramIcon className="w-4 h-4" />
+                  </a>
+                )}
 
                 <a
                   href={`mailto:${personalInfo.email}`}
@@ -162,8 +216,10 @@ export default function Hero() {
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div
               ref={cardRef}
+              onClick={handleCardClick}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
+              title="Klik ID Card untuk beralih peran"
               style={{
                 transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)",
                 transformOrigin: "top center",
@@ -206,8 +262,7 @@ export default function Hero() {
                 <div className="pt-3 pb-2.5 px-4 bg-zinc-50/90 border-b border-zinc-100 relative">
                   {/* Absolute Left Status */}
                   <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-[9px] font-mono text-zinc-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>ID</span>
+                    <span>INFORMATICS</span>
                   </div>
 
                   {/* Centered Lanyard Punch Hole with Hook Loop */}
@@ -220,7 +275,7 @@ export default function Hero() {
 
                   {/* Absolute Right Code */}
                   <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[9px] font-mono text-zinc-400 font-medium tracking-wider">
-                    UNTAD.TI.24
+                    UNTAD'24
                   </div>
                 </div>
 
@@ -231,20 +286,16 @@ export default function Hero() {
                     alt={personalInfo.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
-                    className="object-cover object-center filter grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
+                    className="object-cover object-center filter grayscale-0 md:grayscale md:group-hover:grayscale-0 contrast-105 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
                     priority
                   />
                   {/* Subtle Inset Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-30 md:opacity-60 md:group-hover:opacity-20 transition-opacity duration-500" />
 
                   {/* Corner Badges on Photo */}
                   <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white text-xs font-mono">
                     <span className="bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[10px] border border-white/10">
                       Tadulako Univ
-                    </span>
-                    <span className="flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 backdrop-blur-md px-2 py-0.5 rounded border border-emerald-500/30 text-[10px] font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      ACTIVE
                     </span>
                   </div>
                 </div>
@@ -252,22 +303,68 @@ export default function Hero() {
                 {/* Card Identity Footer */}
                 <div className="p-3.5 bg-white border-t border-zinc-100">
                   <div className="flex items-start justify-between gap-2.5">
-                    <div>
-                      <p className="text-sm font-black text-zinc-950 tracking-tight leading-snug">Alif Apriansyah</p>
-                      <p className="text-[10.5px] text-zinc-500 font-mono mt-0.5 leading-snug">
-                        Staff Penalaran Keilmuan <span className="text-zinc-700 font-semibold">HMTI Untad</span>
+                    <div className="min-h-[46px] flex-1">
+                      <p className="text-sm font-black text-zinc-950 tracking-tight leading-snug">
+                        Alif Apriansyah
                       </p>
+                      <div
+                        className={`transition-all duration-200 transform ${
+                          isRoleFading
+                            ? "opacity-0 -translate-y-0.5"
+                            : "opacity-100 translate-y-0"
+                        }`}
+                      >
+                        <div className="text-[10px] text-zinc-500 font-mono mt-0.5 leading-snug">
+                          <p className="text-zinc-500">{currentCardRole.title}</p>
+                          <p className="text-zinc-800 font-semibold">{currentCardRole.org}</p>
+                        </div>
+                      </div>
                     </div>
+
                     <div className="text-right shrink-0">
-                      <span className="text-[9px] font-mono text-zinc-400 block uppercase font-semibold">ROLE</span>
-                      <span className="text-xs font-bold text-zinc-900 font-mono">Web Mentor</span>
+                      <span className="text-[9px] font-mono text-zinc-400 block uppercase font-semibold">
+                        ROLE
+                      </span>
+                      <div
+                        className={`transition-all duration-200 transform ${
+                          isRoleFading
+                            ? "opacity-0 scale-95"
+                            : "opacity-100 scale-100"
+                        }`}
+                      >
+                        <span className="text-xs font-bold text-zinc-900 font-mono">
+                          {currentCardRole.badge}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Clean Monospaced Spec Strip (No emojis) */}
+                  {/* Clean Monospaced Spec Strip with Indicator Switcher */}
                   <div className="mt-2.5 pt-2 border-t border-zinc-100 flex items-center justify-between text-[10px] font-mono text-zinc-500">
-                    <span className="text-zinc-600 font-semibold">[LARAVEL · GO · NEXT.JS]</span>
-                    <span className="text-zinc-400">PALU, ID</span>
+                    <span
+                      className={`font-semibold text-zinc-600 transition-opacity duration-200 ${
+                        isRoleFading ? "opacity-0" : "opacity-100"
+                      }`}
+                    >
+                      {currentCardRole.spec}
+                    </span>
+
+                    {/* Interactive dot indicator */}
+                    <div
+                      className="flex items-center gap-1.5"
+                      title="Klik kartu untuk beralih peran"
+                    >
+                      {cardRoles.map((_, i) => (
+                        <span
+                          key={i}
+                          className={`h-1.5 rounded-full transition-all duration-300 ${
+                            i === cardRoleIndex
+                              ? "w-3.5 bg-zinc-900"
+                              : "w-1.5 bg-zinc-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -282,10 +379,10 @@ export default function Hero() {
             {/* 01: Status */}
             <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
               <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                01 // STATUS
+                STATUS
               </span>
               <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
-                Semester 5
+                Active Builder
               </p>
               <p className="text-xs text-zinc-500 font-mono mt-0.5">
                 Teknik Informatika Untad
@@ -295,39 +392,39 @@ export default function Hero() {
             {/* 02: Projects */}
             <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
               <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                02 // PROJECTS
+                PROJECTS
               </span>
               <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
                 {projects.length}+ Karya
               </p>
               <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                WebGIS · Backend · Mobile
+                Web · Mobile · Backend · IoT
               </p>
             </div>
 
             {/* 03: Organisasi & Komunitas */}
             <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
               <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                03 // KOMUNITAS
+                KOMUNITAS
               </span>
               <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
-                Prog. Tadulako
+                Pengurus &amp; Mentor
               </p>
               <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                Web Mentor &amp; HMTI Untad
+                HMTI Untad &amp; Prog. Tadulako
               </p>
             </div>
 
-            {/* 04: Riset Lomba */}
+            {/* 04: Lomba */}
             <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
               <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                04 // RISET LOMBA
+                LOMBA
               </span>
               <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
-                LIDM &amp; Gemastik
+                LIDM &amp; Gemastik 
               </p>
               <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                Ketua Tim SIFOKUS IoT &apos;26
+                SIFOKUS &apos;25 &amp; Pemuda Vimral &apos;26
               </p>
             </div>
 

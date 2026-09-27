@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { personalInfo } from "@/data/portfolio";
 import { Mail, Menu, X, ArrowUpRight } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
+import { GithubIcon, InstagramIcon } from "@/components/Icons";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,21 +34,21 @@ export default function Navbar() {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between relative">
         {/* Brand */}
         <Link
           href="/"
           className="flex items-center gap-2.5 text-zinc-950 font-mono font-bold tracking-tight text-sm sm:text-base group"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          {/* <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" /> */}
           <span>alif</span>
           <span className="text-zinc-400 group-hover:text-zinc-600 transition-colors">
-            / apriansyah
+            apriansyah
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/80 border border-zinc-200/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-2xs">
+        <nav className="hidden md:flex items-center gap-1 bg-white/80 border border-zinc-200/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-2xs absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -62,6 +62,15 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="hidden sm:flex items-center gap-2.5">
+          <a
+            href={personalInfo.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Profile"
+            className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 transition-all"
+          >
+            <InstagramIcon className="w-4 h-4" />
+          </a>
           <a
             href={personalInfo.github}
             target="_blank"

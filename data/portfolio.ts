@@ -11,8 +11,8 @@ export const personalInfo: PersonalInfo = {
   bio: "Mahasiswa Teknik Informatika Universitas Tadulako yang aktif membangun sistem web fullstack, arsitektur backend berkinerja tinggi, WebGIS spasial, serta inovasi IoT & Computer Vision. Berpengalaman sebagai pengurus Divisi Penalaran Keilmuan HMTI Untad dan mentor pemrograman web.",
   status: "Open for collaboration & research projects",
   github: "https://github.com/Lieff246",
-  email: "alifapriansyah246@gmail.com",
-  linkedin: "https://www.linkedin.com/in/alif-apriansyah",
+  email: "alifapriansyahasgar@gmail.com",
+  instagram: "https://www.instagram.com/alifapriansyah02/"
 };
 
 export const focusAreas: FocusArea[] = [

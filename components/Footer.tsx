@@ -1,6 +1,6 @@
 import { personalInfo } from "@/data/portfolio";
 import { Mail } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
 
 export default function Footer() {
   return (
@@ -29,6 +29,28 @@ export default function Footer() {
             >
               <GithubIcon className="w-4 h-4" />
             </a>
+            {personalInfo.linkedin && (
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+            )}
+            {personalInfo.instagram && (
+              <a
+                href={personalInfo.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Profile"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+            )}
             <a
               href={`mailto:${personalInfo.email}`}
               aria-label="Send Email"

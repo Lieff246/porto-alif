@@ -80,5 +80,6 @@ export interface PersonalInfo {
   status: string;
   github: string;
   email: string;
-  linkedin: string;
+  linkedin?: string;
+  instagram?: string;
 }
