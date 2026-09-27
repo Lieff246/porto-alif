@@ -13,7 +13,7 @@ export default function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  once = false,
+  once = true,
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export default function ScrollReveal({
           }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.02, rootMargin: "0px 0px -20px 0px" }
     );
 
     const currentRef = ref.current;
