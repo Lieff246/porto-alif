@@ -43,7 +43,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
                 {project.category}
               </span>
               {project.featured && (
-                <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-emerald-600 text-white shadow-sm">
+                <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-zinc-700 text-white shadow-sm">
                   FEATURED WORK
                 </span>
               )}
