@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import FocusAreas from "@/components/FocusAreas";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import TechStack from "@/components/TechStack";
@@ -22,9 +21,6 @@ export default function Home() {
 
       <main className="flex-1">
         <Hero />
-        <ScrollReveal>
-          <FocusAreas />
-        </ScrollReveal>
         <ScrollReveal>
           <ProjectsSection />
         </ScrollReveal>

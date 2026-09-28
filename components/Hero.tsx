@@ -7,10 +7,10 @@ import { ArrowDown, ExternalLink, Terminal, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
 
 const roles = [
-  "Web Developer",
-  "WebGIS Specialist",
-  "Flutter Mobile Dev",
-  "IoT & AI Researcher",
+  "Web & WebGIS Developer",
+  "Backend Engineer",
+  "Flutter Mobile Developer",
+  "AI & Vision Explorer",
 ];
 
 const cardRoles = [
@@ -132,7 +132,7 @@ export default function Hero() {
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
                 <Terminal className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Software Builder &amp; Informatics Student</span>
+                <span>Informatics </span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
@@ -155,10 +155,10 @@ export default function Hero() {
             </p>
 
             {/* Quick Interactive Actions & Social Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1">
               <a
                 href="#projects"
-                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all shadow-sm hover:shadow"
+                className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all shadow-sm hover:shadow"
               >
                 <span>Lihat Project</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -168,15 +168,17 @@ export default function Hero() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-sm font-semibold transition-all shadow-2xs"
+                aria-label="GitHub Profile"
+                className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-sm font-semibold transition-all shadow-2xs"
+                title="GitHub @Lieff246"
               >
-                <GithubIcon className="w-4 h-4" />
-                <span>GitHub @Lieff246</span>
-                <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+                <GithubIcon className="w-4 h-4 shrink-0" />
+                <span className="hidden sm:inline">GitHub @Lieff246</span>
+                <ExternalLink className="hidden sm:inline w-3.5 h-3.5 text-zinc-400" />
               </a>
 
               {/* Social Quick Connect */}
-              <div className="flex items-center gap-1.5 pl-1 border-l border-zinc-200">
+              <div className="flex items-center gap-2 sm:gap-1.5 sm:pl-2 sm:border-l sm:border-zinc-200">
                 {personalInfo.linkedin && (
                   <a
                     href={personalInfo.linkedin}
@@ -398,7 +400,7 @@ export default function Hero() {
                 {projects.length}+ Karya
               </p>
               <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                Web · Mobile · Backend · IoT
+                Web · Mobile · Backend · AI
               </p>
             </div>
 

@@ -2,14 +2,6 @@ import { PersonalInfo, Project, Experience, SkillCategory, FocusArea, TechTool }
 
 export const personalInfo: PersonalInfo = {
   name: "Alif Apriansyah",
-  nickname: "Alif",
-  role: "Informatics Engineering Student & Software Builder",
-  institution: "Universitas Tadulako",
-  faculty: "Fakultas Teknik",
-  semester: "Semester 5",
-  location: "Palu, Sulawesi Tengah, Indonesia",
-  bio: "Mahasiswa Teknik Informatika Universitas Tadulako yang aktif membangun sistem web fullstack, arsitektur backend berkinerja tinggi, WebGIS spasial, serta inovasi IoT & Computer Vision. Berpengalaman sebagai pengurus Divisi Penalaran Keilmuan HMTI Untad dan mentor pemrograman web.",
-  status: "Open for collaboration & research projects",
   github: "https://github.com/Lieff246",
   email: "alifapriansyahasgar@gmail.com",
   instagram: "https://www.instagram.com/alifapriansyah02/"
@@ -17,108 +9,28 @@ export const personalInfo: PersonalInfo = {
 
 export const focusAreas: FocusArea[] = [
   {
-    code: "WEBGIS_SPATIAL",
     title: "Fullstack Web & WebGIS",
-    tagline: "Sistem informasi spasial interaktif dengan arsitektur decoupled untuk visualisasi data skala provinsi.",
-    description: "Membangun sistem pemetaan geografis dan antarmuka web modern dengan integrasi RESTful API terpisah.",
-    capabilities: [
-      {
-        label: "Visualisasi Data Spasial",
-        detail: "Clustering ribuan koordinat sekolah, kalkulasi buffer, dan polygon 6 batas cabang dinas menggunakan Leaflet & GeoJSON.",
-      },
-      {
-        label: "Decoupled Frontend UI",
-        detail: "Komponen antarmuka modular dan reaktif menggunakan React 19, TypeScript, dan Tailwind CSS.",
-      },
-      {
-        label: "Headless RESTful API",
-        detail: "Layanan data terpusat dan proteksi akses multi-role berbasis Laravel 11 Sanctum & Fortify.",
-      },
-    ],
-    provenProject: {
-      title: "Portal Pemetaan Sekolah Dinas Pendidikan Sulteng",
-      description: "WebGIS terintegrasi untuk visualisasi ribuan data sekolah se-Provinsi Sulawesi Tengah.",
-    },
+    description: "Pengembangan platform pemetaan geografis interaktif skala provinsi. Menerapkan visualisasi ribuan titik koordinat, polygon batas wilayah, serta arsitektur decoupled berbasis React dan REST API.",
     tags: ["React 19", "TypeScript", "Laravel 11", "Leaflet", "GeoJSON", "Tailwind CSS"],
     icon: "Globe",
   },
   {
-    code: "CLEAN_BACKEND",
     title: "Backend Engineering",
-    tagline: "Perancangan RESTful API terstruktur dengan prinsip Clean Architecture dan efisiensi konkurensi.",
-    description: "Membangun fondasi server yang mudah dirawat, berkinerja tinggi, dan memiliki pemisahan tanggung jawab yang ketat.",
-    capabilities: [
-      {
-        label: "High-Throughput Routing",
-        detail: "Pemanfaatan concurrency goroutine dan router berbobot ringan di Go (Golang) menggunakan Chi Router.",
-      },
-      {
-        label: "Clean Architecture Pattern",
-        detail: "Pemisahan lapisan sistem yang ketat antara Handler (Transport), UseCase (Domain Logic), dan Repository (Storage).",
-      },
-      {
-        label: "Autentikasi & Database",
-        detail: "Implementasi stateless JWT authentication dan perancangan skema relasional terindeks di MySQL.",
-      },
-    ],
-    provenProject: {
-      title: "High-Performance Notes API & Backend Service",
-      description: "Implementasi Clean Architecture di Go 1.21 dengan koneksi database MySQL dan proteksi JWT.",
-    },
+    description: "Membangun layanan backend dan RESTful API modular berbasis PHP (Laravel) dan Go. Menerapkan prinsip Clean Architecture, efisiensi konkurensi data, manajemen sesi stateless, serta skema basis data relasional yang kokoh.",
     tags: ["Go (Golang)", "Chi Router", "MySQL", "JWT Auth", "Clean Architecture", "PHP 8+"],
     icon: "Server",
   },
   {
-    code: "VISION_AI_SYSTEMS",
-    title: "AI & Computer Vision",
-    tagline: "Penerapan visi komputer untuk analisis metrik biometrik dan integrasi agen kecerdasan buatan.",
-    description: "Mengembangkan algoritma deteksi visual dan integrasi model Large Language Model untuk solusi terapan.",
-    capabilities: [
-      {
-        label: "Deteksi Metrik Biometrik (EAR)",
-        detail: "Tracking 468 titik FaceMesh untuk kalkulasi Eye Aspect Ratio (EAR) 6-titik euclidean dalam mendeteksi kelelahan.",
-      },
-      {
-        label: "Multi-Agent AI Systems",
-        detail: "Integrasi model penalaran Google Gemini API dengan pembagian peran terstruktur (Validator, Synthesizer, Analyst).",
-      },
-      {
-        label: "Pipeline Pemrosesan Citra",
-        detail: "Manipulasi frame video real-time, masking kontur, dan inferensi visual berbasis OpenCV & Python.",
-      },
-    ],
-    provenProject: {
-      title: "SIFOKUS & SmartStudy AI",
-      description: "Riset deteksi kantuk LIDM Puspresnas 2025 serta sistem pembelajaran cerdas berbasis Gemini API.",
-    },
-    tags: ["Python", "OpenCV", "MediaPipe FaceMesh", "Google Gemini API", "Multi-Agent"],
-    icon: "Brain",
+    title: "Mobile App Development",
+    description: "Pengembangan aplikasi mobile modern lintas platform menggunakan Flutter dan Dart. Menerapkan manajemen state reaktif, integrasi layanan cloud database (Firebase & Supabase), serta persistensi data lokal offline.",
+    tags: ["Flutter", "Dart", "Firebase", "Supabase", "GetX", "SQLite"],
+    icon: "Smartphone",
   },
   {
-    code: "EMBEDDED_HARDWARE",
-    title: "IoT & Hardware Prototyping",
-    tagline: "Integrasi modul mikrokontroler visual mandiri dengan perancangan enclosure mekanik 3D print.",
-    description: "Menghubungkan komputasi perangkat keras dengan sensor visual dan perancangan fisik perangkat yang fungsional.",
-    capabilities: [
-      {
-        label: "Visual Microcontroller",
-        detail: "Pemrograman modul ESP32-CAM dengan sensor OV2640 untuk transmisi frame citra melalui protokol jaringan lokal.",
-      },
-      {
-        label: "Perancangan Enclosure 3D CAD",
-        detail: "Pemodelan wadah fisik perangkat (casing Swanky Turing) dengan toleransi presisi menggunakan format STL/CAD.",
-      },
-      {
-        label: "Logika Sistem Tertanam (Embedded)",
-        detail: "Kontrol sinyal GPIO, indikator alert LED, dan manajemen daya 3.3V menggunakan C/C++ pada Arduino IDE.",
-      },
-    ],
-    provenProject: {
-      title: "Perangkat Hardware Sensor SIFOKUS",
-      description: "Prototipe perangkat monitoring siswa dengan casing 3D print custom untuk Capstone Design FATEK.",
-    },
-    tags: ["ESP32-CAM", "3D CAD / STL", "Embedded C++", "Arduino", "Hardware Prototyping"],
-    icon: "Cpu",
+    title: "AI & Computer Vision",
+    description: "Implementasi visi komputer untuk kalkulasi biometrik waktu nyata (Eye Aspect Ratio/FaceMesh) guna deteksi kelelahan, dipadukan dengan integrasi model kecerdasan buatan untuk sistem terapan.",
+    tags: ["Python", "OpenCV", "MediaPipe FaceMesh", "Google Gemini API", "Multi-Agent"],
+    icon: "Brain",
   },
 ];
 
@@ -127,7 +39,7 @@ export const projects: Project[] = [
     id: "disdik-pemetaan",
     title: "Portal Pemetaan Sekolah Sulawesi Tengah",
     tagline: "Sistem Informasi Geografis & WebGIS Pemetaan Sekolah Se-Provinsi Sulawesi Tengah",
-    category: "Fullstack / WebGIS",
+    category: "Web",
     role: "Fullstack Developer (Magang Dispen)",
     period: "2026",
     featured: true,
@@ -151,10 +63,38 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "ewastehub",
+    title: "E-Waste Hub — Platform Pengelolaan Sampah Elektronik",
+    tagline: "Sistem Manajemen & Penjemputan Sampah Elektronik dengan Multi-Role & Sistem Pakar Verifikasi",
+    category: "Web",
+    role: "Fullstack Developer",
+    period: "2026",
+    featured: true,
+    image: "/images/ewaste.png",
+    description: "Platform web terpadu untuk pengelolaan dan penjemputan sampah elektronik yang menghubungkan masyarakat (kontributor) dengan mitra pengepul dan admin dengan sistem reward poin dan verifikasi cerdas.",
+    fullDescription: "Dikembangkan sebagai proyek akhir komprehensif mata kuliah Pemrograman Web di Universitas Tadulako (Kelompok 4). E-Waste Hub mengintegrasikan tiga portal peran terpisah (Masyarakat, Mitra Pengepul, dan Admin). Mengimplementasikan custom RoleMiddleware untuk proteksi rute dan guest redirection, sistem permohonan penjemputan e-waste dengan tracking status bertahap, gamifikasi 100 poin/kg dengan konversi saldo tunai (Rp 75/poin), integrasi kontak WhatsApp sekali klik, serta algoritma Sistem Pakar (MitraVerificationService) berbasis heuristik untuk verifikasi otomatis kelayakan lapak mitra.",
+    tags: ["Laravel 11", "PHP 8.2+", "Blade", "Tailwind CSS", "MySQL", "Role Middleware", "Rule-Based Expert System", "WhatsApp Integration"],
+    githubUrl: "https://github.com/DarkPhantom24/UAS-web",
+    liveUrl: null,
+    metrics: "3 Multi-Role Portals · Sistem Poin Reward & Expert System Verifikasi",
+    highlights: [
+      "Arsitektur 3 Multi-Role aman (Masyarakat, Mitra Pengepul, Admin) dengan proteksi custom RoleMiddleware",
+      "Sistem permohonan penjemputan e-waste dengan pelacakan status bertahap (Menunggu, Diambil, Diproses, Selesai)",
+      "Sistem gamifikasi poin (100 poin/kg) dan konversi saldo rupiah otomatis (1 poin = Rp 75)",
+      "Sistem Pakar Verifikasi Otomatis (MitraVerificationService) berbasis 8 aturan heuristik & skor kelayakan lapak",
+      "Integrasi komunikasi instan WhatsApp mitra ke kontributor dan dashboard admin monitoring transaksi"
+    ],
+    techDetails: {
+      frontend: "Blade Components, Tailwind CSS, Phosphor Icons, Responsive Layout",
+      backend: "Laravel 11.x, PHP 8.2+, Custom RoleMiddleware, Service Architecture",
+      database: "MySQL Relational Schema, Foreign Key Cascades & Status Indexing",
+    },
+  },
+  {
     id: "sifokus-iot",
     title: "SIFOKUS — Sensor Fokus & Deteksi Kantuk Siswa",
     tagline: "Inovasi Perangkat IoT & Computer Vision untuk Monitoring Konsentrasi Belajar Siswa",
-    category: "IoT & Vision",
+    category: "AI",
     role: "Ketua Tim Pelaksana (Ordinary Squad)",
     period: "2025",
     featured: false,
@@ -180,7 +120,7 @@ export const projects: Project[] = [
     id: "smartstudy-ai",
     title: "SmartStudy — AI-Powered Task Management",
     tagline: "Platform Manajemen Beban Kuliah Cerdas dengan 3 Multi-Agent Google Gemini",
-    category: "AI & Systems",
+    category: "Web & AI",
     role: "Lead Fullstack & AI Engineer",
     period: "2026",
     featured: true,
@@ -289,7 +229,7 @@ export const projects: Project[] = [
     id: "kuliner-nusantara",
     title: "Kuliner Nusantara — Showcase Web Tradisional",
     tagline: "Website Informasi Keanekaragaman Kuliner Tradisional Indonesia",
-    category: "Frontend / Web",
+    category: "Web",
     role: "Front-End Developer",
     period: "2025",
     featured: true,
@@ -310,7 +250,7 @@ export const projects: Project[] = [
     id: "nongkis-palu",
     title: "NONGKIS — Web Direktori & Reservasi Tempat Nongkrong Kota Palu",
     tagline: "Platform Penemuan & Reservasi 32 Spot Nongkrong, Nugas, dan Kafe Terbaik di Kota Palu",
-    category: "Fullstack / Web",
+    category: "Web",
     role: "Fullstack Developer (RPL Kelompok 8)",
     period: "2025",
     featured: true,
@@ -338,7 +278,7 @@ export const projects: Project[] = [
     id: "safe-game-lidm",
     title: "S.A.F.E — Game Edukasi Mitigasi Gempa Bumi (Roblox)",
     tagline: "Inovasi Media Pembelajaran Berbasis Game 3D & Microlearning untuk Edukasi Mitigasi Gempa Bumi",
-    category: "Game & Simulation",
+    category: "Game",
     role: "Game Developer (Tim Pemuda Vimral)",
     period: "2026",
     featured: false,

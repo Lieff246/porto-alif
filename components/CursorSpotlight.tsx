@@ -107,7 +107,7 @@ export default function CursorSpotlight() {
       <div
         ref={ringRef}
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-50 w-8 h-8 rounded-full border border-zinc-900/40 opacity-0 hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[999999] w-8 h-8 rounded-full border border-zinc-900/40 opacity-0 hidden md:block"
         style={{
           willChange: "transform, border-color, background-color",
           transition: "opacity 300ms ease, border-color 200ms ease, background-color 200ms ease",
@@ -118,7 +118,7 @@ export default function CursorSpotlight() {
       <div
         ref={dotRef}
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-50 w-2 h-2 rounded-full bg-zinc-900 opacity-0 hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[999999] w-2 h-2 rounded-full bg-zinc-900 opacity-0 hidden md:block"
         style={{
           willChange: "transform",
           transition: "opacity 300ms ease",

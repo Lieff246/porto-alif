@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   tagline: string;
-  category: "Fullstack / WebGIS" | "Fullstack / Web" | "AI & Systems" | "Backend" | "IoT & Vision" | "Mobile" | "Frontend / Web" | "Game & Simulation";
+  category: "Web" | "Backend" | "Mobile" | "AI" | "Game" | string;
   role: string;
   period: string;
   image?: string;
@@ -49,37 +49,17 @@ export interface TechTool {
   icon?: string; // Path file logo lokal di /public/icons/ (contoh: "/icons/react.svg")
 }
 
-export interface FocusCapability {
-  label: string;
-  detail: string;
-}
-
 export interface FocusArea {
-  code: string;
   title: string;
-  tagline: string;
   description: string;
-  capabilities: FocusCapability[];
-  provenProject: {
-    title: string;
-    description: string;
-  };
   tags: string[];
   icon: string;
 }
 
 export interface PersonalInfo {
   name: string;
-  nickname: string;
-  role: string;
-  institution: string;
-  faculty: string;
-  semester: string;
-  location: string;
-  bio: string;
-  status: string;
   github: string;
   email: string;
-  linkedin?: string;
   instagram?: string;
+  linkedin?: string;
 }
