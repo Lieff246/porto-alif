@@ -466,48 +466,40 @@ export const skillCategories: SkillCategory[] = [
 
 export const techTools: TechTool[] = [
   // Web & Frameworks
-  { name: "React", category: "Frameworks & Web", role: "FRONTEND LIB", icon: "icons/react.svg" },
-  { name: "Tailwind CSS", category: "Frameworks & Web", role: "CSS FRAMEWORK", icon: "icons/tailwindcss.svg" },
-  { name: "Next.js", category: "Frameworks & Web", role: "WEB FRAMEWORK", icon: "icons/nextdotjs.svg" },
-  { name: "Laravel", category: "Frameworks & Web", role: "BACKEND API", icon: "icons/laravel.svg" },
-  { name: "Flutter", category: "Frameworks & Web", role: "MOBILE SDK", icon: "icons/flutter.svg" },
-  { name: "Vite", category: "Frameworks & Web", role: "BUILD TOOL", icon: "icons/vite.svg"},
-  { name: "Node.js", category: "Frameworks & Web", role: "JS RUNTIME", icon: "icons/nodedotjs.svg" },
+  { name: "React", category: "Frameworks & Web", role: "Frontend UI", icon: "icons/react.svg" },
+  { name: "Next.js", category: "Frameworks & Web", role: "React Framework", icon: "icons/nextdotjs.svg" },
+  { name: "Laravel", category: "Frameworks & Web", role: "Backend Framework", icon: "icons/laravel.svg" },
+  { name: "Flutter", category: "Frameworks & Web", role: "Cross-Platform Mobile", icon: "icons/flutter.svg" },
+  { name: "Tailwind CSS", category: "Frameworks & Web", role: "Styling Framework", icon: "icons/tailwindcss.svg" },
+  { name: "Vite", category: "Frameworks & Web", role: "Frontend Tooling", icon: "icons/vite.svg" },
+  { name: "Node.js", category: "Frameworks & Web", role: "JavaScript Runtime", icon: "icons/nodedotjs.svg" },
 
   // Languages
-  { name: "TypeScript", category: "Languages", role: "TYPED SCRIPT", icon: "icons/typescript.svg" },
-  { name: "JavaScript", category: "Languages", role: "CLIENT SCRIPT", icon: "icons/javascript.svg" },
-  { name: "Go (Golang)", category: "Languages", role: "SYSTEMS LANG", icon: "icons/go.svg" },
-  { name: "PHP 8+", category: "Languages", role: "SERVER SCRIPT", icon: "icons/php.svg" },
-  { name: "Python 3", category: "Languages", role: "AI & DATA LANG", icon: "icons/python.svg" },
-  { name: "Dart", category: "Languages", role: "CROSS-PLATFORM", icon: "icons/dart.svg" },
-  { name: "Kotlin", category: "Languages", role: "ANDROID LANG", icon: "icons/kotlin.svg" },
-  { name: "C++", category: "Languages", role: "EMBEDDED LANG", icon: "icons/cplusplus.svg" },
-  { name: "SQL", category: "Languages", role: "QUERY LANG", icon: "icons/mysql.svg"},
+  { name: "Go (Golang)", category: "Languages", role: "Backend & Systems", icon: "icons/go.svg" },
+  { name: "TypeScript", category: "Languages", role: "Type-Safe JS", icon: "icons/typescript.svg" },
+  { name: "PHP 8+", category: "Languages", role: "Server Scripting", icon: "icons/php.svg" },
+  { name: "Python 3", category: "Languages", role: "Vision & Scripting", icon: "icons/python.svg" },
+  { name: "JavaScript", category: "Languages", role: "Web Scripting", icon: "icons/javascript.svg" },
+  { name: "Dart", category: "Languages", role: "Flutter Language", icon: "icons/dart.svg" },
+  { name: "SQL", category: "Languages", role: "Database Queries", icon: "icons/mysql.svg" },
 
   // Geospatial & Spatial Data
-  { name: "Leaflet.js", category: "Geospatial", role: "WEB MAPPING", icon: "icons/leaflet.svg" },
-  { name: "QGIS", category: "Geospatial", role: "DESKTOP GIS", icon: "icons/qgis.svg"  },
-  { name: "ArcGIS", category: "Geospatial", role: "ESRI SPATIAL", icon: "icons/arcgis.svg" },
+  { name: "Leaflet.js", category: "Geospatial", role: "WebGIS Mapping", icon: "icons/leaflet.svg" },
+  { name: "QGIS", category: "Geospatial", role: "Spatial Analysis", icon: "icons/qgis.svg" },
 
-  // AI, Vision & Embedded
-  { name: "Google Gemini", category: "AI & Hardware", role: "LLM MULTI-AGENT", icon: "icons/googlegemini.svg" },
-  { name: "Claude", category: "AI & Hardware", role: "LLM MULTI-AGENT", icon: "icons/claude.svg" },
-  { name: "MediaPipe", category: "AI & Hardware", role: "FACEMESH VISION", icon: "icons/mediapipe.svg" },
-  { name: "OpenCV", category: "AI & Hardware", role: "IMAGE PROCESSING", icon: "icons/opencv.svg" },
-  { name: "Arduino", category: "AI & Hardware", role: "EMBEDDED PLATFORM", icon: "icons/arduino.svg" },
+  // AI, Vision & Hardware
+  { name: "Google Gemini", category: "AI & Hardware", role: "LLM & Multi-Agent", icon: "icons/googlegemini.svg" },
+  { name: "MediaPipe", category: "AI & Hardware", role: "FaceMesh Tracking", icon: "icons/mediapipe.svg" },
+  { name: "OpenCV", category: "AI & Hardware", role: "Computer Vision", icon: "icons/opencv.svg" },
+  { name: "Arduino", category: "AI & Hardware", role: "Embedded IoT", icon: "icons/arduino.svg" },
 
-  // Tools & DevOps
-  { name: "VS Code", category: "Tools & DevOps", role: "CODE EDITOR", icon: "icons/visualstudiocode.svg" },
-  { name: "Antigravity", category: "Tools & DevOps", role: "CODE EDITOR", icon: "icons/antigravity.svg" },
-  { name: "Git", category: "Tools & DevOps", role: "VERSION CONTROL", icon: "icons/git.svg" },
-  { name: "GitHub", category: "Tools & DevOps", role: "CODE REPO", icon: "icons/github.svg" },
-  { name: "MySQL", category: "Tools & DevOps", role: "RELATIONAL DB", icon: "icons/mysql.svg" },
-  { name: "PhpMyAdmin", category: "Tools & DevOps", role: "RELATIONAL DB", icon: "icons/phpmyadmin.svg" },
-  { name: "Supabase", category: "Tools & DevOps", role: "POSTGRES BAAS", icon: "icons/supabase.svg" },
-  { name: "Firebase", category: "Tools & DevOps", role: "BACKEND SERVICE", icon: "icons/firebase.svg" },
-  { name: "SQLite", category: "Tools & DevOps", role: "LOCAL DATABASE", icon: "icons/sqlite.svg" },
-  { name: "Postman", category: "Tools & DevOps", role: "API TESTING", icon: "icons/postman.svg" },
-  { name: "Laragon", category: "Tools & DevOps", role: "LOCAL SERVER", icon: "icons/laragon.svg" },
-  { name: "Android Studio", category: "Tools & DevOps", role: "MOBILE IDE", icon: "icons/android.svg" },
+  // Database, Cloud & Tools
+  { name: "MySQL", category: "Database & Tools", role: "Relational Database", icon: "icons/mysql.svg" },
+  { name: "Supabase", category: "Database & Tools", role: "Cloud Postgres BaaS", icon: "icons/supabase.svg" },
+  { name: "Firebase", category: "Database & Tools", role: "Cloud Firestore & Auth", icon: "icons/firebase.svg" },
+  { name: "SQLite", category: "Database & Tools", role: "Local Offline Cache", icon: "icons/sqlite.svg" },
+  { name: "Git", category: "Database & Tools", role: "Version Control", icon: "icons/git.svg" },
+  { name: "GitHub", category: "Database & Tools", role: "Code Repository", icon: "icons/github.svg" },
+  { name: "Postman", category: "Database & Tools", role: "API Testing", icon: "icons/postman.svg" },
+  { name: "VS Code", category: "Database & Tools", role: "Code Editor", icon: "icons/visualstudiocode.svg" },
 ];

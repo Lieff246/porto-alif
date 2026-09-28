@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { experiences } from "@/data/portfolio";
 import { Maximize2, X } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 interface LightboxData {
   src: string;
@@ -41,39 +42,62 @@ export default function ExperienceSection() {
     <section id="experience" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header: Bersih & Selaras dengan Projects Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
-              <span>EXPERIENCE &amp; LEADERSHIP</span>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
+                <span>EXPERIENCE &amp; LEADERSHIP</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
+                Pengalaman &amp; Kontribusi
+              </h2>
+              <p className="text-zinc-600 text-xs sm:text-sm mt-1.5 max-w-2xl leading-relaxed">
+                Rekam jejak kepemimpinan organisasi mahasiswa, peran mengajar sebagai mentor, instruksi praktikum laboratorium, hingga keterlibatan dalam pelatihan teknis dan kompetisi nasional.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
-              Pengalaman &amp; Kontribusi
-            </h2>
-            <p className="text-zinc-600 text-xs sm:text-sm mt-1.5 max-w-2xl leading-relaxed">
-              Rekam jejak kepemimpinan organisasi mahasiswa, peran mengajar sebagai mentor, instruksi praktikum laboratorium, hingga keterlibatan dalam pelatihan teknis dan kompetisi nasional.
-            </p>
-          </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-mono text-zinc-600 shadow-2xs self-start md:self-auto">
-            <span>{experiences.length} Pengalaman</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-mono text-zinc-600 shadow-2xs self-start md:self-auto">
+              <span>{experiences.length} Pengalaman</span>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Experience Cards List */}
         <div className="space-y-6">
-          {experiences.map((exp) => (
-            <div
-              key={exp.id}
-              className="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-300 hover:shadow-xs transition-all"
-            >
-              {/* Card Header */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-5 border-b border-zinc-100">
-                <div className="space-y-2 w-full">
-                  <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-200/80">
-                        {exp.organization}
-                      </span>
+          {experiences.map((exp, index) => {
+            const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+              const card = e.currentTarget;
+              const rect = card.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              card.style.setProperty("--mouse-x", `${x}px`);
+              card.style.setProperty("--mouse-y", `${y}px`);
+            };
+
+            return (
+              <ScrollReveal key={exp.id} delay={Math.min(index * 60, 200)}>
+                <div
+                  onMouseMove={handleCardMouseMove}
+                  className="group relative p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-400/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+                >
+                {/* Dynamic Local Spotlight */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                  style={{
+                    background:
+                      "radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.05), transparent 70%)",
+                  }}
+                />
+
+                {/* Card Header */}
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-5 border-b border-zinc-100">
+                  <div className="space-y-2 w-full">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-200/80">
+                          {exp.organization}
+                        </span>
                       <span className="text-zinc-300">•</span>
                       <span className="text-xs text-zinc-500 font-medium">
                         {exp.badge}
@@ -200,10 +224,12 @@ export default function ExperienceSection() {
                     )}
                   </div>
                 )}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </ScrollReveal>
+          );
+        })}
+      </div>
       </div>
 
       {/* Lightbox Modal rendered via Portal directly to body */}

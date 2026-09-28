@@ -21,15 +21,9 @@ export default function Home() {
 
       <main className="flex-1">
         <Hero />
-        <ScrollReveal>
-          <ProjectsSection />
-        </ScrollReveal>
-        <ScrollReveal>
-          <ExperienceSection />
-        </ScrollReveal>
-        <ScrollReveal>
-          <TechStack />
-        </ScrollReveal>
+        <ProjectsSection />
+        <ExperienceSection />
+        <TechStack />
       </main>
 
       <ScrollReveal>

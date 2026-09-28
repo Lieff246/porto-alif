@@ -9,7 +9,6 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-10">
           <div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
               <h3 className="text-lg font-black text-zinc-950 tracking-tight">
                 {personalInfo.name}
               </h3>
@@ -25,7 +24,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
             >
               <GithubIcon className="w-4 h-4" />
             </a>
@@ -35,7 +34,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -46,7 +45,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram Profile"
-                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -54,7 +53,7 @@ export default function Footer() {
             <a
               href={`mailto:${personalInfo.email}`}
               aria-label="Send Email"
-              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 transition-all"
+              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
             >
               <Mail className="w-4 h-4" />
             </a>
@@ -64,7 +63,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
           <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
           <p className="text-zinc-400">
-            Architected with Next.js &amp; Tailwind CSS · Light Minimalist
+            Architected with Next.js &amp; Tailwind CSS
           </p>
         </div>
       </div>

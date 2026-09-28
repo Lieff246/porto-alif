@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { personalInfo, projects } from "@/data/portfolio";
-import { ArrowDown, ExternalLink, Terminal, Mail } from "lucide-react";
+import { ArrowDown, ExternalLink, Terminal, Mail, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
 
 const roles = [
@@ -35,6 +35,19 @@ export default function Hero() {
   // ID Card dynamic role switcher
   const [cardRoleIndex, setCardRoleIndex] = useState(0);
   const [isRoleFading, setIsRoleFading] = useState(false);
+
+  // Copy email with tooltip feedback
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(personalInfo.email);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2200);
+    } else {
+      window.location.href = `mailto:${personalInfo.email}`;
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -203,13 +216,27 @@ export default function Hero() {
                   </a>
                 )}
 
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
-                  title="Kirim Email"
-                >
-                  <Mail className="w-4 h-4" />
-                </a>
+                <div className="relative inline-flex items-center">
+                  <button
+                    onClick={handleCopyEmail}
+                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs cursor-pointer active:scale-95"
+                    title="Klik untuk salin alamat email"
+                    aria-label="Salin email ke clipboard"
+                  >
+                    {copiedEmail ? (
+                      <Check className="w-4 h-4 text-emerald-600 animate-fadeIn" />
+                    ) : (
+                      <Mail className="w-4 h-4" />
+                    )}
+                  </button>
+
+                  {/* Tooltip feedback */}
+                  {copiedEmail && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-zinc-950 text-white text-[10px] font-mono font-medium rounded-md shadow-lg whitespace-nowrap z-50 pointer-events-none animate-fadeIn">
+                      Email tersalin!
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

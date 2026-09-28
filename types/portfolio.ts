@@ -44,7 +44,7 @@ export interface SkillCategory {
 
 export interface TechTool {
   name: string;
-  category: "Languages" | "Frameworks & Web" | "Geospatial" | "AI & Hardware" | "Tools & DevOps";
+  category: "Languages" | "Frameworks & Web" | "Geospatial" | "AI & Hardware" | "Tools & DevOps" | "Database & Tools" | string;
   role: string;
   icon?: string; // Path file logo lokal di /public/icons/ (contoh: "/icons/react.svg")
 }

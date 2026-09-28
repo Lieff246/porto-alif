@@ -52,7 +52,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 px-3 py-1 rounded-full hover:bg-zinc-100 transition-all font-mono"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 px-3 py-1 rounded-full hover:bg-zinc-100/90 active:scale-95 transition-all duration-150 font-mono"
             >
               {link.name}
             </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram Profile"
-            className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 transition-all"
+            className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150"
           >
             <InstagramIcon className="w-4 h-4" />
           </a>
@@ -75,13 +75,13 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
-            className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 transition-all"
+            className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150"
           >
             <GithubIcon className="w-4 h-4" />
           </a>
           <a
             href={`mailto:${personalInfo.email}`}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white px-3.5 py-1.5 rounded-lg transition-all shadow-xs"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow active:scale-95"
           >
             <Mail className="w-3.5 h-3.5" />
             <span>Hubungi Saya</span>

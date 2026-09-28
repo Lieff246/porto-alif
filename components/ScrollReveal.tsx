@@ -38,7 +38,7 @@ export default function ScrollReveal({
           }
         }
       },
-      { threshold: 0.02, rootMargin: "0px 0px -20px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
 
     const currentRef = ref.current;
