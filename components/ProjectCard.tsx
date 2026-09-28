@@ -66,7 +66,6 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
         <div className="p-7">
           <div className="flex items-center justify-between text-xs font-mono text-zinc-500 mb-1.5">
             <span className="text-zinc-600 font-bold">{project.role}</span>
-            <span>Untad Portfolio</span>
           </div>
 
           <h3
@@ -80,13 +79,6 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
           <p className="text-xs sm:text-sm text-zinc-600 mt-2.5 leading-relaxed">
             {project.description}
           </p>
-
-          {/* Key Metric Pill */}
-          {project.metrics && (
-            <div className="mt-4 px-3.5 py-1.5 rounded-lg bg-zinc-50 border border-zinc-200 text-xs font-mono text-zinc-800 font-medium">
-              ⚡ {project.metrics}
-            </div>
-          )}
         </div>
       </div>
 
@@ -127,7 +119,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
               onClick={() => onOpenModal(project)}
               className="text-xs font-mono font-bold text-zinc-950 hover:text-zinc-600 underline underline-offset-4"
             >
-              Detail Kasus →
+              Lihat Detail →
             </button>
           </div>
         </div>
