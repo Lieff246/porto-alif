@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { experiences } from "@/data/portfolio";
-import { Users, BookOpen, Award, GraduationCap, CheckCircle, Camera, Maximize2, X, Briefcase } from "lucide-react";
+import { Maximize2, X } from "lucide-react";
 
 interface LightboxData {
   src: string;
@@ -37,74 +37,109 @@ export default function ExperienceSection() {
     }
   }, [lightboxData]);
 
-  const iconMap: Record<string, React.ReactNode> = {
-    Leadership: <Users className="w-4 h-4 text-emerald-700" />,
-    Mentoring: <BookOpen className="w-4 h-4 text-blue-700" />,
-    Academic: <GraduationCap className="w-4 h-4 text-amber-700" />,
-    Competition: <Award className="w-4 h-4 text-purple-700" />,
-    Internship: <Briefcase className="w-4 h-4 text-indigo-700" />,
-  };
-
   return (
-    <section id="experience" className="py-24 border-t border-zinc-200 bg-zinc-50/50">
+    <section id="experience" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between border-b-2 border-zinc-950 pb-3 mb-10">
+        {/* Section Header: Bersih & Selaras dengan Projects Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-10">
           <div>
-            <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest font-semibold">
-              [03] // LEADERSHIP_&amp;_COMMUNITY
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 mt-1">
-              Pengalaman Organisasi &amp; Mentoring
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
+              <span>EXPERIENCE &amp; LEADERSHIP</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
+              Pengalaman &amp; Kontribusi
             </h2>
+            <p className="text-zinc-600 text-xs sm:text-sm mt-1.5 max-w-2xl leading-relaxed">
+              Rekam jejak kepemimpinan organisasi mahasiswa, peran mengajar sebagai mentor, instruksi praktikum laboratorium, hingga keterlibatan dalam pelatihan teknis dan kompetisi nasional.
+            </p>
           </div>
-          <span className="hidden sm:inline-block text-xs font-mono text-zinc-400">
-            EXPERIENCE
-          </span>
+
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-mono text-zinc-600 shadow-2xs self-start md:self-auto">
+            <span>{experiences.length} Pengalaman</span>
+          </div>
         </div>
 
+        {/* Experience Cards List */}
         <div className="space-y-6">
           {experiences.map((exp) => (
             <div
               key={exp.id}
-              className="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-2xs hover:border-zinc-400 transition-all"
+              className="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-300 hover:shadow-xs transition-all"
             >
-              {/* Full Width Card Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-zinc-100">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <div className="w-6 h-6 rounded-md bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0">
-                      {iconMap[exp.category]}
+              {/* Card Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-5 border-b border-zinc-100">
+                <div className="space-y-2 w-full">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-200/80">
+                        {exp.organization}
+                      </span>
+                      <span className="text-zinc-300">•</span>
+                      <span className="text-xs text-zinc-500 font-medium">
+                        {exp.badge}
+                      </span>
                     </div>
-                    <span className="text-xs font-mono font-bold text-zinc-950">
-                      {exp.organization}
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">
-                      {exp.badge}
-                    </span>
+                    <div className="text-xs font-mono font-bold text-zinc-400 sm:text-right shrink-0">
+                      {exp.period}
+                    </div>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-zinc-950 tracking-tight">
+
+                  {/* Mobile Only: Documentation Photo placed above role title */}
+                  {exp.image && (
+                    <div className="block md:hidden pt-2 pb-1">
+                      <div
+                        onClick={() =>
+                          setLightboxData({
+                            src: exp.image!,
+                            alt: `${exp.role} - ${exp.organization}`,
+                            caption: exp.imageCaption,
+                            role: exp.role,
+                            organization: exp.organization,
+                          })
+                        }
+                        className="group relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200/80 bg-zinc-100 shadow-2xs cursor-pointer active:scale-[0.99] transition-transform"
+                      >
+                        <Image
+                          src={exp.image}
+                          alt={`${exp.role} - ${exp.organization}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 360px"
+                          className="object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 opacity-30" />
+                        <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white/95 text-zinc-900 shadow-sm backdrop-blur-xs">
+                          <Maximize2 className="w-3.5 h-3.5 text-zinc-600" />
+                          <span>Perbesar</span>
+                        </div>
+                      </div>
+                      {exp.imageCaption && (
+                        <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
+                          {exp.imageCaption}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-950 tracking-tight pt-0.5">
                     {exp.role}
                   </h3>
-                </div>
-                <div className="text-xs font-mono font-bold text-zinc-500 sm:text-right shrink-0">
-                  {exp.period}
                 </div>
               </div>
 
               {/* Card Body: Content & Photo */}
-              <div className={`pt-5 ${exp.image ? "grid grid-cols-1 md:grid-cols-12 gap-6 items-start" : ""}`}>
+              <div className={`pt-5 ${exp.image ? "grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start" : ""}`}>
                 {/* Left/Main Column */}
                 <div className={exp.image ? "md:col-span-7 lg:col-span-8 flex flex-col justify-between" : ""}>
                   <div>
-                    <p className="text-sm text-zinc-600 leading-relaxed mb-4">
+                    <p className="text-sm sm:text-base text-zinc-600 leading-relaxed mb-4">
                       {exp.description}
                     </p>
 
-                    {/* Achievements */}
-                    <div className="space-y-2 mb-5">
+                    {/* Achievements: Clean Editorial Bullet Points */}
+                    <div className="space-y-2.5 mb-5">
                       {exp.achievements.map((ach, i) => (
-                        <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-700">
-                          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 mt-2 shrink-0" />
                           <span>{ach}</span>
                         </div>
                       ))}
@@ -116,7 +151,7 @@ export default function ExperienceSection() {
                     {exp.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded bg-zinc-50 text-zinc-600 border border-zinc-200/60"
+                        className="text-xs font-medium px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 border border-zinc-200/60"
                       >
                         {tag}
                       </span>
@@ -124,9 +159,9 @@ export default function ExperienceSection() {
                   </div>
                 </div>
 
-                {/* Right Column: Documentation Photo Preview */}
+                {/* Right Column: Documentation Photo Preview (Desktop Only) */}
                 {exp.image && (
-                  <div className="md:col-span-5 lg:col-span-4 flex flex-col">
+                  <div className="hidden md:flex md:col-span-5 lg:col-span-4 flex-col">
                     <div
                       onClick={() =>
                         setLightboxData({
@@ -137,7 +172,7 @@ export default function ExperienceSection() {
                           organization: exp.organization,
                         })
                       }
-                      className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-2xs cursor-pointer hover:border-zinc-400 hover:shadow-md transition-all"
+                      className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200/80 bg-zinc-100 shadow-2xs cursor-pointer hover:border-zinc-400 hover:shadow-md transition-all"
                     >
                       <Image
                         src={exp.image}
@@ -148,25 +183,19 @@ export default function ExperienceSection() {
                       />
 
                       {/* Subtle Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-40 group-hover:opacity-60 transition-opacity" />
-
-                      {/* Top Documentation Badge */}
-                      <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-zinc-950/80 text-white backdrop-blur-md shadow-xs">
-                        <Camera className="w-3 h-3 text-emerald-400" />
-                        <span>DOKUMENTASI</span>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 opacity-30 group-hover:opacity-50 transition-opacity" />
 
                       {/* Hover Zoom Icon & Hint */}
-                      <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 text-[10px] font-mono font-medium px-2 py-1 rounded-md bg-white/95 text-zinc-900 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
-                        <Maximize2 className="w-3 h-3 text-zinc-600" />
+                      <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white/95 text-zinc-900 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity backdrop-blur-xs">
+                        <Maximize2 className="w-3.5 h-3.5 text-zinc-600" />
                         <span>Perbesar</span>
                       </div>
                     </div>
 
                     {/* Caption */}
                     {exp.imageCaption && (
-                      <p className="text-[11px] font-mono text-zinc-500 mt-2 px-0.5 leading-snug">
-                        ↳ {exp.imageCaption}
+                      <p className="text-xs text-zinc-500 mt-2.5 leading-relaxed">
+                        {exp.imageCaption}
                       </p>
                     )}
                   </div>
@@ -190,8 +219,7 @@ export default function ExperienceSection() {
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-sm shrink-0">
               <div className="flex items-center gap-2 overflow-hidden">
-                <Camera className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-xs font-mono font-bold text-zinc-200 truncate">
+                <span className="text-xs font-semibold text-zinc-200 truncate">
                   {lightboxData.role} — {lightboxData.organization}
                 </span>
               </div>
@@ -204,25 +232,22 @@ export default function ExperienceSection() {
               </button>
             </div>
 
-            {/* Large Image Preview with Natural Centering */}
-            <div className="relative w-full flex-1 min-h-[280px] max-h-[70vh] bg-zinc-950/80 flex items-center justify-center p-3 sm:p-4">
-              <div className="relative w-full h-[55vh] max-h-[560px]">
-                <Image
-                  src={lightboxData.src}
-                  alt={lightboxData.alt}
-                  fill
-                  priority
-                  sizes="(max-width: 1200px) 100vw, 1000px"
-                  className="object-contain"
-                />
-              </div>
+            {/* Image Container */}
+            <div className="relative w-full h-[65vh] sm:h-[70vh] bg-black flex items-center justify-center">
+              <Image
+                src={lightboxData.src}
+                alt={lightboxData.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 900px"
+                className="object-contain"
+                priority
+              />
             </div>
 
-            {/* Footer Caption */}
+            {/* Caption Footer */}
             {lightboxData.caption && (
-              <div className="px-5 py-3 border-t border-zinc-800 bg-zinc-900/90 text-xs font-mono text-zinc-300 flex items-center justify-between shrink-0">
-                <span className="truncate pr-4">{lightboxData.caption}</span>
-                <span className="text-[10px] text-zinc-500 font-mono shrink-0">ESC untuk menutup</span>
+              <div className="px-5 py-3 border-t border-zinc-800 bg-zinc-900/90 text-xs text-zinc-400 text-center shrink-0">
+                {lightboxData.caption}
               </div>
             )}
           </div>

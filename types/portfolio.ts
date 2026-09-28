@@ -28,7 +28,7 @@ export interface Experience {
   organization: string;
   period: string;
   badge: string;
-  category: "Leadership" | "Mentoring" | "Academic" | "Competition" | "Internship";
+  category: "Leadership" | "Mentoring" | "Academic" | "Competition" | "Internship" | "Training" | string;
   description: string;
   achievements: string[];
   tags: string[];

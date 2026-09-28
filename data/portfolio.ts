@@ -224,7 +224,7 @@ export const projects: Project[] = [
     tagline: "Website Panduan & Ragam Resep Masakan Tradisional Khas Nusantara",
     category: "Web",
     role: "Frontend Developer (Submission Programming Tadulako Soyuz)",
-    period: "2025",
+    period: "2024",
     featured: true,
     image: "/images/kulinernusantara.png",
     description: "Website responsif yang menyajikan informasi keanekaragaman makanan tradisional dari berbagai daerah di Indonesia dengan struktur web semantik yang bersih.",
@@ -306,12 +306,12 @@ export const experiences: Experience[] = [
     category: "Internship",
     description: "Melaksanakan magang kedinasan di Dinas Pendidikan Provinsi Sulawesi Tengah untuk merancang dan membangun sistem informasi geospasial (WebGIS) pemetaan profiling sekolah terintegrasi se-Provinsi Sulawesi Tengah.",
     achievements: [
-      "Mengembangkan arsitektur Decoupled murni memisahkan Laravel dan frontend interaktif React + TypeScript + Vite",
-      "Mengintegrasikan visualisasi peta Leaflet dengan cluster marker sekolah dan data spasial poligon 6 cabang dinas pendidikan",
-      "Menerapkan sistem autentikasi multi-role aman berbasis Laravel Sanctum, Fortify, dan Spatie Role/Permission",
-      "Membangun fitur profiling sekolah se-Sulawesi Tengah dengan data lengkap dan terintegrasi"
+      "Membangun arsitektur terpisah antara backend Laravel REST API dan antarmuka web interaktif React + TypeScript",
+      "Mengintegrasikan visualisasi peta Leaflet dengan clustering ribuan titik sekolah dan batas wilayah 6 cabang dinas",
+      "Menerapkan sistem autentikasi dan manajemen hak akses multi-role (Admin Provinsi, Cabang Dinas, Sekolah) dengan Spatie & Sanctum",
+      "Membangun profiling data sekolah se-Sulawesi Tengah untuk rekapitulasi fasilitas dan akreditasi sekolah"
     ],
-    tags: ["Laravel", "React", "TypeScript", "WebGIS & Leaflet", "GeoJSON", "MySQL", "Government System"],
+    tags: ["Laravel", "React", "TypeScript", "WebGIS & Leaflet", "GeoJSON", "MySQL", "Experience"],
     image: "/images/dispen.png",
     imageCaption: "Dokumentasi saat magang di Dinas Pendidikan Provinsi Sulawesi Tengah",
   },
@@ -319,16 +319,16 @@ export const experiences: Experience[] = [
     id: "hmti-penalaran",
     role: "PJ Divisi Penalaran Keilmuan (Intelektual)",
     organization: "Himpunan Mahasiswa Teknik Informatika (HMTI) Untad",
-    period: "2025 — Sekarang",
-    badge: "Leadership & Academic",
-    category: "Leadership",
+    period: "2025 — 2026",
+    badge: "Teaching, Mentoring & Academic",
+    category: "Organization",
     description: "Mengemban amanah di divisi intelektual HMTI Untad untuk mengorganisir program pengembangan kapabilitas akademik mahasiswa Informatika dan fasilitasi kompetisi.",
     achievements: [
       "Menginisiasi kelas belajar dan diskusi mingguan untuk mata kuliah inti (OOP, UI/UX, Pemrograman Web, Basis Data, Rekayasa API, dsb)",
       "Mendampingi dan menyiapkan delegasi mahasiswa Informatika untuk kompetisi teknologi tingkat regional dan nasional (LIDM, Gemastik, dsb)",
       "Menyusun modul serta bank materi pembelajaran untuk mendukung kelancaran studi mahasiswa"
     ],
-    tags: ["Academic Mentoring", "Community Leadership", "Event Organizing", "Informatics Community"],
+    tags: ["Academic Mentoring", "Event Organizing", "Informatics Community"],
     image: "/images/pk.jpeg",
     imageCaption: "Dokumentasi Penalaran Mingguan",
   },
@@ -343,28 +343,11 @@ export const experiences: Experience[] = [
     achievements: [
       "Mengembangkan 3 stage skenario kebencanaan (Misi Tas Siaga, simulasi guncangan Drop-Cover-Hold On, dan evakuasi rute aman)",
       "Merancang integrasi NPC instruktur virtual 'Pak John' (BPBD) serta Teacher Dashboard berbasis Roblox DataStore API",
-      "Menyusun proposal ilmiah dan materi pengujian edukasi mitigasi gempa bumi bersama Tim Pemuda Vimral dibimbing Fizar Syafa'at, S.Kom., M.Kom."
+      "Menyusun proposal ilmiah dan memvisualisasikan edukasi mitigasi gempa bumi bersama Tim Pemuda Vimral, dengan bimbingan Dosen Fizar Syafa'at, S.Kom., M.Kom."
     ],
-    tags: ["LIDM 2026", "Roblox Studio", "Luau", "Game-Based Learning", "Disaster Mitigation"],
+    tags: ["LIDM 2026", "Roblox Studio", "Luau", "Game-Based Learning", "Disaster Mitigation", "Reasearch Paper"],
     image: "/images/safe.png",
     imageCaption: "In-Game NPC 'Pak John' BPBD & Skenario Simulasi Game S.A.F.E (Roblox)",
-  },
-  {
-    id: "mentor-pt",
-    role: "Front-End Web Development Mentor",
-    organization: "Programming Tadulako",
-    period: "2025 — 2026",
-    badge: "Mentorship & Teaching",
-    category: "Mentoring",
-    description: "Berperan sebagai mentor pengajar kelas Web Dasar di komunitas Programming Tadulako untuk membimbing mahasiswa dalam membangun fondasi web modern.",
-    achievements: [
-      "Menyusun kurikulum 6 hari pembelajaran intensif (Semantic HTML5, CSS Layouting, JavaScript DOM, dan Git/GitHub)",
-      "Membimbing langsung sesi live coding dan membantu troubleshooting error/bug para peserta",
-      "Mengarahkan peserta hingga berhasil menyelesaikan dan men-deploy project akhir submission web masing-masing"
-    ],
-    tags: ["Teaching", "HTML5/CSS3", "JavaScript", "Git & GitHub Workflow", "Peer Review"],
-    image: "/images/pt.jpg",
-    imageCaption: "Submission Project Web Programming Tadulako Batch Orion",
   },
   {
     id: "asisten-lab",
@@ -384,11 +367,45 @@ export const experiences: Experience[] = [
     imageCaption: "Dokumentasi Pengenalan Praktikum 2026",
   },
   {
+    id: "mentor-pt",
+    role: "Front-End Web Development Mentor (Batch Orion)",
+    organization: "Programming Tadulako",
+    period: "2025 — 2026",
+    badge: "Mentorship & Teaching",
+    category: "Mentoring",
+    description: "Berperan sebagai mentor pengajar kelas Web Dasar di komunitas Programming Tadulako untuk membimbing mahasiswa dalam membangun fondasi web modern.",
+    achievements: [
+      "Menyusun kurikulum 6 hari pembelajaran intensif (Semantic HTML5, CSS Layouting, JavaScript DOM, dan Version Control Git/GitHub)",
+      "Membimbing langsung sesi live coding dan membantu troubleshooting error/bug para peserta",
+      "Mengarahkan peserta hingga berhasil menyelesaikan dan men-deploy project akhir submission web masing-masing"
+    ],
+    tags: ["Teaching", "HTML5/CSS3", "JavaScript", "Git & GitHub Workflow", "Peer Review"],
+    image: "/images/pt.jpg",
+    imageCaption: "Submission Project Web Programming Tadulako Batch Orion",
+  },
+  {
+    id: "hammercode-backend",
+    role: "Peserta Kelas Backend (Golang)",
+    organization: "Hammercode",
+    period: "2025",
+    badge: "Community & Training",
+    category: "Training",
+    description: "Mengikuti program kelas intensif di komunitas Hammercode pada peminatan Backend, mendalami arsitektur backend modern dengan bahasa Go (Golang), perancangan REST API terstruktur, autentikasi stateless JWT, dan basis data relasional MySQL.",
+    achievements: [
+      "Merancang dan menyelesaikan submission akhir berupa RESTful API catatan & tagging (Go Notes API) menerapkan Clean Architecture",
+      "Mengimplementasikan sistem keamanan otentikasi JWT, password hashing Bcrypt, serta routing modular Chi",
+      "Mengikuti rangkaian sesi live learning, bimbingan teknis best practice software engineering, dan code review bersama mentor"
+    ],
+    tags: ["Golang", "Clean Architecture", "REST API", "JWT Auth", "MySQL", "Hammercode"],
+    image: "/images/submissionbe.jpg",
+    imageCaption: "Dokumentasi bersama peserta dan mentor kelas Backend Hammercode",
+  },
+  {
     id: "lead-lidm",
     role: "Ketua Tim Pelaksana (Team Leader) — Ordinary Squad",
     organization: "LIDM 2025 & Capstone Design FATEK",
     period: "2025",
-    badge: "National Competition",
+    badge: "National Competition & Team Leadership",
     category: "Competition",
     description: "Memimpin tim Ordinary Squad dalam perancangan produk inovasi teknologi pendidikan 'SIFOKUS' (Sistem Fokus Siswa) berbasis IoT dan Computer Vision.",
     achievements: [
@@ -396,9 +413,26 @@ export const experiences: Experience[] = [
       "Mengintegrasikan prototipe ESP32-CAM dengan pemrosesan citra MediaPipe FaceMesh di Python",
       "Memimpin presentasi teknis dan demonstrasi purwarupa perangkat pada Lomba Capstone Design Dies Natalis FATEK Untad"
     ],
-    tags: ["Team Leadership", "IoT & Vision", "Research Paper", "Puspresnas / Balmawa"],
+    tags: ["LIDM 2025", "Capstone Design FATEK Untad", "Team Leadership", "IoT & Vision", "Research Paper"],
     image: "/images/sifokus.jpg",
     imageCaption: "Tim Pelaksana SIFOKUS — Capstone Dies Natalis FATEK Untad",
+  },
+  {
+    id: "peserta-pt-soyuz",
+    role: "Peserta Web Development (Batch Soyuz)",
+    organization: "Programming Tadulako",
+    period: "2024",
+    badge: "Community & Training",
+    category: "Training",
+    description: "Mengikuti program pelatihan web development dasar intensif di komunitas Programming Tadulako (Batch Soyuz) yang menjadi langkah awal mendalami rekayasa perangkat lunak dan pemrograman web modern.",
+    achievements: [
+      "Merancang dan menyelesaikan project submission web 'Kuliner Nusantara' menggunakan HTML5 semantik, CSS responsif, dan JavaScript murni",
+      "Mempelajari dasar version control dengan Git dan mempublikasikan karya ke GitHub Pages",
+      "Menjadi fondasi awal perjalanan sebelum dipercaya menjadi Mentor Front-End di Batch Orion dan mendalami Backend di Hammercode"
+    ],
+    tags: ["HTML5/CSS3", "JavaScript", "Git & GitHub", "GitHub Pages", "Programming Tadulako"],
+    image: "/images/submissionsoyuz.jpg",
+    imageCaption: "Dokumentasi bersama peserta dan mentor Programming Tadulako Batch Soyuz",
   },
 ];
 
