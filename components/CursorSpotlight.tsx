@@ -21,9 +21,27 @@ export default function CursorSpotlight() {
     let isVisible = false;
     let rafId: number;
 
+    // Check if preloader is active on initial load
+    let isPreloading =
+      typeof document !== "undefined" && document.body.classList.contains("is-preloading");
+
+    const onPreloaderFinished = () => {
+      isPreloading = false;
+      // Once preloader finishes, reveal smoothly if mouse is already in viewport
+      if (!isVisible && mouseX > 0 && mouseY > 0) {
+        isVisible = true;
+        if (dotRef.current) dotRef.current.style.opacity = "1";
+        if (ringRef.current) ringRef.current.style.opacity = "1";
+        if (spotlightRef.current) spotlightRef.current.style.opacity = "1";
+      }
+    };
+    window.addEventListener("preloaderFinished", onPreloaderFinished);
+
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
+      if (isPreloading) return;
 
       if (!isVisible) {
         isVisible = true;
@@ -47,6 +65,7 @@ export default function CursorSpotlight() {
     };
 
     const onMouseEnter = () => {
+      if (isPreloading) return;
       isVisible = true;
       if (dotRef.current) dotRef.current.style.opacity = "1";
       if (ringRef.current) ringRef.current.style.opacity = "1";
@@ -89,6 +108,7 @@ export default function CursorSpotlight() {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseenter", onMouseEnter);
+      window.removeEventListener("preloaderFinished", onPreloaderFinished);
       cancelAnimationFrame(rafId);
     };
   }, []); // Run once on mount
@@ -98,6 +118,7 @@ export default function CursorSpotlight() {
       {/* 1. Large Ambient Background Spotlight */}
       <div
         ref={spotlightRef}
+        data-cursor-spotlight
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500 hidden md:block"
         style={{ willChange: "background" }}
@@ -106,6 +127,7 @@ export default function CursorSpotlight() {
       {/* 2. Trailing Smooth Ring Follower */}
       <div
         ref={ringRef}
+        data-cursor-spotlight
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-[999999] w-8 h-8 rounded-full border border-zinc-900/40 opacity-0 hidden md:block"
         style={{
@@ -117,6 +139,7 @@ export default function CursorSpotlight() {
       {/* 3. Center Micro Dot (Locked 1:1 to hardware cursor) */}
       <div
         ref={dotRef}
+        data-cursor-spotlight
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-[999999] w-2 h-2 rounded-full bg-zinc-900 opacity-0 hidden md:block"
         style={{

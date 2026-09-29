@@ -28,12 +28,15 @@ export default function Preloader() {
     setTimeout(() => {
       setIsFinished(true);
       document.body.style.overflow = "";
+      document.body.classList.remove("is-preloading");
+      window.dispatchEvent(new Event("preloaderFinished"));
     }, 750);
   }, []);
 
   useEffect(() => {
     setMounted(true);
     document.body.style.overflow = "hidden";
+    document.body.classList.add("is-preloading");
 
     // Cycle through greetings
     const interval = setInterval(() => {
@@ -64,6 +67,7 @@ export default function Preloader() {
       clearInterval(interval);
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
+      document.body.classList.remove("is-preloading");
     };
   }, [handleFinish]);
 

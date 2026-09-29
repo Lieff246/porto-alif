@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { techTools } from "@/data/portfolio";
-import { TechIcon } from "./TechIcons";
+import { Code2 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 export default function TechStack() {
@@ -119,7 +119,7 @@ export default function TechStack() {
                         className="w-6 h-6 object-contain shrink-0"
                       />
                     ) : (
-                      <TechIcon name={tool.name} className="w-6 h-6 shrink-0" />
+                      <Code2 className="w-6 h-6 text-zinc-400 shrink-0" />
                     )}
                   </div>
 

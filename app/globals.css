@@ -108,3 +108,10 @@ body {
   filter: blur(0px);
 }
 
+/* Hide custom cursor & spotlight while preloader is active */
+body.is-preloading [data-cursor-spotlight] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
