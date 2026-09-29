@@ -35,6 +35,11 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
