@@ -92,7 +92,7 @@ export default function Preloader() {
         </div>
       </div>
 
-      {/* Center Cinematic Greeting Display */}
+      {/* Cinematic Greeting Display */}
       <div className="flex flex-col items-center justify-center text-center my-auto">
         <p className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white transition-all duration-150 mb-3">
           {greetings[index].text}

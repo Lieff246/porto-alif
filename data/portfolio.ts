@@ -481,7 +481,6 @@ export const techTools: TechTool[] = [
   { name: "Python 3", category: "Languages", role: "Vision & Scripting", icon: "icons/python.svg" },
   { name: "JavaScript", category: "Languages", role: "Web Scripting", icon: "icons/javascript.svg" },
   { name: "Dart", category: "Languages", role: "Flutter Language", icon: "icons/dart.svg" },
-  { name: "SQL", category: "Languages", role: "Database Queries", icon: "icons/mysql.svg" },
 
   // Geospatial & Spatial Data
   { name: "Leaflet.js", category: "Geospatial", role: "WebGIS Mapping", icon: "icons/leaflet.svg" },
