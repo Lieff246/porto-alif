@@ -15,41 +15,35 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [mounted, setMounted] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(project);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Manage fluid enter and exit animations
+  // Open modal when project prop is provided
   useEffect(() => {
     if (project) {
       setActiveProject(project);
+      setIsClosing(false);
       document.body.style.overflow = "hidden";
-      const raf = requestAnimationFrame(() => {
-        setIsVisible(true);
-      });
-      return () => cancelAnimationFrame(raf);
-    } else {
-      setIsVisible(false);
-      const timer = setTimeout(() => {
-        setActiveProject(null);
-        document.body.style.overflow = "";
-      }, 260);
-      return () => clearTimeout(timer);
     }
   }, [project]);
 
   const handleClose = useCallback(() => {
-    setIsVisible(false);
+    if (isClosing) return;
+    setIsClosing(true);
     setTimeout(() => {
+      document.body.style.overflow = "";
+      setActiveProject(null);
+      setIsClosing(false);
       onClose();
-    }, 250);
-  }, [onClose]);
+    }, 200);
+  }, [isClosing, onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && activeProject) {
+      if (e.key === "Escape" && activeProject && !isClosing) {
         handleClose();
       }
     };
@@ -59,22 +53,20 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activeProject, handleClose]);
+  }, [activeProject, isClosing, handleClose]);
 
   if (!mounted || !activeProject) return null;
 
   return createPortal(
     <div
       onClick={handleClose}
-      className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-zinc-950/65 backdrop-blur-md transition-opacity duration-300 ease-out cursor-pointer ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-zinc-950/65 backdrop-blur-md cursor-pointer ${
+        isClosing ? "modal-backdrop-out" : "modal-backdrop-in"
       }`}
     >
       <div
-        className={`relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-zinc-200/90 shadow-2xl p-6 sm:p-8 cursor-default transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isVisible
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-[0.93] translate-y-5"
+        className={`relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-zinc-200/90 shadow-2xl p-6 sm:p-8 cursor-default ${
+          isClosing ? "modal-dialog-out" : "modal-dialog-in"
         }`}
         onClick={(e) => e.stopPropagation()}
       >

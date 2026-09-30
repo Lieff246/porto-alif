@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { experiences } from "@/data/portfolio";
@@ -16,27 +16,44 @@ interface LightboxData {
 }
 
 export default function ExperienceSection() {
-  const [lightboxData, setLightboxData] = useState<LightboxData | null>(null);
+  const [activeLightbox, setActiveLightbox] = useState<LightboxData | null>(null);
+  const [isClosingLightbox, setIsClosingLightbox] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const openLightbox = (data: LightboxData) => {
+    setActiveLightbox(data);
+    setIsClosingLightbox(false);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeLightbox = useCallback(() => {
+    if (isClosingLightbox) return;
+    setIsClosingLightbox(true);
+    setTimeout(() => {
+      document.body.style.overflow = "";
+      setActiveLightbox(null);
+      setIsClosingLightbox(false);
+    }, 200);
+  }, [isClosingLightbox]);
+
   // Close lightbox on Escape key & prevent body scroll
   useEffect(() => {
-    if (lightboxData) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setLightboxData(null);
-      };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && activeLightbox && !isClosingLightbox) {
+        closeLightbox();
+      }
+    };
+    if (activeLightbox) {
       window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        window.removeEventListener("keydown", handleKeyDown);
-      };
     }
-  }, [lightboxData]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeLightbox, isClosingLightbox, closeLightbox]);
 
   return (
     <section id="experience" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
@@ -113,7 +130,7 @@ export default function ExperienceSection() {
                     <div className="block md:hidden pt-2 pb-1">
                       <div
                         onClick={() =>
-                          setLightboxData({
+                          openLightbox({
                             src: exp.image!,
                             alt: `${exp.role} - ${exp.organization}`,
                             caption: exp.imageCaption,
@@ -188,7 +205,7 @@ export default function ExperienceSection() {
                   <div className="hidden md:flex md:col-span-5 lg:col-span-4 flex-col">
                     <div
                       onClick={() =>
-                        setLightboxData({
+                        openLightbox({
                           src: exp.image!,
                           alt: `${exp.role} - ${exp.organization}`,
                           caption: exp.imageCaption,
@@ -196,7 +213,7 @@ export default function ExperienceSection() {
                           organization: exp.organization,
                         })
                       }
-                      className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200/80 bg-zinc-100 shadow-2xs cursor-pointer hover:border-zinc-400 hover:shadow-md transition-all"
+                      className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200/80 bg-zinc-100 shadow-2xs cursor-pointer hover:border-zinc-400 hover:shadow-md transition-all active:scale-[0.99]"
                     >
                       <Image
                         src={exp.image}
@@ -233,26 +250,30 @@ export default function ExperienceSection() {
       </div>
 
       {/* Lightbox Modal rendered via Portal directly to body */}
-      {mounted && lightboxData && createPortal(
+      {mounted && activeLightbox && createPortal(
         <div
-          onClick={() => setLightboxData(null)}
-          className="fixed inset-0 z-[99999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-8 cursor-zoom-out animate-fadeIn"
+          onClick={closeLightbox}
+          className={`fixed inset-0 z-[99999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-8 cursor-zoom-out ${
+            isClosingLightbox ? "modal-backdrop-out" : "modal-backdrop-in"
+          }`}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col cursor-default"
+            className={`relative max-w-4xl w-full max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col cursor-default ${
+              isClosingLightbox ? "modal-dialog-out" : "modal-dialog-in"
+            }`}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-sm shrink-0">
               <div className="flex items-center gap-2 overflow-hidden">
                 <span className="text-xs font-semibold text-zinc-200 truncate">
-                  {lightboxData.role} — {lightboxData.organization}
+                  {activeLightbox.role} — {activeLightbox.organization}
                 </span>
               </div>
               <button
-                onClick={() => setLightboxData(null)}
+                onClick={closeLightbox}
                 aria-label="Tutup pratinjau"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 active:scale-90 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -261,8 +282,8 @@ export default function ExperienceSection() {
             {/* Image Container */}
             <div className="relative w-full h-[65vh] sm:h-[70vh] bg-black flex items-center justify-center">
               <Image
-                src={lightboxData.src}
-                alt={lightboxData.alt}
+                src={activeLightbox.src}
+                alt={activeLightbox.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 900px"
                 className="object-contain"
@@ -271,9 +292,9 @@ export default function ExperienceSection() {
             </div>
 
             {/* Caption Footer */}
-            {lightboxData.caption && (
+            {activeLightbox.caption && (
               <div className="px-5 py-3 border-t border-zinc-800 bg-zinc-900/90 text-xs text-zinc-400 text-center shrink-0">
-                {lightboxData.caption}
+                {activeLightbox.caption}
               </div>
             )}
           </div>
