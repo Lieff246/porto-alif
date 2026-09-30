@@ -144,10 +144,11 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
             )}
             <button
               onClick={() => onOpenModal(project)}
-              className="group/btn inline-flex items-center gap-1 text-xs font-mono font-bold text-zinc-950 hover:text-emerald-600 underline underline-offset-4 cursor-pointer transition-colors"
+              className="group/btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold text-zinc-900 bg-zinc-100 hover:bg-zinc-950 hover:text-white active:scale-95 transition-all duration-200 cursor-pointer shadow-2xs"
+              aria-label={`Lihat detail proyek ${project.title}`}
             >
               <span>Lihat Detail</span>
-              <span className="inline-block transition-transform duration-200 ease-out group-hover/btn:translate-x-1">
+              <span className="inline-block transition-transform duration-200 ease-out group-hover/btn:translate-x-0.5">
                 →
               </span>
             </button>
