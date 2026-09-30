@@ -89,23 +89,20 @@ body {
 .delay-600 { animation-delay: 600ms; }
 .delay-700 { animation-delay: 700ms; }
 
-/* Ultra-Smooth Apple/Linear Scroll Reveal with Optical Softness */
+/* Ultra-Smooth Apple/Linear Scroll Reveal (Composited GPU Only) */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
-  filter: blur(4px);
+  transform: translate3d(0, 20px, 0);
   transition: 
-    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.95s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
   backface-visibility: hidden;
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  filter: blur(0px);
 }
 
 /* Hide custom cursor & spotlight while preloader is active */

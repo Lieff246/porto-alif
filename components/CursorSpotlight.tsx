@@ -17,7 +17,14 @@ export default function CursorSpotlight() {
     let mouseY = -100;
     let ringX = -100;
     let ringY = -100;
+
+    let prevMouseX = -100;
+    let prevMouseY = -100;
+    let prevRingX = -100;
+    let prevRingY = -100;
+
     let isHovered = false;
+    let lastHovered = false;
     let isVisible = false;
     let rafId: number;
 
@@ -72,28 +79,41 @@ export default function CursorSpotlight() {
       if (spotlightRef.current) spotlightRef.current.style.opacity = "1";
     };
 
-    // 144Hz Hardware-accelerated fluid Lerp Loop (Zero React overhead)
+    // 144Hz Hardware-accelerated fluid Lerp Loop (Zero Repaints & Zero Style Thrashing)
     const loop = () => {
-      // 0.11 Lerp coefficient = luxurious fluid trailing delay with silky settling
-      ringX += (mouseX - ringX) * 0.11;
-      ringY += (mouseY - ringY) * 0.11;
+      // Fluid trailing delay with silky settling
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
 
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-      }
+      const mouseDelta = Math.abs(mouseX - prevMouseX) + Math.abs(mouseY - prevMouseY);
+      const ringDelta = Math.abs(ringX - prevRingX) + Math.abs(ringY - prevRingY);
 
-      if (ringRef.current) {
-        const scale = isHovered ? "scale(1.45)" : "scale(1)";
-        const borderColor = isHovered ? "rgba(16, 185, 129, 0.7)" : "rgba(24, 24, 27, 0.45)";
-        const bg = isHovered ? "rgba(16, 185, 129, 0.08)" : "transparent";
+      // Only perform DOM updates when there is actual movement or hover state change
+      if (mouseDelta > 0.05 || ringDelta > 0.05 || isHovered !== lastHovered) {
+        prevMouseX = mouseX;
+        prevMouseY = mouseY;
+        prevRingX = ringX;
+        prevRingY = ringY;
 
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${scale}`;
-        ringRef.current.style.borderColor = borderColor;
-        ringRef.current.style.backgroundColor = bg;
-      }
+        if (dotRef.current) {
+          dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        }
 
-      if (spotlightRef.current) {
-        spotlightRef.current.style.background = `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(16, 185, 129, 0.04), transparent 70%)`;
+        if (ringRef.current) {
+          const scale = isHovered ? "scale(1.45)" : "scale(1)";
+          ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${scale}`;
+
+          if (isHovered !== lastHovered) {
+            ringRef.current.style.borderColor = isHovered ? "rgba(16, 185, 129, 0.7)" : "rgba(24, 24, 27, 0.45)";
+            ringRef.current.style.backgroundColor = isHovered ? "rgba(16, 185, 129, 0.08)" : "transparent";
+            lastHovered = isHovered;
+          }
+        }
+
+        // Spotlight is moved purely via GPU transform (0ms CPU raster time, no repaint during scroll)
+        if (spotlightRef.current) {
+          spotlightRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        }
       }
 
       rafId = requestAnimationFrame(loop);
@@ -111,17 +131,21 @@ export default function CursorSpotlight() {
       window.removeEventListener("preloaderFinished", onPreloaderFinished);
       cancelAnimationFrame(rafId);
     };
-  }, []); // Run once on mount
+  }, []);
 
   return (
     <>
-      {/* 1. Large Ambient Background Spotlight */}
+      {/* 1. Large Ambient Background Spotlight (100% GPU-Composited Layer) */}
       <div
         ref={spotlightRef}
         data-cursor-spotlight
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500 hidden md:block"
-        style={{ willChange: "background" }}
+        className="pointer-events-none fixed top-0 left-0 z-30 w-[600px] h-[600px] rounded-full opacity-0 transition-opacity duration-500 hidden md:block"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(16, 185, 129, 0.045) 0%, rgba(16, 185, 129, 0.015) 45%, transparent 70%)",
+          willChange: "transform",
+        }}
       />
 
       {/* 2. Trailing Smooth Ring Follower */}
