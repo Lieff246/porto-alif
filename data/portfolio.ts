@@ -368,7 +368,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "mentor-pt",
-    role: "Front-End Web Development Mentor (Batch Orion)",
+    role: "Web Development Mentor (Batch Orion)",
     organization: "Programming Tadulako",
     period: "2025 — 2026",
     badge: "Mentorship & Teaching",
