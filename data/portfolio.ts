@@ -316,6 +316,23 @@ export const experiences: Experience[] = [
     imageCaption: "Dokumentasi saat magang di Dinas Pendidikan Provinsi Sulawesi Tengah",
   },
   {
+    id: "mentor-be",
+    role: "Mentor Backend Hammercode",
+    organization: "Hammercode",
+    period: "2026",
+    badge: "Teaching, Mentoring",
+    category: "Mentoring",
+    description: "Memberikan bimbingan kepada peserta program bootcamps mengenai pemrograman backend dengan bahasa Golang.",
+    achievements: [
+      "Mengajar fundamental backend programming dengan fokus pada bahasa Golang, mencakup sintaksis dasar, struktur kontrol, dan best practice.",
+      "Membimbing peserta melewati project akhir berupa RESTful API menggunakan Gin Framework dengan database, termasuk desain skema relasional, autentikasi JWT, dan implementasi endpoint CRUD.",
+      "Membantu peserta membuat tugas submission dari mentor."
+    ],
+    tags: ["Golang", "PostgreSQL", "JWT", "API Development", "Mentoring"],
+    image: "/images/pk.jpeg",
+    imageCaption: "Dokumentasi Mentoring Backend Hammercode",
+  },
+  {
     id: "hmti-penalaran",
     role: "PJ Divisi Penalaran Keilmuan (Intelektual)",
     organization: "Himpunan Mahasiswa Teknik Informatika (HMTI) Untad",
