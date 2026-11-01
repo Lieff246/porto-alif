@@ -64,8 +64,9 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
                 {project.category}
               </span>
               {project.featured && (
-                <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-full bg-zinc-900/90 backdrop-blur-md text-zinc-100 border border-zinc-700/60 shadow-xs">
-                  Unggulan
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium px-2.5 py-1 rounded-full bg-zinc-900/90 backdrop-blur-md text-zinc-100 border border-zinc-700/60 shadow-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  <span>Dapat Dibuka</span>
                 </span>
               )}
             </div>

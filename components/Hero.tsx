@@ -370,10 +370,6 @@ export default function Hero() {
             {/* 5-col: Academic & Focus Anchor */}
             <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between bg-zinc-50/40">
               <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-mono font-medium border border-zinc-200/80 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900" />
-                  Status Akademik Aktif
-                </div>
                 <h3 className="text-base sm:text-lg font-bold text-zinc-950 tracking-tight">
                   Teknik Informatika · Angkatan 2024
                 </h3>

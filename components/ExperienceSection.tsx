@@ -62,9 +62,6 @@ export default function ExperienceSection() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
-                <span>EXPERIENCE &amp; LEADERSHIP</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
                 Pengalaman &amp; Kontribusi
               </h2>

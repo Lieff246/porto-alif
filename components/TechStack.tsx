@@ -83,6 +83,7 @@ const techDomains: TechDomain[] = [
       { name: "OpenCV", role: "Image Processing", icon: "/icons/opencv.svg" },
       { name: "Google Gemini", role: "LLM & Agent Logic", icon: "/icons/googlegemini.svg" },
       { name: "Arduino", role: "Embedded IoT Hardware", icon: "/icons/arduino.svg" },
+      { name: "Claude", role: "AI Assistant", icon: "/icons/claude.svg" },
     ],
   },
 ];
@@ -111,9 +112,6 @@ export default function TechStack() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-500 mb-1.5">
-                <span>Stack &amp; Peralatan Kerja</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
                 Teknologi yang Biasa Saya Gunakan
               </h2>

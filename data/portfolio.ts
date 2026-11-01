@@ -101,7 +101,7 @@ export const projects: Project[] = [
     fullDescription: "Karya tim saya (Ordinary Squad) untuk Lomba Inovasi Digital Mahasiswa (LIDM) 2025 Divisi Inovasi Teknologi Digital Pendidikan serta Capstone Design FATEK Untad. Kami merancang alat pemantau konsentrasi menggunakan mikrokontroler ESP32-CAM yang mengirimkan feed gambar ke program Python. Memanfaatkan MediaPipe FaceMesh untuk melacak koordinat mata dan menghitung Eye Aspect Ratio (EAR) guna membedakan kedipan normal dengan kantuk (micro-sleep), lengkap dengan lampu indikator peringatan dan casing custom hasil 3D printing.",
     tags: ["Python", "OpenCV", "MediaPipe FaceMesh", "EAR Algorithm", "ESP32-CAM", "3D Printing"],
     githubUrl: null,
-    liveUrl: null,
+    liveUrl: "https://youtu.be/M6NNQR6wMK0?si=LRJVCENVfzuOpoGV",
     highlights: [
       "Deteksi kantuk real-time menggunakan kalkulasi matematis Eye Aspect Ratio (EAR) 6-titik",
       "Integrasi modul ESP32-CAM dengan lampu indikator LED sebagai alarm pengingat di meja belajar",
