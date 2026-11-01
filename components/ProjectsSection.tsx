@@ -131,7 +131,7 @@ export default function ProjectsSection() {
                 >
                   <Icon
                     className={`w-3.5 h-3.5 shrink-0 ${
-                      isActive ? "text-emerald-400" : "text-zinc-400"
+                      isActive ? "text-zinc-200" : "text-zinc-400"
                     }`}
                   />
                   <span>{cat.tabLabel}</span>
@@ -161,14 +161,14 @@ export default function ProjectsSection() {
           </span>
         </div>
 
-        {/* Editorial Bento Grid */}
+        {/* Clean Showcase Grid: Flagship #1 Full-Width + Symmetrical 2-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((project, index) => {
-            const isFeatured = activeCategoryId === "all" && (index === 0 || index === 3 || index === 8);
+            const isFeatured = activeCategoryId === "all" && index === 0;
             return (
               <ScrollReveal
                 key={project.id}
-                delay={isFeatured ? 0 : (index % 2) * 120}
+                delay={isFeatured ? 0 : ((index - 1) % 2) * 100}
                 className={isFeatured ? "md:col-span-2" : "col-span-1"}
               >
                 <ProjectCard

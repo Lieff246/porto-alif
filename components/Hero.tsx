@@ -117,19 +117,15 @@ export default function Hero() {
           {/* Main Hero Narrative */}
           <div className="lg:col-span-7 space-y-4">
             <div className="space-y-1.5">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
-                <Terminal className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Informatika</span>
-              </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
-                Alif Apriansyah<span className="text-emerald-500">.</span>
+                Alif Apriansyah.
               </h1>
 
               {/* Dynamic Vertical Rolling Role */}
               <div className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2.5 pt-1">
                 <span className="text-zinc-400 font-normal">I'm a</span>
-                <span className="text-zinc-950 font-black border-b-2 border-emerald-500 pb-0.5 inline-flex items-center min-h-[32px] overflow-hidden">
+                <span className="text-zinc-950 font-black border-b-2 border-zinc-950 pb-0.5 inline-flex items-center min-h-[32px] overflow-hidden">
                   <span
                     className={`inline-block transition-all duration-200 transform ${
                       isRoleChanging
@@ -205,7 +201,7 @@ export default function Hero() {
                     aria-label="Salin email ke clipboard"
                   >
                     {copiedEmail ? (
-                      <Check className="w-4 h-4 text-emerald-600 animate-fadeIn" />
+                      <Check className="w-4 h-4 text-zinc-950 animate-fadeIn" />
                     ) : (
                       <Mail className="w-4 h-4" />
                     )}
@@ -374,8 +370,8 @@ export default function Hero() {
             {/* 5-col: Academic & Focus Anchor */}
             <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between bg-zinc-50/40">
               <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200/60 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-mono font-medium border border-zinc-200/80 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900" />
                   Status Akademik Aktif
                 </div>
                 <h3 className="text-base sm:text-lg font-bold text-zinc-950 tracking-tight">
@@ -412,7 +408,7 @@ export default function Hero() {
                   Mentor &amp; Staff
                 </p>
                 <p className="text-xs text-zinc-500 mt-1">
-                  HMTI &amp; Prog. Tadulako
+                  HMTI Untad &amp; Programming Tadulako
                 </p>
               </div>
 

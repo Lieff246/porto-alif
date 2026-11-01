@@ -104,8 +104,8 @@ export default function CursorSpotlight() {
           ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${scale}`;
 
           if (isHovered !== lastHovered) {
-            ringRef.current.style.borderColor = isHovered ? "rgba(16, 185, 129, 0.7)" : "rgba(24, 24, 27, 0.45)";
-            ringRef.current.style.backgroundColor = isHovered ? "rgba(16, 185, 129, 0.08)" : "transparent";
+            ringRef.current.style.borderColor = isHovered ? "rgba(24, 24, 27, 0.8)" : "rgba(24, 24, 27, 0.4)";
+            ringRef.current.style.backgroundColor = isHovered ? "rgba(24, 24, 27, 0.05)" : "transparent";
             lastHovered = isHovered;
           }
         }
@@ -143,7 +143,7 @@ export default function CursorSpotlight() {
         className="pointer-events-none fixed top-0 left-0 z-30 w-[600px] h-[600px] rounded-full opacity-0 transition-opacity duration-500 hidden md:block"
         style={{
           background:
-            "radial-gradient(circle, rgba(16, 185, 129, 0.045) 0%, rgba(16, 185, 129, 0.015) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(24, 24, 27, 0.035) 0%, rgba(24, 24, 27, 0.01) 45%, transparent 70%)",
           willChange: "transform",
         }}
       />

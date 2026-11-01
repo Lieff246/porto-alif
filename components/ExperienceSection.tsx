@@ -103,7 +103,7 @@ export default function ExperienceSection() {
                   className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
                   style={{
                     background:
-                      "radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.05), transparent 70%)",
+                      "radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
                   }}
                 />
 

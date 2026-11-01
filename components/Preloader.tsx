@@ -88,8 +88,8 @@ export default function Preloader() {
       {/* Top Header Information */}
       <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
         <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-semibold text-zinc-200">alif apriansyah</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
+          <span className="font-semibold text-zinc-300">alif apriansyah</span>
           <span className="text-zinc-600 hidden sm:inline">· portfolio</span>
         </div>
         <div className="text-[11px] font-mono text-zinc-500">
@@ -101,7 +101,7 @@ export default function Preloader() {
       <div className="flex flex-col items-center justify-center text-center my-auto">
         <p className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white transition-all duration-100 flex items-center justify-center">
           <span>{greetings[index].text}</span>
-          <span className="text-emerald-500 ml-1">.</span>
+          <span className="text-zinc-600 ml-1">.</span>
         </p>
 
         <p className="text-xs sm:text-sm font-mono text-zinc-400 mt-3 transition-opacity duration-100">
@@ -111,9 +111,6 @@ export default function Preloader() {
 
       {/* Bottom Hint & Location */}
       <div className="flex items-center justify-between w-full max-w-5xl mx-auto text-[11px] font-mono text-zinc-500">
-        <span className="hidden sm:inline text-zinc-600">
-          Universitas Tadulako · Palu, Indonesia
-        </span>
         <span className="hover:text-zinc-300 transition-colors ml-auto">
           Klik atau spasi untuk lewati ↵
         </span>

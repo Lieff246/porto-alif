@@ -59,7 +59,6 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2.5 text-zinc-950 font-mono font-bold tracking-tight text-sm sm:text-base group"
           >
-            {/* <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" /> */}
             <span>alif</span>
             <span className="text-zinc-400 group-hover:text-zinc-600 transition-colors">
               apriansyah

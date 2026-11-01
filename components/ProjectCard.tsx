@@ -35,7 +35,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
         className="pointer-events-none absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
         style={{
           background:
-            "radial-gradient(550px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.07), transparent 70%)",
+            "radial-gradient(550px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
         }}
       />
 
@@ -64,7 +64,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
                 {project.category}
               </span>
               {project.featured && (
-                <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md text-emerald-200 border border-emerald-500/30 shadow-xs">
+                <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-full bg-zinc-900/90 backdrop-blur-md text-zinc-100 border border-zinc-700/60 shadow-xs">
                   Unggulan
                 </span>
               )}
@@ -91,10 +91,10 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
 
           <h3
             onClick={() => onOpenModal(project)}
-            className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight group-hover:text-emerald-700 transition-colors duration-200 cursor-pointer flex items-center justify-between"
+            className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight group-hover:text-zinc-600 transition-colors duration-200 cursor-pointer flex items-center justify-between"
           >
             <span>{project.title}</span>
-            <ArrowUpRight className="w-5 h-5 text-zinc-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200 shrink-0 ml-2" />
+            <ArrowUpRight className="w-5 h-5 text-zinc-400 group-hover:text-zinc-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200 shrink-0 ml-2" />
           </h3>
 
           <p className="text-xs sm:text-sm text-zinc-600 mt-2.5 leading-relaxed">

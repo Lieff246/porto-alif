@@ -170,7 +170,7 @@ export default function TechStack() {
                         }`}
                       >
                         {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-white" />
                         )}
                         <IconComponent className="w-3.5 h-3.5 shrink-0" />
                         <span>{meta.label}</span>
@@ -187,7 +187,7 @@ export default function TechStack() {
               {/* Informative Sub-Bar */}
               <div className="flex items-center justify-between gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-zinc-50/80 border border-zinc-200/70 text-[11px] sm:text-xs font-mono text-zinc-600">
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 bg-emerald-500" />
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 bg-zinc-900" />
                   <span className="text-zinc-700 leading-snug">{activeMeta.description}</span>
                 </div>
 
@@ -253,13 +253,13 @@ export default function TechStack() {
                       className="pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
                       style={{
                         background:
-                          "radial-gradient(160px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.08), transparent 70%)",
+                          "radial-gradient(160px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
                       }}
                     />
 
                     {/* Top Accent Line for Active Category */}
                     {activeCategoryId !== "all" && isMatch && (
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-zinc-950" />
                     )}
 
                     {/* Square Icon Tile */}
@@ -283,7 +283,7 @@ export default function TechStack() {
 
                     {/* Subtitle / Role Tag with Clean Dot */}
                     <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5 sm:mt-1 relative z-10 max-w-full justify-center">
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-zinc-300 group-hover:bg-emerald-500 transition-colors" />
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-zinc-300 group-hover:bg-zinc-900 transition-colors" />
                       <span className="text-[10px] sm:text-[11px] text-zinc-500 font-medium truncate">
                         {tool.role}
                       </span>
