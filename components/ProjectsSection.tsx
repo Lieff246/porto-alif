@@ -92,8 +92,8 @@ export default function ProjectsSection() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
-                <span>PROJECT WORK</span>
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-500 mb-1.5">
+                <span>Koleksi Proyek</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
                 Project &amp; Karya Unggulan
@@ -109,7 +109,7 @@ export default function ProjectsSection() {
           </div>
         </ScrollReveal>
 
-        {/* Filter Bar: Horizontal swipeable pill buttons di mobile, clean pills di desktop */}
+        {/* Filter Bar */}
         <ScrollReveal delay={40}>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
             {categories.map((cat) => {
@@ -150,7 +150,7 @@ export default function ProjectsSection() {
 
         {/* Subtitle Status */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-sm font-mono font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-2">
+          <h3 className="text-sm font-mono font-bold text-zinc-900 tracking-tight flex items-center gap-2">
             <span>Daftar Proyek [{activeCategory.tabLabel}]</span>
             <span className="text-xs font-normal text-zinc-400">
               ({filteredProjects.length} proyek)
@@ -161,10 +161,10 @@ export default function ProjectsSection() {
           </span>
         </div>
 
-        {/* Langsung ke Bento Grid Proyek: Bersih, Cepat & Tanpa Bloat */}
+        {/* Editorial Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((project, index) => {
-            const isFeatured = activeCategoryId === "all" && (index === 0 || index === 1);
+            const isFeatured = activeCategoryId === "all" && (index === 0 || index === 3 || index === 8);
             return (
               <ScrollReveal
                 key={project.id}

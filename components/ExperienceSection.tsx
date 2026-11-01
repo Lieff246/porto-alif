@@ -267,7 +267,7 @@ export default function ExperienceSection() {
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-sm shrink-0">
               <div className="flex items-center gap-2 overflow-hidden">
                 <span className="text-xs font-semibold text-zinc-200 truncate">
-                  {activeLightbox.role} — {activeLightbox.organization}
+                  {activeLightbox.role} · {activeLightbox.organization}
                 </span>
               </div>
               <button

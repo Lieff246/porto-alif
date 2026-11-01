@@ -29,7 +29,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
         featured ? "md:col-span-2" : "col-span-1"
       }`}
     >
-      {/* 1. Dynamic Local Mouse Spotlight (Zero-Jank CSS Variables) */}
+      {/* Dynamic Local Mouse Spotlight (Zero-Jank CSS Variables) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
@@ -56,13 +56,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
               className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
             {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/20 opacity-80 group-hover:opacity-50 transition-opacity duration-300" />
-
-            {/* Subtle Glass Sheen Sweep on Hover */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent z-10"
-            />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-black/20 opacity-80 group-hover:opacity-50 transition-opacity duration-300" />
 
             {/* Top Category Badge */}
             <div className="absolute top-4 left-4 flex items-center gap-2 z-20">
@@ -70,8 +64,8 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
                 {project.category}
               </span>
               {project.featured && (
-                <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-zinc-800/90 backdrop-blur-md text-white shadow-xs">
-                  FEATURED WORK
+                <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md text-emerald-200 border border-emerald-500/30 shadow-xs">
+                  Unggulan
                 </span>
               )}
             </div>

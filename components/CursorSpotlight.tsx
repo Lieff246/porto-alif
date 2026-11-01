@@ -82,8 +82,8 @@ export default function CursorSpotlight() {
     // 144Hz Hardware-accelerated fluid Lerp Loop (Zero Repaints & Zero Style Thrashing)
     const loop = () => {
       // Fluid trailing delay with silky settling
-      ringX += (mouseX - ringX) * 0.14;
-      ringY += (mouseY - ringY) * 0.14;
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
 
       const mouseDelta = Math.abs(mouseX - prevMouseX) + Math.abs(mouseY - prevMouseY);
       const ringDelta = Math.abs(ringX - prevRingX) + Math.abs(ringY - prevRingY);

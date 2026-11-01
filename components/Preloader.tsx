@@ -38,21 +38,21 @@ export default function Preloader() {
     document.body.style.overflow = "hidden";
     document.body.classList.add("is-preloading");
 
-    // Cycle through greetings
+    // Cycle through greetings with crisp, rhythmic pacing (150ms)
     const interval = setInterval(() => {
       setIndex((prev) => {
         if (prev < greetings.length - 1) {
           return prev + 1;
         } else {
           clearInterval(interval);
-          // Wait slightly on the last greeting then slide up
+          // Brief pause on regional identity (Tabe' · Palu) then silky curtain rise
           setTimeout(() => {
             handleFinish();
-          }, 320);
+          }, 240);
           return prev;
         }
       });
-    }, 200);
+    }, 150);
 
     // Keyboard escape to skip immediately
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -86,7 +86,12 @@ export default function Preloader() {
       }`}
     >
       {/* Top Header Information */}
-      <div className="flex items-center justify-between w-full max-w-5xl mx-auto opacity-70">
+      <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
+        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-semibold text-zinc-200">alif apriansyah</span>
+          <span className="text-zinc-600 hidden sm:inline">· portfolio</span>
+        </div>
         <div className="text-[11px] font-mono text-zinc-500">
           [{String(index + 1).padStart(2, "0")} / {String(greetings.length).padStart(2, "0")}]
         </div>
@@ -94,19 +99,23 @@ export default function Preloader() {
 
       {/* Cinematic Greeting Display */}
       <div className="flex flex-col items-center justify-center text-center my-auto">
-        <p className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white transition-all duration-150 mb-3">
-          {greetings[index].text}
+        <p className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white transition-all duration-100 flex items-center justify-center">
+          <span>{greetings[index].text}</span>
+          <span className="text-emerald-500 ml-1">.</span>
         </p>
 
-        <p className="text-xs sm:text-sm font-mono text-zinc-500 tracking-widest uppercase transition-opacity duration-150">
+        <p className="text-xs sm:text-sm font-mono text-zinc-400 mt-3 transition-opacity duration-100">
           {greetings[index].lang}
         </p>
       </div>
 
-      {/* Bottom Hint */}
-      <div className="flex items-center justify-end w-full max-w-5xl mx-auto text-[11px] font-mono text-zinc-600">
-        <span className="hover:text-zinc-400 transition-colors">
-          KLIK DI MANA SAJA UNTUK LEWATI ↵
+      {/* Bottom Hint & Location */}
+      <div className="flex items-center justify-between w-full max-w-5xl mx-auto text-[11px] font-mono text-zinc-500">
+        <span className="hidden sm:inline text-zinc-600">
+          Universitas Tadulako · Palu, Indonesia
+        </span>
+        <span className="hover:text-zinc-300 transition-colors ml-auto">
+          Klik atau spasi untuk lewati ↵
         </span>
       </div>
     </aside>

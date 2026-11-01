@@ -18,13 +18,13 @@ const cardRoles = [
     title: "Staff Penalaran Keilmuan",
     org: "HMTI Untad",
     badge: "Staff",
-    spec: "[LARAVEL · GO · NEXT.JS]",
+    spec: "Laravel, Go, Next.js",
   },
   {
     title: "Web Programming Mentor",
     org: "Programming Tadulako",
-    badge: "Web Mentor",
-    spec: "[HTML · CSS · JS · GO]",
+    badge: "Mentor",
+    spec: "HTML, CSS, JS, Go",
   },
 ];
 
@@ -70,53 +70,34 @@ export default function Hero() {
 
   const currentCardRole = cardRoles[cardRoleIndex];
 
-  // Dynamic Typewriter Effect (like Hafidz Humaidi)
+  // Dynamic Vertical Rolling Role Ticker
   const [roleIndex, setRoleIndex] = useState(0);
-  const [displayedRole, setDisplayedRole] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isRoleChanging, setIsRoleChanging] = useState(false);
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
-    let timer: NodeJS.Timeout;
-
-    if (!isDeleting) {
-      if (displayedRole.length < currentRole.length) {
-        timer = setTimeout(() => {
-          setDisplayedRole(currentRole.slice(0, displayedRole.length + 1));
-        }, 65);
-      } else {
-        timer = setTimeout(() => {
-          setIsDeleting(true);
-        }, 2200);
-      }
-    } else {
-      if (displayedRole.length > 0) {
-        timer = setTimeout(() => {
-          setDisplayedRole(currentRole.slice(0, displayedRole.length - 1));
-        }, 35);
-      } else {
-        setIsDeleting(false);
+    const timer = setInterval(() => {
+      setIsRoleChanging(true);
+      setTimeout(() => {
         setRoleIndex((prev) => (prev + 1) % roles.length);
-      }
-    }
+        setIsRoleChanging(false);
+      }, 200);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [displayedRole, isDeleting, roleIndex]);
-
-  // Ultra-Smooth 60/120fps Hardware-Accelerated Pendulum Mouse Physics
+  // Ultra-Smooth Hardware-Accelerated Pendulum Mouse Physics for ID card
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
     if (rafId.current) cancelAnimationFrame(rafId.current);
     rafId.current = requestAnimationFrame(() => {
       if (cardRef.current) {
-        // Damped, subtle physical sway anchored at the lanyard top
         const rotY = x * 8;
         const rotX = -y * 6;
-        const rotZ = x * 2.5; // gentle natural pendulum sway
+        const rotZ = x * 2.5;
         cardRef.current.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translateY(-4px)`;
       }
     });
@@ -125,19 +106,12 @@ export default function Hero() {
   const handleMouseLeave = () => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     if (cardRef.current) {
-      // Silky smooth return to resting tilt
       cardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)`;
     }
   };
 
   return (
     <section id="about" className="relative pt-16 pb-8 sm:pt-20 sm:pb-12 overflow-hidden">
-      {/* Soft Ambient Radial Light for Breathing Room */}
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-emerald-100/40 via-zinc-100/60 to-transparent rounded-full blur-3xl -z-10" 
-      />
-
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Main Hero Narrative */}
@@ -145,19 +119,26 @@ export default function Hero() {
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
                 <Terminal className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Informatics </span>
+                <span>Informatika</span>
               </div>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
                 Alif Apriansyah<span className="text-emerald-500">.</span>
               </h1>
 
-              {/* Dynamic Typewriter Role - Unified Clean Typography */}
+              {/* Dynamic Vertical Rolling Role */}
               <div className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2.5 pt-1">
                 <span className="text-zinc-400 font-normal">I'm a</span>
-                <span className="text-zinc-950 font-black border-b-2 border-emerald-500 pb-0.5 inline-flex items-center">
-                  {displayedRole}
-                  <span className="w-0.5 h-5 bg-emerald-500 ml-1 inline-block animate-pulse" />
+                <span className="text-zinc-950 font-black border-b-2 border-emerald-500 pb-0.5 inline-flex items-center min-h-[32px] overflow-hidden">
+                  <span
+                    className={`inline-block transition-all duration-200 transform ${
+                      isRoleChanging
+                        ? "opacity-0 -translate-y-2.5"
+                        : "opacity-100 translate-y-0"
+                    }`}
+                  >
+                    {roles[roleIndex]}
+                  </span>
                 </span>
               </div>
             </div>
@@ -258,70 +239,56 @@ export default function Hero() {
               }}
               className="w-full max-w-[280px] sm:max-w-[290px] select-none cursor-pointer flex flex-col items-center"
             >
-              
-              {/* Lanyard Fabric Ribbon (Tali) */}
+              {/* Lanyard Fabric Ribbon */}
               <div className="w-6 h-10 sm:h-12 bg-gradient-to-b from-zinc-800/0 via-zinc-900 to-zinc-950 border-x border-zinc-700/60 relative overflow-hidden shadow-xs shrink-0 flex items-center justify-center">
-                {/* Fine Stitched Borders */}
                 <div className="absolute inset-y-0 left-0.5 w-[1px] border-r border-dashed border-zinc-500/40" />
                 <div className="absolute inset-y-0 right-0.5 w-[1px] border-l border-dashed border-zinc-500/40" />
-                {/* Subtle Woven Center Spine */}
                 <div className="w-1 h-full bg-zinc-800/60" />
               </div>
 
-              {/* Metallic Crimp / End Clamp (Penjepit Besi Tali) */}
+              {/* Metallic Crimp / End Clamp */}
               <div className="w-7 h-2.5 rounded-[2px] bg-gradient-to-r from-zinc-400 via-zinc-100 to-zinc-400 border border-zinc-400/80 shadow-xs z-30 -mt-0.5 shrink-0 flex items-center justify-center">
                 <div className="w-4 h-[1px] bg-zinc-400/70" />
               </div>
 
-              {/* Silver Swivel Ring & Clasp (Ring Putar & Pengait) */}
+              {/* Silver Swivel Ring & Clasp */}
               <div className="flex flex-col items-center -mt-0.5 z-30 shrink-0">
-                {/* Circular Swivel Ring */}
                 <div className="w-3.5 h-3.5 rounded-full border-2 border-zinc-300 bg-transparent shadow-xs" />
-                
-                {/* Clasp Body */}
                 <div className="w-3 h-3 bg-gradient-to-b from-zinc-300 via-zinc-100 to-zinc-400 rounded-xs border border-zinc-400 shadow-xs -mt-1" />
-                
-                {/* Metallic Clip Hook looping into the hole */}
                 <div className="w-2.5 h-3.5 bg-gradient-to-b from-zinc-300 via-zinc-200 to-zinc-400 rounded-b-xs border-x border-b border-zinc-400/90 shadow-xs -mt-0.5" />
               </div>
 
-              {/* ID Card Body - slightly overlapping hook */}
+              {/* ID Card Body */}
               <div className="w-full -mt-1.5 group relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8 hover:shadow-2xl hover:shadow-zinc-900/12 transition-shadow duration-500">
-                {/* ID Badge Top Header with Mathematically Centered Slot Hole */}
+                {/* ID Badge Top Header */}
                 <div className="pt-3 pb-2.5 px-4 bg-zinc-50/90 border-b border-zinc-100 relative">
-                  {/* Absolute Left Status */}
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-[9px] font-mono text-zinc-400">
-                    <span>INFORMATICS</span>
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-[9px] font-mono text-zinc-500 font-medium">
+                    <span>Informatika</span>
                   </div>
 
-                  {/* Centered Lanyard Punch Hole with Hook Loop */}
+                  {/* Centered Slot Hole */}
                   <div className="flex items-center justify-center">
                     <div className="w-9 h-2 rounded-full bg-zinc-200/90 border border-zinc-300/90 shadow-inner relative flex items-center justify-center">
-                      {/* Inner metallic clip loop showing through the hole */}
                       <div className="w-2 h-1.5 rounded-xs bg-gradient-to-b from-zinc-400 to-zinc-500 opacity-80" />
                     </div>
                   </div>
 
-                  {/* Absolute Right Code */}
-                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[9px] font-mono text-zinc-400 font-medium tracking-wider">
-                    UNTAD'24
+                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[9px] font-mono text-zinc-500 font-medium tracking-wider">
+                    Untad 2024
                   </div>
                 </div>
 
-                {/* Photo Viewport */}
+                {/* Photo Viewport - Natural Color Photo */}
                 <div className="aspect-[4/4.3] relative w-full bg-zinc-100 overflow-hidden">
                   <Image
                     src="/alif.jpeg"
                     alt={personalInfo.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
-                    className="object-cover object-center filter grayscale-0 md:grayscale md:group-hover:grayscale-0 contrast-105 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
+                    className="object-cover object-center contrast-105 transition-transform duration-500 group-hover:scale-105"
                     priority
                   />
-                  {/* Subtle Inset Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-30 md:opacity-60 md:group-hover:opacity-20 transition-opacity duration-500" />
-
-                  {/* Corner Badges on Photo */}
+                  {/* Subtle Corner Badge */}
                   <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white text-xs font-mono">
                     <span className="bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[10px] border border-white/10">
                       Tadulako Univ
@@ -352,7 +319,7 @@ export default function Hero() {
 
                     <div className="text-right shrink-0">
                       <span className="text-[9px] font-mono text-zinc-400 block uppercase font-semibold">
-                        ROLE
+                        Peran
                       </span>
                       <div
                         className={`transition-all duration-200 transform ${
@@ -368,7 +335,7 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* Clean Monospaced Spec Strip with Indicator Switcher */}
+                  {/* Clean Spec Strip */}
                   <div className="mt-2.5 pt-2 border-t border-zinc-100 flex items-center justify-between text-[10px] font-mono text-zinc-500">
                     <span
                       className={`font-semibold text-zinc-600 transition-opacity duration-200 ${
@@ -378,7 +345,7 @@ export default function Hero() {
                       {currentCardRole.spec}
                     </span>
 
-                    {/* Interactive dot indicator */}
+                    {/* Dot indicator */}
                     <div
                       className="flex items-center gap-1.5"
                       title="Klik kartu untuk beralih peran"
@@ -401,62 +368,66 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 4 Stat Metrics: Unified Minimalist Grid (Anti-AI-Slop) */}
+        {/* Editorial Overview: Asymmetric Focus Anchor & Proof Matrix */}
         <div className="mt-10 sm:mt-12 pt-8 border-t border-zinc-200">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-2xs divide-y sm:divide-y-0 sm:divide-x divide-zinc-200">
-            
-            {/* 01: Status */}
-            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
-              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                STATUS
-              </span>
-              <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
-                Active Builder
-              </p>
-              <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                Teknik Informatika Untad
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-2xs divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
+            {/* 5-col: Academic & Focus Anchor */}
+            <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between bg-zinc-50/40">
+              <div>
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200/60 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Status Akademik Aktif
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-zinc-950 tracking-tight">
+                  Teknik Informatika · Angkatan 2024
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-600 mt-1.5 leading-relaxed">
+                  Fokus pada rekayasa backend, arsitektur web modern, dan sistem WebGIS di Universitas Tadulako.
+                </p>
+              </div>
+              <div className="pt-4 text-xs font-mono text-zinc-500">
+                Palu, Sulawesi Tengah
+              </div>
             </div>
 
-            {/* 02: Projects */}
-            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
-              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                PROJECTS
-              </span>
-              <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
-                {projects.length}+ Karya
-              </p>
-              <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                Web · Mobile · Backend · AI
-              </p>
-            </div>
+            {/* 7-col: 3-cell Data Proof Matrix */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200">
+              <div className="p-4 sm:p-5 hover:bg-zinc-50/60 transition-colors">
+                <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                  PROJECTS
+                </span>
+                <p className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+                  {projects.length}+ Karya
+                </p>
+                <p className="text-xs text-zinc-500 mt-1">
+                  Web, Mobile, Backend &amp; AI
+                </p>
+              </div>
 
-            {/* 03: Organisasi & Komunitas */}
-            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
-              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                KOMUNITAS
-              </span>
-              <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
-                Pengurus &amp; Mentor
-              </p>
-              <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                HMTI Untad &amp; Prog. Tadulako
-              </p>
-            </div>
+              <div className="p-4 sm:p-5 hover:bg-zinc-50/60 transition-colors">
+                <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                  KONTRIBUSI
+                </span>
+                <p className="text-lg sm:text-xl font-bold text-zinc-950 tracking-tight">
+                  Mentor &amp; Staff
+                </p>
+                <p className="text-xs text-zinc-500 mt-1">
+                  HMTI &amp; Prog. Tadulako
+                </p>
+              </div>
 
-            {/* 04: Lomba */}
-            <div className="p-4 sm:p-5 hover:bg-zinc-50/80 transition-colors">
-              <span className="text-[11px] font-mono text-zinc-400 block mb-1">
-                LOMBA
-              </span>
-              <p className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight leading-snug">
-                LIDM &amp; Gemastik 
-              </p>
-              <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                SIFOKUS &apos;25 &amp; Pemuda Vimral &apos;26
-              </p>
+              <div className="p-4 sm:p-5 hover:bg-zinc-50/60 transition-colors">
+                <span className="text-[11px] font-mono text-zinc-400 block mb-1">
+                  KOMPETISI
+                </span>
+                <p className="text-lg sm:text-xl font-bold text-zinc-950 tracking-tight">
+                  LIDM &amp; Gemastik
+                </p>
+                <p className="text-xs text-zinc-500 mt-1">
+                  SIFOKUS &amp; Pemuda Vimral
+                </p>
+              </div>
             </div>
-
           </div>
         </div>
       </div>

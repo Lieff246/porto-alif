@@ -63,7 +63,7 @@ export const projects: Project[] = [
   },
   {
     id: "ewastehub",
-    title: "E-Waste Hub — Pengelolaan Sampah Elektronik",
+    title: "E-Waste Hub: Pengelolaan Sampah Elektronik",
     tagline: "Platform Penjemputan Sampah Elektronik Rumah Tangga Berbasis Poin Reward",
     category: "Web",
     role: "Fullstack Developer (Tugas Akhir Mata Kuliah Pemrograman Web)",
@@ -90,7 +90,7 @@ export const projects: Project[] = [
   },
   {
     id: "sifokus-iot",
-    title: "SIFOKUS — Pendeteksi Kantuk Siswa (IoT & Vision)",
+    title: "SIFOKUS: Pendeteksi Kantuk Siswa (IoT & Vision)",
     tagline: "Prototipe Pendeteksi Kantuk & Pengukur Fokus Belajar Berbasis Kamera ESP32",
     category: "AI",
     role: "Ketua Tim (LIDM 2025 & Capstone Design FATEK Untad 2025)",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
   },
   {
     id: "smartstudy-ai",
-    title: "SmartStudy — Web Manajemen Tugas Kuliah Berbasis AI",
+    title: "SmartStudy: Web Manajemen Tugas Kuliah Berbasis AI",
     tagline: "Aplikasi Manajemen Tugas Kuliah Terintegrasi Google Gemini AI",
     category: "Web & AI",
     role: "Fullstack & AI Developer (Tugas Akhir Praktikum Pemrograman Web)",
@@ -141,7 +141,7 @@ export const projects: Project[] = [
   },
   {
     id: "go-notes-api",
-    title: "Go Notes API — Backend Clean Architecture",
+    title: "Go Notes API: Backend Clean Architecture",
     tagline: "REST API Manajemen Catatan & Tagging dengan Clean Architecture Golang",
     category: "Backend",
     role: "Backend Developer (Submission Hammercode Backend)",
@@ -166,7 +166,7 @@ export const projects: Project[] = [
   },
   {
     id: "moviex-flutter",
-    title: "MOVIEX — Katalog & Trailer Film Flutter",
+    title: "MOVIEX: Katalog & Trailer Film Flutter",
     tagline: "Aplikasi Mobile Penjelajah Film & Pemutar Trailer Berbasis Flutter dan Firebase",
     category: "Mobile",
     role: "Mobile App Developer (Tugas Akhir Mata Kuliah Pemrograman Mobile)",
@@ -193,7 +193,7 @@ export const projects: Project[] = [
   },
   {
     id: "distroku-ecommerce",
-    title: "DistroKu — Katalog & Belanja Distro Mobile",
+    title: "DistroKu: Katalog & Belanja Distro Mobile",
     tagline: "Aplikasi Katalog Pakaian Distro dengan Supabase Auth & Cache Offline SQLite",
     category: "Mobile",
     role: "Mobile Developer (Tugas Akhir Praktikum Pemrograman Mobile)",
@@ -220,7 +220,7 @@ export const projects: Project[] = [
   },
   {
     id: "kuliner-nusantara",
-    title: "Kuliner Nusantara — Direktori Masakan Tradisional",
+    title: "Kuliner Nusantara: Direktori Masakan Tradisional",
     tagline: "Website Panduan & Ragam Resep Masakan Tradisional Khas Nusantara",
     category: "Web",
     role: "Frontend Developer (Submission Programming Tadulako Soyuz)",
@@ -241,7 +241,7 @@ export const projects: Project[] = [
   },
   {
     id: "nongkis-palu",
-    title: "NONGKIS — Direktori & Reservasi Kafe Kota Palu",
+    title: "NONGKIS: Direktori & Reservasi Kafe Kota Palu",
     tagline: "Platform Pencarian & Reservasi Tempat Nugas dan Nongkrong di Kota Palu",
     category: "Web",
     role: "Fullstack Developer (Tugas Mata Kuliah Rekayasa Perangkat Lunak)",
@@ -268,7 +268,7 @@ export const projects: Project[] = [
   },
   {
     id: "safe-game-lidm",
-    title: "S.A.F.E — Game 3D Edukasi Mitigasi Gempa (Roblox)",
+    title: "S.A.F.E: Game 3D Edukasi Mitigasi Gempa (Roblox)",
     tagline: "Simulasi 3D Kesiapsiagaan & Mitigasi Gempa Bumi untuk Siswa Sekolah",
     category: "Game",
     role: "Game Developer (LIDM 2026)",
@@ -336,7 +336,7 @@ export const experiences: Experience[] = [
     id: "hmti-penalaran",
     role: "PJ Divisi Penalaran Keilmuan (Intelektual)",
     organization: "Himpunan Mahasiswa Teknik Informatika (HMTI) Untad",
-    period: "2025 — 2026",
+    period: "2025 - 2026",
     badge: "Teaching, Mentoring & Academic",
     category: "Organization",
     description: "Mengemban amanah di divisi intelektual HMTI Untad untuk mengorganisir program pengembangan kapabilitas akademik mahasiswa Informatika dan fasilitasi kompetisi.",
@@ -352,7 +352,7 @@ export const experiences: Experience[] = [
   {
     id: "lidm-2026-safe",
     role: "Game Developer & System Integrator (Anggota Tim)",
-    organization: "LIDM 2026 — Tim Pemuda Vimral",
+    organization: "LIDM 2026 · Tim Pemuda Vimral",
     period: "2026",
     badge: "National Competition",
     category: "Competition",
@@ -387,7 +387,7 @@ export const experiences: Experience[] = [
     id: "mentor-pt",
     role: "Web Development Mentor (Batch Orion)",
     organization: "Programming Tadulako",
-    period: "2025 — 2026",
+    period: "2025 - 2026",
     badge: "Mentorship & Teaching",
     category: "Mentoring",
     description: "Berperan sebagai mentor pengajar kelas Web Dasar di komunitas Programming Tadulako untuk membimbing mahasiswa dalam membangun fondasi web modern.",
@@ -419,7 +419,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "lead-lidm",
-    role: "Ketua Tim Pelaksana (Team Leader) — Ordinary Squad",
+    role: "Ketua Tim Pelaksana · Ordinary Squad",
     organization: "LIDM 2025 & Capstone Design FATEK",
     period: "2025",
     badge: "National Competition & Team Leadership",
@@ -432,7 +432,7 @@ export const experiences: Experience[] = [
     ],
     tags: ["LIDM 2025", "Capstone Design FATEK Untad", "Team Leadership", "IoT & Vision", "Research Paper"],
     image: "/images/sifokus.jpg",
-    imageCaption: "Tim Pelaksana SIFOKUS — Capstone Dies Natalis FATEK Untad",
+    imageCaption: "Tim Pelaksana SIFOKUS · Capstone Dies Natalis FATEK Untad",
   },
   {
     id: "peserta-pt-soyuz",
