@@ -15,9 +15,9 @@ const roles = [
 
 const cardRoles = [
   {
-    title: "Staff Penalaran Keilmuan",
+    title: "PJ Penalaran Keilmuan",
     org: "HMTI Untad",
-    badge: "Staff",
+    badge: "Pengurus",
     spec: "Laravel, Go, Next.js",
   },
   {
@@ -405,7 +405,7 @@ export default function Hero() {
                   KONTRIBUSI
                 </span>
                 <p className="text-lg sm:text-xl font-bold text-zinc-950 tracking-tight">
-                  Mentor &amp; Staff
+                  Mentor &amp; Pengurus
                 </p>
                 <p className="text-xs text-zinc-500 mt-1">
                   HMTI Untad &amp; Programming Tadulako

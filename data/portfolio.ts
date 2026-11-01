@@ -339,7 +339,7 @@ export const experiences: Experience[] = [
     period: "2025 - 2026",
     badge: "Teaching, Mentoring & Academic",
     category: "Organization",
-    description: "Mengemban amanah di divisi intelektual HMTI Untad untuk mengorganisir program pengembangan kapabilitas akademik mahasiswa Informatika dan fasilitasi kompetisi.",
+    description: "Mengemban amanah jadi pengurus divisi intelektual HMTI Untad untuk mengorganisir program pengembangan kapabilitas akademik mahasiswa Informatika dan fasilitasi kompetisi.",
     achievements: [
       "Menginisiasi kelas belajar dan diskusi mingguan untuk mata kuliah inti (OOP, UI/UX, Pemrograman Web, Basis Data, Rekayasa API, dsb)",
       "Mendampingi dan menyiapkan delegasi mahasiswa Informatika untuk kompetisi teknologi tingkat regional dan nasional (LIDM, Gemastik, dsb)",

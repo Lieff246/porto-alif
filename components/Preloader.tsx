@@ -86,12 +86,7 @@ export default function Preloader() {
       }`}
     >
       {/* Top Header Information */}
-      <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
-        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
-          <span className="font-semibold text-zinc-300">alif apriansyah</span>
-          <span className="text-zinc-600 hidden sm:inline">· portfolio</span>
-        </div>
+      <div className="flex items-center justify-end w-full max-w-5xl mx-auto">
         <div className="text-[11px] font-mono text-zinc-500">
           [{String(index + 1).padStart(2, "0")} / {String(greetings.length).padStart(2, "0")}]
         </div>
