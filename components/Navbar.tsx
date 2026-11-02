@@ -9,6 +9,7 @@ import Magnetic from "@/components/Magnetic";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -31,12 +32,62 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Precision Scrollspy: mendeteksi bagian aktif saat di-scroll
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
+
+    const sectionIds = ["about", "projects", "experience", "skills", "contact"];
+    const sectionElements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sectionElements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-25% 0px -65% 0px", // Membaca area pandang fokus tengah layar
+        threshold: 0,
+      }
+    );
+
+    sectionElements.forEach((el) => observer.observe(el));
+
+    // Menangani batas atas (Hero) dan batas paling bawah halaman (Contact)
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollY + windowHeight >= documentHeight - 60) {
+        setActiveSection("contact");
+      } else if (scrollY < 120) {
+        setActiveSection("about");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      sectionElements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", id: "about", href: "#about" },
+    { name: "Projects", id: "projects", href: "#projects" },
+    { name: "Experience", id: "experience", href: "#experience" },
+    { name: "Skills", id: "skills", href: "#skills" },
+    { name: "Contact", id: "contact", href: "#contact" },
   ];
 
   return (
@@ -67,17 +118,25 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/80 border border-zinc-200/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-2xs absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 px-3 py-1 rounded-full hover:bg-zinc-100/90 active:scale-95 transition-all duration-150 font-mono"
-              >
-                {link.name}
-              </Link>
-            ))}
+          {/* Desktop Nav: Active Scrollspy Indicator */}
+          <nav className="hidden md:flex items-center gap-1 bg-white/85 border border-zinc-200/90 backdrop-blur-md rounded-full p-1.5 shadow-2xs absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setActiveSection(link.id)}
+                  className={`text-xs font-mono font-semibold px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? "bg-zinc-950 text-white shadow-xs"
+                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/90"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Actions */}
@@ -115,30 +174,45 @@ export default function Navbar() {
             </Magnetic>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-zinc-700 hover:text-zinc-950 bg-white border border-zinc-200 shadow-2xs"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Status Pill & Toggle */}
+          <div className="flex md:hidden items-center gap-2">
+            <span className="text-[11px] font-mono font-semibold text-zinc-700 bg-white border border-zinc-200/90 px-2.5 py-1 rounded-full shadow-2xs capitalize">
+              {activeSection}
+            </span>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-zinc-700 hover:text-zinc-950 bg-white border border-zinc-200 shadow-2xs"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden border-b border-zinc-200 bg-white/95 backdrop-blur-md px-4 py-4 space-y-3">
-            <nav className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-zinc-700 hover:text-zinc-950 px-3 py-2 rounded-lg hover:bg-zinc-100 font-mono"
-                >
-                  {link.name}
-                </Link>
-              ))}
+            <nav className="flex flex-col space-y-1.5">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      setActiveSection(link.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`text-xs font-mono font-semibold px-3.5 py-2 rounded-xl transition-all ${
+                      isActive
+                        ? "bg-zinc-950 text-white shadow-xs"
+                        : "text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </nav>
             <div className="pt-3 border-t border-zinc-200 flex items-center justify-between gap-3">
               <a
