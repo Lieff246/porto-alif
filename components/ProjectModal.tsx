@@ -66,6 +66,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       }`}
     >
       <div
+        data-lenis-prevent
         className={`relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-zinc-200/90 shadow-2xl p-6 sm:p-8 cursor-default ${
           isClosing ? "modal-dialog-out" : "modal-dialog-in"
         }`}
