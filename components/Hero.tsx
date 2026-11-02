@@ -132,8 +132,8 @@ export default function Hero() {
   };
 
   return (
-    <section id="about" className="relative pt-16 pb-8 sm:pt-20 sm:pb-12 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="about" className="relative pt-28 pb-10 sm:pt-36 sm:pb-14 lg:pt-40 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Main Hero Narrative */}
           <div className="lg:col-span-7 space-y-4">

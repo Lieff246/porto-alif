@@ -103,10 +103,10 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
           scrolled
             ? "bg-white/90 backdrop-blur-md border-b border-zinc-200 py-3 shadow-xs"
-            : "bg-transparent py-5"
+            : "bg-transparent py-3.5 sm:py-5"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between relative">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 flex items-center justify-between relative">
           {/* Brand */}
           <Link
             href="/"
@@ -174,14 +174,11 @@ export default function Navbar() {
             </Magnetic>
           </div>
 
-          {/* Mobile Status Pill & Toggle */}
-          <div className="flex md:hidden items-center gap-2">
-            <span className="text-[11px] font-mono font-semibold text-zinc-700 bg-white border border-zinc-200/90 px-2.5 py-1 rounded-full shadow-2xs capitalize">
-              {activeSection}
-            </span>
+          {/* Mobile Toggle Button */}
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-zinc-700 hover:text-zinc-950 bg-white border border-zinc-200 shadow-2xs"
+              className="p-2 rounded-xl text-zinc-700 hover:text-zinc-950 bg-white border border-zinc-200/90 shadow-2xs active:scale-95 transition-all"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
