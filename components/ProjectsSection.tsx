@@ -168,7 +168,7 @@ export default function ProjectsSection() {
               <ScrollReveal
                 key={`${activeCategoryId}-${project.id}`}
                 delay={isFeatured ? 0 : (index % 2) * 80}
-                className={isFeatured ? "md:col-span-2" : "col-span-1"}
+                className={`h-full ${isFeatured ? "md:col-span-2" : "col-span-1"}`}
               >
                 <ProjectCard
                   project={project}

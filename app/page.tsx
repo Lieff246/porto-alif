@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import TechStack from "@/components/TechStack";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import CursorSpotlight from "@/components/CursorSpotlight";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -24,6 +25,7 @@ export default function Home() {
         <ProjectsSection />
         <ExperienceSection />
         <TechStack />
+        <ContactSection />
       </main>
 
       <ScrollReveal>

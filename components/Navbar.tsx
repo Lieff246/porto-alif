@@ -36,6 +36,7 @@ export default function Navbar() {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Skills", href: "#skills" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -105,7 +106,7 @@ export default function Navbar() {
             </Magnetic>
             <Magnetic strength={0.25}>
               <a
-                href={`mailto:${personalInfo.email}`}
+                href="#contact"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow active:scale-95"
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -151,11 +152,12 @@ export default function Navbar() {
                 <ArrowUpRight className="w-3 h-3" />
               </a>
               <a
-                href={`mailto:${personalInfo.email}`}
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
                 className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 text-white px-3 py-1.5 rounded-lg"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>Email</span>
+                <span>Kontak</span>
               </a>
             </div>
           </div>
