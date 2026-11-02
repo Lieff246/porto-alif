@@ -77,51 +77,106 @@ export default function ExperienceSection() {
           </div>
         </ScrollReveal>
 
-        {/* Experience Cards List */}
-        <div className="space-y-6">
-          {experiences.map((exp, index) => {
-            const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-              const card = e.currentTarget;
-              const rect = card.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-              card.style.setProperty("--mouse-x", `${x}px`);
-              card.style.setProperty("--mouse-y", `${y}px`);
-            };
+        {/* Continuous Git-branch Spine Timeline */}
+        <div className="relative pl-6 sm:pl-10 md:pl-14">
+          {/* Continuous Vertical Spine */}
+          <div
+            aria-hidden="true"
+            className="absolute left-[11px] sm:left-[19px] md:left-[27px] top-6 bottom-8 w-[2px] bg-gradient-to-b from-zinc-950 via-zinc-300 to-zinc-200"
+          />
 
-            return (
-              <ScrollReveal key={exp.id} delay={Math.min(index * 60, 200)}>
-                <div
-                  onMouseMove={handleCardMouseMove}
-                  className="group relative p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-400/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
-                >
-                {/* Dynamic Local Spotlight */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
-                  style={{
-                    background:
-                      "radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
-                  }}
-                />
+          <div className="space-y-8 sm:space-y-10">
+            {experiences.map((exp, index) => {
+              const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+                const card = e.currentTarget;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+              };
 
-                {/* Card Header */}
-                <div className="relative z-10 flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-5 border-b border-zinc-100">
-                  <div className="space-y-2 w-full">
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-200/80">
-                          {exp.organization}
+              const isFirst = index === 0;
+
+              return (
+                <ScrollReveal key={exp.id} delay={Math.min(index * 50, 180)}>
+                  <div className="relative group">
+                    {/* Horizontal Branch Connector */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute -left-[13px] sm:-left-[21px] md:-left-[29px] top-7 sm:top-9 w-[13px] sm:w-[21px] md:w-[29px] h-[1.5px] bg-zinc-200 group-hover:bg-zinc-400 transition-colors pointer-events-none"
+                    />
+
+                    {/* Git-branch Node on Spine */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute -left-[13px] sm:-left-[21px] md:-left-[29px] top-7 sm:top-9 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 pointer-events-none"
+                    >
+                      <div
+                        className={`rounded-full flex items-center justify-center transition-all duration-200 bg-white ${
+                          isFirst
+                            ? "w-5 h-5 border-2 border-zinc-950 shadow-xs"
+                            : "w-4 h-4 border-2 border-zinc-300 group-hover:border-zinc-950 group-hover:scale-125"
+                        }`}
+                      >
+                        <div
+                          className={`rounded-full transition-colors ${
+                            isFirst
+                              ? "w-2 h-2 bg-zinc-950 animate-pulse"
+                              : "w-1.5 h-1.5 bg-zinc-300 group-hover:bg-zinc-950"
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Prominent Timestamp Spine Label */}
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-950 text-white font-mono text-[11px] font-bold shadow-2xs">
+                        <span>{exp.period}</span>
+                      </span>
+                      {isFirst && (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-zinc-600 bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 animate-pulse" />
+                          <span>Saat Ini</span>
                         </span>
-                      <span className="text-zinc-300">•</span>
-                      <span className="text-xs text-zinc-500 font-medium">
-                        {exp.badge}
+                      )}
+                      <span className="text-[11px] font-mono text-zinc-400 hidden sm:inline">
+                        {exp.category}
                       </span>
                     </div>
-                    <div className="text-xs font-mono font-bold text-zinc-400 sm:text-right shrink-0">
-                      {exp.period}
-                    </div>
-                  </div>
+
+                    {/* Experience Card */}
+                    <div
+                      onMouseMove={handleCardMouseMove}
+                      className="relative p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-400/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+                    >
+                      {/* Dynamic Local Spotlight */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                        style={{
+                          background:
+                            "radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
+                        }}
+                      />
+
+                      {/* Card Header */}
+                      <div className="relative z-10 flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-5 border-b border-zinc-100">
+                        <div className="space-y-2 w-full">
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-200/80">
+                                {exp.organization}
+                              </span>
+                              <span className="text-zinc-300">•</span>
+                              <span className="text-xs text-zinc-500 font-medium">
+                                {exp.badge}
+                              </span>
+                            </div>
+                            <span className="text-xs font-mono text-zinc-400 sm:text-right shrink-0">
+                              {exp.category}
+                            </span>
+                          </div>
 
                   {/* Mobile Only: Documentation Photo placed above role title */}
                   {exp.image && (
@@ -241,11 +296,13 @@ export default function ExperienceSection() {
                 )}
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
+          </ScrollReveal>
           );
         })}
       </div>
-      </div>
+    </div>
+  </div>
 
       {/* Lightbox Modal rendered via Portal directly to body */}
       {mounted && activeLightbox && createPortal(
