@@ -250,42 +250,47 @@ export default function Hero() {
 
           {/* ID Card with subtle organic tilt and aligned lanyard */}
           <div className={`lg:col-span-5 flex justify-center lg:justify-end hero-cascade-card ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            <div
-              ref={cardRef}
-              onClick={handleCardClick}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              title="Klik ID Card untuk beralih peran"
-              style={{
-                transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)",
-                transformOrigin: "top center",
-                transition: "transform 450ms cubic-bezier(0.16, 1, 0.3, 1)",
-                willChange: "transform",
-                backfaceVisibility: "hidden",
-              }}
-              className="w-full max-w-[280px] sm:max-w-[290px] select-none cursor-pointer flex flex-col items-center"
-            >
-              {/* Lanyard Fabric Ribbon */}
-              <div className="w-6 h-10 sm:h-12 bg-gradient-to-b from-zinc-800/0 via-zinc-900 to-zinc-950 border-x border-zinc-700/60 relative overflow-hidden shadow-xs shrink-0 flex items-center justify-center">
-                <div className="absolute inset-y-0 left-0.5 w-[1px] border-r border-dashed border-zinc-500/40" />
-                <div className="absolute inset-y-0 right-0.5 w-[1px] border-l border-dashed border-zinc-500/40" />
-                <div className="w-1 h-full bg-zinc-800/60" />
+            <div className="w-full max-w-[280px] sm:max-w-[290px] flex flex-col items-center relative">
+              {/* Lanyard Fabric Ribbon: Menggantung lurus dari batas paling atas layar / navbar */}
+              <div
+                aria-hidden="true"
+                className="absolute bottom-full left-1/2 -translate-x-1/2 w-6 h-[900px] bg-zinc-950 border-x border-zinc-800 shadow-sm flex items-center justify-center overflow-hidden pointer-events-none z-20"
+              >
+                <div className="absolute inset-y-0 left-0.5 w-[1px] border-r border-dashed border-zinc-600/40" />
+                <div className="absolute inset-y-0 right-0.5 w-[1px] border-l border-dashed border-zinc-600/40" />
+                <div className="w-1.5 h-full bg-zinc-900/90" />
               </div>
 
-              {/* Metallic Crimp / End Clamp */}
-              <div className="w-7 h-2.5 rounded-[2px] bg-gradient-to-r from-zinc-400 via-zinc-100 to-zinc-400 border border-zinc-400/80 shadow-xs z-30 -mt-0.5 shrink-0 flex items-center justify-center">
-                <div className="w-4 h-[1px] bg-zinc-400/70" />
-              </div>
+              {/* Interactive ID Badge: Berputar & miring dari cincin pengait (Swivel Ring) */}
+              <div
+                ref={cardRef}
+                onClick={handleCardClick}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                title="Klik ID Card untuk beralih peran"
+                style={{
+                  transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(2.5deg) translateY(0px)",
+                  transformOrigin: "top center",
+                  transition: "transform 450ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  willChange: "transform",
+                  backfaceVisibility: "hidden",
+                }}
+                className="w-full select-none cursor-pointer flex flex-col items-center"
+              >
+                {/* Metallic Crimp / End Clamp */}
+                <div className="w-7 h-2.5 rounded-[2px] bg-gradient-to-r from-zinc-400 via-zinc-100 to-zinc-400 border border-zinc-400/80 shadow-xs z-30 shrink-0 flex items-center justify-center">
+                  <div className="w-4 h-[1px] bg-zinc-400/70" />
+                </div>
 
-              {/* Silver Swivel Ring & Clasp */}
-              <div className="flex flex-col items-center -mt-0.5 z-30 shrink-0">
-                <div className="w-3.5 h-3.5 rounded-full border-2 border-zinc-300 bg-transparent shadow-xs" />
-                <div className="w-3 h-3 bg-gradient-to-b from-zinc-300 via-zinc-100 to-zinc-400 rounded-xs border border-zinc-400 shadow-xs -mt-1" />
-                <div className="w-2.5 h-3.5 bg-gradient-to-b from-zinc-300 via-zinc-200 to-zinc-400 rounded-b-xs border-x border-b border-zinc-400/90 shadow-xs -mt-0.5" />
-              </div>
+                {/* Silver Swivel Ring & Clasp */}
+                <div className="flex flex-col items-center -mt-0.5 z-30 shrink-0">
+                  <div className="w-3.5 h-3.5 rounded-full border-2 border-zinc-300 bg-transparent shadow-xs" />
+                  <div className="w-3 h-3 bg-gradient-to-b from-zinc-300 via-zinc-100 to-zinc-400 rounded-xs border border-zinc-400 shadow-xs -mt-1" />
+                  <div className="w-2.5 h-3.5 bg-gradient-to-b from-zinc-300 via-zinc-200 to-zinc-400 rounded-b-xs border-x border-b border-zinc-400/90 shadow-xs -mt-0.5" />
+                </div>
 
-              {/* ID Card Body */}
-              <div className="w-full -mt-1.5 group relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8 hover:shadow-2xl hover:shadow-zinc-900/12 transition-shadow duration-500">
+                {/* ID Card Body */}
+                <div className="w-full -mt-1.5 group relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8 hover:shadow-2xl hover:shadow-zinc-900/12 transition-shadow duration-500">
                 {/* ID Badge Top Header */}
                 <div className="pt-3 pb-2.5 px-4 bg-zinc-50/90 border-b border-zinc-100 relative">
                   <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-[9px] font-mono text-zinc-500 font-medium">
@@ -392,6 +397,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         {/* Editorial Overview: Asymmetric Focus Anchor & Proof Matrix */}
