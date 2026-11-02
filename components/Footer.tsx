@@ -1,6 +1,7 @@
 import { personalInfo } from "@/data/portfolio";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
+import Magnetic from "@/components/Magnetic";
 
 export default function Footer() {
   return (
@@ -18,45 +19,53 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            {personalInfo.linkedin && (
+          <div className="flex items-center gap-2.5">
+            <Magnetic strength={0.35}>
               <a
-                href={personalInfo.linkedin}
+                href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
+                aria-label="GitHub Profile"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
               >
-                <LinkedinIcon className="w-4 h-4" />
+                <GithubIcon className="w-4 h-4" />
               </a>
+            </Magnetic>
+            {personalInfo.linkedin && (
+              <Magnetic strength={0.35}>
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+              </Magnetic>
             )}
             {personalInfo.instagram && (
-              <a
-                href={personalInfo.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram Profile"
-                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
+              <Magnetic strength={0.35}>
+                <a
+                  href={personalInfo.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram Profile"
+                  className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
+                >
+                  <InstagramIcon className="w-4 h-4" />
+                </a>
+              </Magnetic>
             )}
-            <a
-              href={`mailto:${personalInfo.email}`}
-              aria-label="Kirim Email"
-              className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
+            <Magnetic strength={0.35}>
+              <a
+                href={`mailto:${personalInfo.email}`}
+                aria-label="Kirim Email"
+                className="p-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:shadow-xs active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+            </Magnetic>
           </div>
         </div>
 

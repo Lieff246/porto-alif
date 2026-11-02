@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Project } from "@/types/portfolio";
 import { X, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
+import Magnetic from "@/components/Magnetic";
 import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
@@ -71,13 +72,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Floating Close Button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 active:scale-90 transition-all cursor-pointer"
-          aria-label="Tutup modal"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        <div className="absolute top-4 right-4 z-30">
+          <Magnetic strength={0.35}>
+            <button
+              onClick={handleClose}
+              className="p-2 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 active:scale-90 transition-all cursor-pointer inline-flex items-center justify-center"
+              aria-label="Tutup modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </Magnetic>
+        </div>
 
         {/* Header */}
         <div className="pr-10">
@@ -199,34 +204,40 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         <div className="mt-8 pt-5 border-t border-zinc-200 flex items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2.5">
             {activeProject.liveUrl && (
-              <a
-                href={activeProject.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold transition-all shadow-xs"
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-                <span>Kunjungi Website</span>
-              </a>
+              <Magnetic strength={0.25}>
+                <a
+                  href={activeProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold transition-all shadow-xs active:scale-95"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Kunjungi Website</span>
+                </a>
+              </Magnetic>
             )}
             {activeProject.githubUrl && (
-              <a
-                href={activeProject.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-xs font-semibold transition-all shadow-2xs"
-              >
-                <GithubIcon className="w-3.5 h-3.5" />
-                <span>Lihat di GitHub</span>
-              </a>
+              <Magnetic strength={0.25}>
+                <a
+                  href={activeProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-xs font-semibold transition-all shadow-2xs active:scale-95"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>Lihat di GitHub</span>
+                </a>
+              </Magnetic>
             )}
           </div>
-          <button
-            onClick={handleClose}
-            className="text-xs text-zinc-400 hover:text-zinc-700 font-medium transition-colors ml-auto cursor-pointer"
-          >
-            Tutup [Esc]
-          </button>
+          <Magnetic strength={0.3}>
+            <button
+              onClick={handleClose}
+              className="text-xs text-zinc-400 hover:text-zinc-700 font-medium transition-colors ml-auto cursor-pointer p-1.5"
+            >
+              Tutup [Esc]
+            </button>
+          </Magnetic>
         </div>
       </div>
     </div>,

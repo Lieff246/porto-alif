@@ -5,6 +5,7 @@ import Image from "next/image";
 import { personalInfo, projects } from "@/data/portfolio";
 import { ArrowDown, ExternalLink, Terminal, Mail, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/Icons";
+import Magnetic from "@/components/Magnetic";
 
 const roles = [
   "Web & WebGIS Developer",
@@ -31,6 +32,26 @@ const cardRoles = [
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
+
+  // Theatrical cascading entrance after preloader curtain lifts
+  const [heroReady, setHeroReady] = useState(false);
+
+  useEffect(() => {
+    const isPreloading =
+      typeof document !== "undefined" && document.body.classList.contains("is-preloading");
+
+    if (!isPreloading) {
+      setHeroReady(true);
+      return;
+    }
+
+    const onFinish = () => {
+      setTimeout(() => setHeroReady(true), 60);
+    };
+
+    window.addEventListener("preloaderFinished", onFinish);
+    return () => window.removeEventListener("preloaderFinished", onFinish);
+  }, []);
 
   // ID Card dynamic role switcher
   const [cardRoleIndex, setCardRoleIndex] = useState(0);
@@ -116,8 +137,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Main Hero Narrative */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="space-y-1.5">
-
+            <div className={`space-y-1.5 hero-cascade-1 ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
                 Alif Apriansyah.
               </h1>
@@ -139,73 +159,83 @@ export default function Hero() {
               </div>
             </div>
 
-            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl pt-1">
+            <p className={`text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-xl pt-1 hero-cascade-2 ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
               Informatics student at{" "}
               <span className="text-zinc-950 font-semibold">Universitas Tadulako</span> who loves building things for the screen. Passionate about software craftsmanship and mentoring fellow students in Palu, Indonesia.
             </p>
 
-            {/* Quick Interactive Actions & Social Row */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1">
-              <a
-                href="#projects"
-                className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all shadow-sm hover:shadow"
-              >
-                <span>Lihat Project</span>
-                <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-              </a>
+            {/* Quick Interactive Actions & Social Row with Magnetic Physics */}
+            <div className={`flex flex-wrap items-center gap-2 sm:gap-3 pt-1 hero-cascade-3 ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+              <Magnetic strength={0.25}>
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all shadow-sm hover:shadow active:scale-95"
+                >
+                  <span>Lihat Project</span>
+                  <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                </a>
+              </Magnetic>
 
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-sm font-semibold transition-all shadow-2xs"
-                title="GitHub @Lieff246"
-              >
-                <GithubIcon className="w-4 h-4 shrink-0" />
-                <span className="hidden sm:inline">GitHub @Lieff246</span>
-                <ExternalLink className="hidden sm:inline w-3.5 h-3.5 text-zinc-400" />
-              </a>
+              <Magnetic strength={0.22}>
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200 text-sm font-semibold transition-all shadow-2xs active:scale-95"
+                  title="GitHub @Lieff246"
+                >
+                  <GithubIcon className="w-4 h-4 shrink-0" />
+                  <span className="hidden sm:inline">GitHub @Lieff246</span>
+                  <ExternalLink className="hidden sm:inline w-3.5 h-3.5 text-zinc-400" />
+                </a>
+              </Magnetic>
 
               {/* Social Quick Connect */}
               <div className="flex items-center gap-2 sm:gap-1.5 sm:pl-2 sm:border-l sm:border-zinc-200">
                 {personalInfo.linkedin && (
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
-                    title="LinkedIn Alif Apriansyah"
-                  >
-                    <LinkedinIcon className="w-4 h-4" />
-                  </a>
+                  <Magnetic strength={0.35}>
+                    <a
+                      href={personalInfo.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs active:scale-95 inline-flex items-center justify-center"
+                      title="LinkedIn Alif Apriansyah"
+                    >
+                      <LinkedinIcon className="w-4 h-4" />
+                    </a>
+                  </Magnetic>
                 )}
 
                 {personalInfo.instagram && (
-                  <a
-                    href={personalInfo.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs"
-                    title="Instagram @alifapriansyah02"
-                  >
-                    <InstagramIcon className="w-4 h-4" />
-                  </a>
+                  <Magnetic strength={0.35}>
+                    <a
+                      href={personalInfo.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs active:scale-95 inline-flex items-center justify-center"
+                      title="Instagram @alifapriansyah02"
+                    >
+                      <InstagramIcon className="w-4 h-4" />
+                    </a>
+                  </Magnetic>
                 )}
 
                 <div className="relative inline-flex items-center">
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs cursor-pointer active:scale-95"
-                    title="Klik untuk salin alamat email"
-                    aria-label="Salin email ke clipboard"
-                  >
-                    {copiedEmail ? (
-                      <Check className="w-4 h-4 text-zinc-950 animate-fadeIn" />
-                    ) : (
-                      <Mail className="w-4 h-4" />
-                    )}
-                  </button>
+                  <Magnetic strength={0.35}>
+                    <button
+                      onClick={handleCopyEmail}
+                      className="p-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200 transition-all shadow-2xs cursor-pointer active:scale-95 inline-flex items-center justify-center"
+                      title="Klik untuk salin alamat email"
+                      aria-label="Salin email ke clipboard"
+                    >
+                      {copiedEmail ? (
+                        <Check className="w-4 h-4 text-zinc-950 animate-fadeIn" />
+                      ) : (
+                        <Mail className="w-4 h-4" />
+                      )}
+                    </button>
+                  </Magnetic>
 
                   {/* Tooltip feedback */}
                   {copiedEmail && (
@@ -219,7 +249,7 @@ export default function Hero() {
           </div>
 
           {/* ID Card with subtle organic tilt and aligned lanyard */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <div className={`lg:col-span-5 flex justify-center lg:justify-end hero-cascade-card ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             <div
               ref={cardRef}
               onClick={handleCardClick}
@@ -365,7 +395,7 @@ export default function Hero() {
         </div>
 
         {/* Editorial Overview: Asymmetric Focus Anchor & Proof Matrix */}
-        <div className="mt-10 sm:mt-12 pt-8 border-t border-zinc-200">
+        <div className={`mt-10 sm:mt-12 pt-8 border-t border-zinc-200 hero-cascade-matrix ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <div className="grid grid-cols-1 lg:grid-cols-12 rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-2xs divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
             {/* 5-col: Academic & Focus Anchor */}
             <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between bg-zinc-50/40">

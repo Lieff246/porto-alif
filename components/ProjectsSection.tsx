@@ -6,6 +6,7 @@ import { Project } from "@/types/portfolio";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import ScrollReveal from "./ScrollReveal";
+import Magnetic from "./Magnetic";
 import {
   Globe,
   Server,
@@ -115,31 +116,32 @@ export default function ProjectsSection() {
               const count = getCategoryCount(cat);
 
               return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategoryId(cat.id)}
-                  className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-4 py-2 sm:px-4 sm:py-2.5 rounded-full border font-mono text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? "bg-zinc-950 text-white border-zinc-950 shadow-xs scale-102"
-                      : "bg-white text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/80 border-zinc-200/90 active:scale-95"
-                  }`}
-                  aria-selected={isActive}
-                  role="tab"
-                >
-                  <Icon
-                    className={`w-3.5 h-3.5 shrink-0 ${
-                      isActive ? "text-zinc-200" : "text-zinc-400"
+                <Magnetic key={cat.id} className="shrink-0" strength={0.22}>
+                  <button
+                    onClick={() => setActiveCategoryId(cat.id)}
+                    className={`whitespace-nowrap flex items-center gap-2 px-4 py-2 sm:px-4 sm:py-2.5 rounded-full border font-mono text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "bg-zinc-950 text-white border-zinc-950 shadow-xs scale-102"
+                        : "bg-white text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/80 border-zinc-200/90 active:scale-95"
                     }`}
-                  />
-                  <span>{cat.tabLabel}</span>
-                  <span
-                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                      isActive ? "bg-zinc-800 text-zinc-200" : "bg-zinc-100 text-zinc-500"
-                    }`}
+                    aria-selected={isActive}
+                    role="tab"
                   >
-                    {count}
-                  </span>
-                </button>
+                    <Icon
+                      className={`w-3.5 h-3.5 shrink-0 ${
+                        isActive ? "text-zinc-200" : "text-zinc-400"
+                      }`}
+                    />
+                    <span>{cat.tabLabel}</span>
+                    <span
+                      className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                        isActive ? "bg-zinc-800 text-zinc-200" : "bg-zinc-100 text-zinc-500"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                </Magnetic>
               );
             })}
           </div>
@@ -158,14 +160,14 @@ export default function ProjectsSection() {
           </span>
         </div>
 
-        {/* Clean Showcase Grid: Flagship #1 Full-Width + Symmetrical 2-Column Grid */}
+        {/* Clean Showcase Grid: Flagship #1 Full-Width + Symmetrical 2-Column Grid with Scroll & Filter Reveals */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((project, index) => {
             const isFeatured = activeCategoryId === "all" && index === 0;
             return (
               <ScrollReveal
-                key={project.id}
-                delay={isFeatured ? 0 : ((index - 1) % 2) * 100}
+                key={`${activeCategoryId}-${project.id}`}
+                delay={isFeatured ? 0 : (index % 2) * 80}
                 className={isFeatured ? "md:col-span-2" : "col-span-1"}
               >
                 <ProjectCard

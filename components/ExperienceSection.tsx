@@ -6,6 +6,7 @@ import Image from "next/image";
 import { experiences } from "@/data/portfolio";
 import { Maximize2, X } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import Magnetic from "./Magnetic";
 
 interface LightboxData {
   src: string;
@@ -267,13 +268,15 @@ export default function ExperienceSection() {
                   {activeLightbox.role} · {activeLightbox.organization}
                 </span>
               </div>
-              <button
-                onClick={closeLightbox}
-                aria-label="Tutup pratinjau"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 active:scale-90 transition-all cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <Magnetic strength={0.35}>
+                <button
+                  onClick={closeLightbox}
+                  aria-label="Tutup pratinjau"
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 active:scale-90 transition-all cursor-pointer inline-flex items-center justify-center"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </Magnetic>
             </div>
 
             {/* Image Container */}

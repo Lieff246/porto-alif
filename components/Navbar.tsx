@@ -5,6 +5,7 @@ import Link from "next/link";
 import { personalInfo } from "@/data/portfolio";
 import { Mail, Menu, X, ArrowUpRight } from "lucide-react";
 import { GithubIcon, InstagramIcon } from "@/components/Icons";
+import Magnetic from "@/components/Magnetic";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -79,32 +80,38 @@ export default function Navbar() {
           </nav>
 
           {/* Actions */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            <a
-              href={personalInfo.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram Profile"
-              className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150"
-            >
-              <InstagramIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow active:scale-95"
-            >
-              <Mail className="w-3.5 h-3.5" />
-              <span>Hubungi Saya</span>
-            </a>
+          <div className="hidden sm:flex items-center gap-2">
+            <Magnetic strength={0.35}>
+              <a
+                href={personalInfo.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Profile"
+                className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.35}>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all duration-150 inline-flex items-center justify-center"
+              >
+                <GithubIcon className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow active:scale-95"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                <span>Hubungi Saya</span>
+              </a>
+            </Magnetic>
           </div>
 
           {/* Mobile Toggle */}

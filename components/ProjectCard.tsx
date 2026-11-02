@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Project } from "@/types/portfolio";
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
+import Magnetic from "@/components/Magnetic";
 
 interface ProjectCardProps {
   project: Project;
@@ -12,7 +13,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onOpenModal, featured = false }: ProjectCardProps) {
-  // Ultra-smooth 144Hz hardware-accelerated local spotlight tracking
+  // Smooth hardware-accelerated local spotlight tracking
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -25,22 +26,22 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
   return (
     <div
       onMouseMove={handleMouseMove}
-      className={`group relative flex flex-col justify-between rounded-2xl bg-white border border-zinc-200/90 hover:border-zinc-400/90 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl overflow-hidden w-full h-full ${
+      className={`group relative flex flex-col justify-between rounded-2xl bg-white border border-zinc-200/90 hover:border-zinc-400/90 shadow-2xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden w-full h-full ${
         featured ? "md:col-span-2" : "col-span-1"
       }`}
     >
-      {/* Dynamic Local Mouse Spotlight (Zero-Jank CSS Variables) */}
+      {/* Dynamic Local Mouse Spotlight */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
         style={{
           background:
-            "radial-gradient(550px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
+            "radial-gradient(500px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(24, 24, 27, 0.04), transparent 70%)",
         }}
       />
 
       <div>
-        {/* Cinematic Visual Preview */}
+        {/* Visual Preview */}
         {project.image ? (
           <div
             onClick={() => onOpenModal(project)}
@@ -53,13 +54,14 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
               alt={project.title}
               fill
               sizes={featured ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 600px"}
-              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
+
             {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-black/20 opacity-80 group-hover:opacity-50 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-black/20 opacity-80 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
 
             {/* Top Category Badge */}
-            <div className="absolute top-4 left-4 flex items-center gap-2 z-20">
+            <div className="absolute top-4 left-4 flex items-center gap-2 z-20 pointer-events-none">
               <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-zinc-950/90 backdrop-blur-md text-white shadow-xs">
                 {project.category}
               </span>
@@ -71,7 +73,7 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
               )}
             </div>
 
-            <div className="absolute bottom-3 right-3 text-xs font-mono font-bold text-zinc-800 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-2xs z-20">
+            <div className="absolute bottom-3 right-3 text-xs font-mono font-bold text-zinc-800 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-2xs z-20 pointer-events-none">
               {project.period}
             </div>
           </div>
@@ -124,29 +126,34 @@ export default function ProjectCard({ project, onOpenModal, featured = false }: 
             )}
           </div>
 
-          {/* External Links */}
+          {/* Actions */}
           <div className="flex items-center gap-2">
             {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`GitHub repo untuk ${project.title}`}
-                className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-95 transition-all"
-              >
-                <GithubIcon className="w-4 h-4" />
-              </a>
+              <Magnetic strength={0.2}>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`GitHub repo untuk ${project.title}`}
+                  className="p-2 rounded-lg text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-transparent hover:border-zinc-200 active:scale-90 transition-all inline-flex items-center justify-center"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+              </Magnetic>
             )}
-            <button
-              onClick={() => onOpenModal(project)}
-              className="group/btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold text-zinc-900 bg-zinc-100 hover:bg-zinc-950 hover:text-white active:scale-95 transition-all duration-200 cursor-pointer shadow-2xs"
-              aria-label={`Lihat detail proyek ${project.title}`}
-            >
-              <span>Lihat Detail</span>
-              <span className="inline-block transition-transform duration-200 ease-out group-hover/btn:translate-x-0.5">
-                →
-              </span>
-            </button>
+
+            <Magnetic strength={0.2}>
+              <button
+                onClick={() => onOpenModal(project)}
+                className="group/btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold text-zinc-900 bg-zinc-100 hover:bg-zinc-950 hover:text-white active:scale-95 transition-all duration-200 cursor-pointer shadow-2xs"
+                aria-label={`Lihat detail proyek ${project.title}`}
+              >
+                <span>Lihat Detail</span>
+                <span className="inline-block transition-transform duration-200 ease-out group-hover/btn:translate-x-1">
+                  →
+                </span>
+              </button>
+            </Magnetic>
           </div>
         </div>
       </div>
