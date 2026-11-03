@@ -275,10 +275,6 @@ export default function ContactSection() {
 
               {/* Social Channels Link Row */}
               <div className="pt-6 border-t border-zinc-100">
-                <p className="text-xs font-mono font-semibold text-zinc-700 mb-3">
-                  Kanal Profesional &amp; Sosial
-                </p>
-
                 <div className="flex flex-wrap items-center gap-2.5">
                   <Magnetic strength={0.3}>
                     <a
