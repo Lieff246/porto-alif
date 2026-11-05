@@ -87,7 +87,7 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
+    <section id="projects" className="py-20 sm:py-28 border-t border-zinc-200/90 relative bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header: Bersih & Profesional */}
         <ScrollReveal>

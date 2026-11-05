@@ -132,7 +132,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="about" className="relative pt-28 pb-10 sm:pt-36 sm:pb-14 lg:pt-40 overflow-hidden">
+    <section id="about" className="relative pt-28 pb-10 sm:pt-36 sm:pb-14 lg:pt-40 overflow-hidden technical-grid-bg">
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Main Hero Narrative */}

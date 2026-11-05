@@ -57,7 +57,7 @@ export default function ExperienceSection() {
   }, [activeLightbox, isClosingLightbox, closeLightbox]);
 
   return (
-    <section id="experience" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
+    <section id="experience" className="py-20 sm:py-28 border-t border-zinc-200/90 relative bg-zinc-50/70">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header: Bersih & Selaras dengan Projects Section */}
         <ScrollReveal>

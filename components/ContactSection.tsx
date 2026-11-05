@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { personalInfo } from "@/data/portfolio";
-import { Mail, Send, Copy, Check, MapPin, Clock, ArrowUpRight, Sparkles } from "lucide-react";
+import { Mail, Send, Copy, Check, MapPin, Clock, ArrowUpRight } from "lucide-react";
 import { GithubIcon, InstagramIcon } from "@/components/Icons";
 import Magnetic from "@/components/Magnetic";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -23,7 +23,6 @@ export default function ContactSection() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
-      // Fallback if clipboard API is restricted
       const textarea = document.createElement("textarea");
       textarea.value = personalInfo.email;
       document.body.appendChild(textarea);
@@ -49,10 +48,10 @@ export default function ContactSection() {
       `Halo Alif,\n\nNama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}\n\n--\nDikirim via formulir kontak portofolio`
     );
 
-    const mailtoUrl = `mailto:${personalInfo.email}?subject=${emailSubject}&body=${emailBody}`;
+    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}&su=${emailSubject}&body=${emailBody}`;
 
     setSubmitted(true);
-    window.location.href = mailtoUrl;
+    window.open(gmailWebUrl, "_blank");
 
     setTimeout(() => {
       setSubmitted(false);
@@ -60,12 +59,16 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 border-t border-zinc-200/90 relative">
+    <section id="contact" className="py-20 sm:py-28 border-t border-zinc-200/90 relative bg-zinc-50/70">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-6 mb-12">
             <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-zinc-800 text-[11px] font-mono font-semibold mb-3 border border-zinc-200/90 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 animate-pulse" />
+                <span>Terbuka untuk Peluang</span>
+              </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950">
                 Mari Terhubung &amp; Berkolaborasi
               </h2>
@@ -73,12 +76,17 @@ export default function ContactSection() {
                 Punya tawaran proyek, peluang magang, riset bersama, atau sekadar ingin bertukar pikiran seputar pengembangan software? Pintu saya selalu terbuka.
               </p>
             </div>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-mono text-zinc-600 shadow-2xs self-start md:self-auto">
+              <span className="w-2 h-2 rounded-full bg-zinc-950" />
+              <span>Status: Aktif &amp; Terbuka</span>
+            </div>
           </div>
         </ScrollReveal>
 
         {/* Split Layout: Form di Sisi Kiri (7 Cols) & Info Editorial di Sisi Kanan (5 Cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* SISI KIRI: Formulir Kontak Interaktif */}
+          {/* SISI KIRI: Formulir Kontak Interaktif (Clean White Card on Zinc-50) */}
           <ScrollReveal delay={40} className="lg:col-span-7 h-full">
             <div className="rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-300 p-6 sm:p-8 h-full flex flex-col justify-between">
               <div>
@@ -184,7 +192,7 @@ export default function ContactSection() {
                     {submitted && (
                       <span className="text-[11px] font-mono text-zinc-600 animate-fadeIn flex items-center gap-1.5">
                         <Check className="w-3.5 h-3.5 text-zinc-950" />
-                        <span>Membuka aplikasi email Anda...</span>
+                        <span>Membuka Gmail Anda...</span>
                       </span>
                     )}
                   </div>
@@ -198,7 +206,7 @@ export default function ContactSection() {
             </div>
           </ScrollReveal>
 
-          {/* SISI KANAN: Editorial Information & 1-Click Copy (Pilihan A) */}
+          {/* SISI KANAN: Editorial Information & 1-Click Copy (Clean White Card on Zinc-50) */}
           <ScrollReveal delay={80} className="lg:col-span-5 h-full">
             <div className="rounded-2xl bg-white border border-zinc-200/90 shadow-2xs hover:border-zinc-300 p-6 sm:p-8 h-full flex flex-col justify-between">
               <div>
@@ -323,4 +331,3 @@ export default function ContactSection() {
     </section>
   );
 }
-
